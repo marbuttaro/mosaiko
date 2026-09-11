@@ -1,0 +1,96 @@
+import { location, navLinks } from '../data/content'
+
+const SOCIALS = [
+  {
+    name: 'LinkedIn',
+    href: '#',
+    icon: (
+      <path
+        d="M6.94 8.5H4V20h2.94V8.5ZM5.47 7.2a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4ZM20 20v-6.4c0-3.06-1.63-4.48-3.8-4.48-1.75 0-2.53.96-2.97 1.64V8.5H10.3c.04.85 0 12 0 12h2.94v-6.7c0-.36.03-.72.13-.98.29-.72.94-1.47 2.04-1.47 1.44 0 2.02 1.1 2.02 2.7V20H20Z"
+        fill="currentColor"
+      />
+    ),
+  },
+  {
+    name: 'Instagram',
+    href: '#',
+    icon: (
+      <path
+        d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm0-1.8a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm6.4-.2a1.17 1.17 0 1 1-2.33 0 1.17 1.17 0 0 1 2.33 0ZM12 4.6c-2.05 0-2.3.008-3.11.045-.81.037-1.36.166-1.85.354a3.73 3.73 0 0 0-1.35.878 3.73 3.73 0 0 0-.878 1.35c-.188.49-.317 1.04-.354 1.85C4.408 9.7 4.4 9.95 4.4 12s.008 2.3.045 3.11c.037.81.166 1.36.354 1.85.19.49.45.9.878 1.35.44.44.86.7 1.35.878.49.188 1.04.317 1.85.354.81.037 1.06.045 3.11.045s2.3-.008 3.11-.045c.81-.037 1.36-.166 1.85-.354a3.73 3.73 0 0 0 1.35-.878c.44-.44.7-.86.878-1.35.188-.49.317-1.04.354-1.85.037-.81.045-1.06.045-3.11s-.008-2.3-.045-3.11c-.037-.81-.166-1.36-.354-1.85a3.73 3.73 0 0 0-.878-1.35 3.73 3.73 0 0 0-1.35-.878c-.49-.188-1.04-.317-1.85-.354C14.3 4.608 14.05 4.6 12 4.6Z"
+        fill="currentColor"
+      />
+    ),
+  },
+]
+
+function Footer() {
+  return (
+    <footer className="bg-mosaiko-navy pb-10 pt-20">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="grid gap-12 border-b border-white/10 pb-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="sm:col-span-2 lg:col-span-2">
+            <img src="/logo/mosaiko-lockup-white.png" alt="Mosaiko" className="h-7 w-auto" />
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
+              Eventi, business e networking: creiamo occasioni concrete di
+              incontro tra persone, imprese e territori.
+            </p>
+            <div className="mt-6 flex items-center gap-4">
+              {SOCIALS.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  aria-label={social.name}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-mosaiko-gold hover:text-mosaiko-gold"
+                >
+                  <svg viewBox="0 0 24 24" className="h-4 w-4">
+                    {social.icon}
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+              Naviga
+            </h3>
+            <ul className="mt-5 space-y-3">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="text-sm text-white/70 hover:text-white">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+              Contatti
+            </h3>
+            <ul className="mt-5 space-y-3 text-sm text-white/70">
+              <li>{location.address}</li>
+              <li>
+                <a href={`mailto:${location.email}`} className="hover:text-white">
+                  {location.email}
+                </a>
+              </li>
+              <li>
+                <a href={`tel:${location.phone}`} className="hover:text-white">
+                  {location.phone}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p className="mt-8 text-xs text-white/40">
+          © {new Date().getFullYear()} Mosaiko. Tutti i diritti riservati.
+        </p>
+      </div>
+    </footer>
+  )
+}
+
+export default Footer

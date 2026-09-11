@@ -1,9 +1,26 @@
+import Header from './components/Header'
+import Hero from './components/Hero'
+import GeneralInfo from './components/GeneralInfo'
+import Team from './components/Team'
+import SponsorsStats from './components/SponsorsStats'
+import UpcomingEvents from './components/UpcomingEvents'
+import Location from './components/Location'
+import Footer from './components/Footer'
+
 function App() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-white text-slate-900">
-      <h1 className="text-4xl font-semibold tracking-tight">Mosaiko</h1>
-      <p className="mt-3 text-slate-500">Progetto in costruzione.</p>
-    </main>
+    <div className="min-h-screen bg-white">
+      <Header />
+      <main>
+        <Hero />
+        <GeneralInfo />
+        <Team />
+        <SponsorsStats />
+        <UpcomingEvents />
+        <Location />
+      </main>
+      <Footer />
+    </div>
   )
 }
 

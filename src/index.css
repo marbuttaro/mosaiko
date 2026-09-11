@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+@theme {
+  --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-mosaiko-navy: #0e1a2b;
+  --color-mosaiko-navy-2: #152841;
+  --color-mosaiko-navy-3: #23405f;
+  --color-mosaiko-cream: #f7f3ea;
+  --color-mosaiko-gold: #c79a4b;
+  --color-mosaiko-gold-light: #e9ce97;
+  --color-mosaiko-gold-dark: #9c7530;
+  --color-mosaiko-ink: #55524c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-mosaiko-cream);
+  color: var(--color-mosaiko-navy);
+}
