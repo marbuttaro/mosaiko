@@ -15,7 +15,9 @@ function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'py-3' : 'py-5'
+        scrolled
+          ? 'border-b border-white/10 bg-mosaiko-navy/75 py-3 shadow-lg shadow-black/10 backdrop-blur-md'
+          : 'py-5'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">

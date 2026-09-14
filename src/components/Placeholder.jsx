@@ -5,7 +5,7 @@ const TONES = {
     label: 'text-white/50',
   },
   cream: {
-    wrapper: 'bg-gradient-to-br from-white to-mosaiko-cream',
+    wrapper: 'bg-gradient-to-br from-white to-mosaiko-navy/5',
     shape: 'text-mosaiko-navy',
     label: 'text-mosaiko-navy/40',
   },

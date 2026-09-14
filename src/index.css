@@ -47,18 +47,17 @@
   --color-mosaiko-navy: #0e1a2b;
   --color-mosaiko-navy-2: #152841;
   --color-mosaiko-navy-3: #23405f;
-  --color-mosaiko-cream: #f7f3ea;
   --color-mosaiko-gold: #c79a4b;
   --color-mosaiko-gold-light: #e9ce97;
   --color-mosaiko-gold-dark: #9c7530;
   --color-mosaiko-ink: #55524c;
 
-  --color-mosaiko-blue: #1a54b8;
-  --color-mosaiko-blue-light: #8daadc;
-  --color-mosaiko-blue-dark: #123f8c;
-  --color-mosaiko-green: #86c622;
-  --color-mosaiko-green-light: #c9e59c;
-  --color-mosaiko-green-dark: #4a6d13;
+  --color-mosaiko-blue: #0c63dd;
+  --color-mosaiko-blue-light: #86b1ee;
+  --color-mosaiko-blue-dark: #0949a2;
+  --color-mosaiko-yellow: #ead906;
+  --color-mosaiko-yellow-light: #f6ee8f;
+  --color-mosaiko-yellow-dark: #827803;
 }
 
 html {
@@ -67,6 +66,6 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-mosaiko-cream);
+  background-color: #ffffff;
   color: var(--color-mosaiko-navy);
 }

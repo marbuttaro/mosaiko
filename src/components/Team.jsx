@@ -14,7 +14,7 @@ function Team() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-green">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-yellow">
             Il team
           </span>
           <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-white sm:text-5xl">
@@ -33,7 +33,7 @@ function Team() {
                 className="h-20 w-20 shrink-0 rounded-xl sm:h-24 sm:w-24"
               />
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-green">
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-yellow">
                   {member.role}
                 </p>
                 <h3 className="mt-1 font-heading text-xl font-normal text-white">

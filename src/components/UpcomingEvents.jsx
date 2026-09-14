@@ -2,9 +2,9 @@ import { events } from '../data/content'
 import Placeholder from './Placeholder'
 
 const TAG_STYLES = {
-  Networking: 'bg-mosaiko-green text-mosaiko-navy',
+  Networking: 'bg-mosaiko-yellow text-mosaiko-navy',
   Conferenza: 'bg-mosaiko-blue text-white',
-  Workshop: 'bg-mosaiko-green text-mosaiko-navy',
+  Workshop: 'bg-mosaiko-yellow text-mosaiko-navy',
 }
 
 function UpcomingEvents() {
@@ -12,7 +12,7 @@ function UpcomingEvents() {
     <section id="eventi" className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-green-dark">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-yellow-dark">
             Calendario
           </span>
           <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-mosaiko-navy sm:text-5xl">
@@ -28,12 +28,12 @@ function UpcomingEvents() {
               className={`flex flex-col gap-2 rounded-xl border px-6 py-6 transition-all sm:px-8 sm:py-8 ${
                 i === 0
                   ? 'border-transparent bg-mosaiko-navy shadow-xl shadow-mosaiko-navy/15'
-                  : 'border-mosaiko-navy/10 bg-mosaiko-cream/60 hover:border-mosaiko-green/40 hover:bg-mosaiko-cream'
+                  : 'border-mosaiko-navy/10 bg-mosaiko-navy/5 hover:border-mosaiko-yellow/40 hover:bg-white'
               }`}
             >
               <span
                 className={`text-xs font-semibold uppercase tracking-[0.15em] sm:text-sm ${
-                  i === 0 ? 'text-mosaiko-green-light' : 'text-mosaiko-green-dark'
+                  i === 0 ? 'text-mosaiko-yellow-light' : 'text-mosaiko-yellow-dark'
                 }`}
               >
                 {event.date}
@@ -66,7 +66,7 @@ function UpcomingEvents() {
               <div className="px-2 pb-2">
                 <span
                   className={`mt-5 inline-flex items-center rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] ${
-                    TAG_STYLES[event.tag] ?? 'bg-mosaiko-green text-mosaiko-navy'
+                    TAG_STYLES[event.tag] ?? 'bg-mosaiko-yellow text-mosaiko-navy'
                   }`}
                 >
                   {event.tag}
@@ -86,7 +86,7 @@ function UpcomingEvents() {
                   <button
                     type="button"
                     aria-label="Condividi"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-mosaiko-navy/15 text-mosaiko-navy/60 transition-colors hover:border-mosaiko-green hover:text-mosaiko-green-dark"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-mosaiko-navy/15 text-mosaiko-navy/60 transition-colors hover:border-mosaiko-yellow hover:text-mosaiko-yellow-dark"
                   >
                     <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
                       <path
