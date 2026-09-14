@@ -1,5 +1,4 @@
 import { location } from '../data/content'
-import Placeholder from './Placeholder'
 
 function Location() {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&output=embed`
@@ -8,7 +7,7 @@ function Location() {
     <section id="dove-siamo" className="bg-mosaiko-cream py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold-dark">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-green-dark">
             Dove siamo
           </span>
           <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-mosaiko-navy sm:text-5xl">
@@ -25,7 +24,7 @@ function Location() {
           <div className="grid gap-3 lg:grid-cols-[1fr_1.4fr_1fr] lg:gap-4">
             <div className="flex flex-col justify-center gap-6 rounded-xl bg-mosaiko-cream/70 p-6 sm:p-8">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-gold-dark">
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-green-dark">
                   Indirizzo
                 </p>
                 <p className="mt-2 text-base font-medium leading-relaxed text-mosaiko-navy">
@@ -33,7 +32,7 @@ function Location() {
                 </p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-gold-dark">
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-green-dark">
                   Città
                 </p>
                 <p className="mt-2 text-base font-medium text-mosaiko-navy">{location.city}</p>
@@ -52,43 +51,28 @@ function Location() {
 
             <div className="flex flex-col justify-center gap-6 rounded-xl bg-mosaiko-navy p-6 text-white sm:p-8">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-gold">
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-green">
                   Email
                 </p>
                 <a
                   href={`mailto:${location.email}`}
-                  className="mt-2 block text-base font-medium text-white hover:text-mosaiko-gold-light"
+                  className="mt-2 block text-base font-medium text-white hover:text-mosaiko-green-light"
                 >
                   {location.email}
                 </a>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-gold">
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-green">
                   Telefono
                 </p>
                 <a
                   href={`tel:${location.phone}`}
-                  className="mt-2 block text-base font-medium text-white hover:text-mosaiko-gold-light"
+                  className="mt-2 block text-base font-medium text-white hover:text-mosaiko-green-light"
                 >
                   {location.phone}
                 </a>
               </div>
             </div>
-          </div>
-
-          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:mt-4">
-            {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="aspect-square overflow-hidden rounded-lg">
-                {i === 2 ? (
-                  <div className="flex h-full w-full flex-col items-center justify-center bg-mosaiko-gold text-center text-mosaiko-navy">
-                    <span className="text-xs font-semibold uppercase tracking-[0.1em]">Sede</span>
-                    <span className="font-heading text-lg font-medium">Mosaiko</span>
-                  </div>
-                ) : (
-                  <Placeholder tone={i % 2 === 0 ? 'navy' : 'cream'} className="h-full w-full" />
-                )}
-              </div>
-            ))}
           </div>
         </div>
       </div>

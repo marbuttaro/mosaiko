@@ -52,6 +52,13 @@
   --color-mosaiko-gold-light: #e9ce97;
   --color-mosaiko-gold-dark: #9c7530;
   --color-mosaiko-ink: #55524c;
+
+  --color-mosaiko-blue: #1a54b8;
+  --color-mosaiko-blue-light: #8daadc;
+  --color-mosaiko-blue-dark: #123f8c;
+  --color-mosaiko-green: #86c622;
+  --color-mosaiko-green-light: #c9e59c;
+  --color-mosaiko-green-dark: #4a6d13;
 }
 
 html {

@@ -4,6 +4,7 @@ const FEATURES = [
   {
     title: 'Eventi',
     text: 'Format originali, dai summit alle serate di networking, pensati per generare incontri di qualità.',
+    tone: 'bg-mosaiko-navy text-mosaiko-green',
     icon: (
       <path
         d="M7 3v4M17 3v4M4 9h16M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
@@ -17,6 +18,7 @@ const FEATURES = [
   {
     title: 'Business',
     text: 'Occasioni concrete di confronto tra imprese, professionisti e istituzioni del territorio.',
+    tone: 'bg-mosaiko-blue text-white',
     icon: (
       <path
         d="M4 8.5 12 4l8 4.5M4 8.5v9L12 22l8-4.5v-9M4 8.5 12 13l8-4.5M12 13v9"
@@ -30,6 +32,7 @@ const FEATURES = [
   {
     title: 'Networking',
     text: 'Una community viva che connette persone e organizzazioni oltre la durata del singolo evento.',
+    tone: 'bg-mosaiko-green text-mosaiko-navy',
     icon: (
       <path
         d="M8 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm12 5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM8 12a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm2.2-3.5 7.2 3.6M10.2 15.3l7.2-3.6"
@@ -61,7 +64,7 @@ function GeneralInfo() {
           </div>
 
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold-dark">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-green-dark">
               Chi siamo
             </span>
             <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-mosaiko-navy sm:text-5xl">
@@ -81,7 +84,7 @@ function GeneralInfo() {
         <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:grid-cols-3 sm:gap-8 sm:py-20 lg:px-10">
           {FEATURES.map((feature) => (
             <div key={feature.title}>
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-mosaiko-navy text-mosaiko-gold">
+              <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${feature.tone}`}>
                 <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
                   {feature.icon}
                 </svg>
@@ -92,7 +95,7 @@ function GeneralInfo() {
               <p className="mt-2 text-sm leading-relaxed text-mosaiko-ink">{feature.text}</p>
               <a
                 href="#eventi"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-mosaiko-gold-dark transition-colors hover:text-mosaiko-navy"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-mosaiko-green-dark transition-colors hover:text-mosaiko-navy"
               >
                 Scopri di più
                 <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">

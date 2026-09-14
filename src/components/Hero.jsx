@@ -32,7 +32,7 @@ function Hero() {
         className="absolute inset-0"
         style={{
           clipPath: 'polygon(58% 0%, 92% 0%, 78% 100%, 44% 100%)',
-          background: 'linear-gradient(150deg, rgba(233,206,151,0.65) 0%, rgba(199,154,75,0) 70%)',
+          background: 'linear-gradient(150deg, rgba(141,170,220,0.6) 0%, rgba(26,84,184,0) 70%)',
           mixBlendMode: 'overlay',
         }}
       />
@@ -41,7 +41,7 @@ function Hero() {
         className="absolute inset-0"
         style={{
           clipPath: 'polygon(80% 0%, 100% 0%, 100% 55%, 88% 100%, 66% 100%)',
-          background: 'linear-gradient(160deg, rgba(14,26,43,0.75) 0%, rgba(14,26,43,0) 65%)',
+          background: 'linear-gradient(160deg, rgba(26,84,184,0.65) 0%, rgba(26,84,184,0) 65%)',
           mixBlendMode: 'multiply',
         }}
       />
@@ -54,13 +54,13 @@ function Hero() {
         Eventi · Business · Networking
       </span>
 
-      <span className="absolute bottom-10 right-8 z-10 hidden h-14 w-14 items-center justify-center rounded-xl border border-mosaiko-gold/50 bg-mosaiko-navy/70 shadow-lg backdrop-blur-sm sm:flex">
-        <span className="h-2.5 w-2.5 rounded-full bg-mosaiko-gold" />
+      <span className="absolute bottom-10 right-8 z-10 hidden h-14 w-14 items-center justify-center rounded-xl border border-mosaiko-green/50 bg-mosaiko-navy/70 shadow-lg backdrop-blur-sm sm:flex">
+        <span className="h-2.5 w-2.5 rounded-full bg-mosaiko-green" />
       </span>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-10">
         <div className="max-w-xl lg:pl-8">
-          <span className="inline-flex items-center rounded-lg border border-mosaiko-gold/40 bg-mosaiko-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold">
+          <span className="inline-flex items-center rounded-lg border border-mosaiko-green/40 bg-mosaiko-green/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-green">
             Mosaiko Enterprise
           </span>
 

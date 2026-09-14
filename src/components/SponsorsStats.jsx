@@ -5,7 +5,7 @@ function SponsorsStats() {
     <>
       <section className="relative overflow-hidden bg-mosaiko-navy py-24 sm:py-32">
         <svg
-          className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 text-mosaiko-gold opacity-[0.07]"
+          className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 text-mosaiko-blue opacity-[0.12]"
           viewBox="0 0 100 100"
           fill="none"
         >
@@ -14,7 +14,7 @@ function SponsorsStats() {
 
         <div className="relative mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-green">
               {model.eyebrow}
             </span>
             <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-white sm:text-5xl">
@@ -24,7 +24,7 @@ function SponsorsStats() {
             <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-white/10 pt-10">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <dt className="font-heading text-5xl font-semibold tracking-tight text-mosaiko-gold sm:text-6xl">
+                  <dt className="font-heading text-5xl font-semibold tracking-tight text-mosaiko-green sm:text-6xl">
                     {stat.value}
                   </dt>
                   <dd className="mt-2 text-sm font-medium uppercase tracking-[0.1em] text-white/60">
@@ -53,7 +53,7 @@ function SponsorsStats() {
       <section id="sponsor" className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold-dark">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-green-dark">
               Partner
             </span>
             <h2 className="mt-4 font-heading text-3xl font-medium leading-tight text-mosaiko-navy sm:text-4xl">
