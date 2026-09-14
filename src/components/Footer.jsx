@@ -23,12 +23,22 @@ const SOCIALS = [
   },
 ]
 
+function SectionLabel({ children }) {
+  return (
+    <h3 className="inline-flex rounded-lg border border-white/15 px-5 py-2 text-sm font-semibold text-white">
+      {children}
+    </h3>
+  )
+}
+
 function Footer() {
+  const half = Math.ceil(navLinks.length / 2)
+
   return (
     <footer className="bg-mosaiko-navy pb-10 pt-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid gap-12 border-b border-white/10 pb-12 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="sm:col-span-2 lg:col-span-2">
+        <div className="grid gap-12 pb-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          <div className="sm:col-span-2 lg:col-span-1">
             <img src="/logo/mosaiko-lockup-white.png" alt="Mosaiko" className="h-7 w-auto" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
               Eventi, business e networking: creiamo occasioni concrete di
@@ -40,7 +50,7 @@ function Footer() {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-mosaiko-gold hover:text-mosaiko-gold"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white/70 transition-colors hover:border-mosaiko-gold hover:text-mosaiko-gold"
                 >
                   <svg viewBox="0 0 24 24" className="h-4 w-4">
                     {social.icon}
@@ -51,31 +61,69 @@ function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-              Naviga
-            </h3>
-            <ul className="mt-5 space-y-3">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className="text-sm text-white/70 hover:text-white">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <SectionLabel>Naviga</SectionLabel>
+            <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3">
+              <ul className="space-y-3">
+                {navLinks.slice(0, half).map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} className="text-sm text-white/70 hover:text-white">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <ul className="space-y-3">
+                {navLinks.slice(half).map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} className="text-sm text-white/70 hover:text-white">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-              Contatti
-            </h3>
-            <ul className="mt-5 space-y-3 text-sm text-white/70">
-              <li>{location.address}</li>
+            <SectionLabel>Newsletter</SectionLabel>
+            <p className="mt-6 text-sm leading-relaxed text-white/60">
+              Iscriviti per ricevere gli aggiornamenti sui prossimi eventi e
+              le novità di Mosaiko.
+            </p>
+            <form className="mt-5 flex items-center gap-2" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                required
+                placeholder="La tua email"
+                className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-mosaiko-gold focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-mosaiko-gold text-mosaiko-navy transition-colors hover:bg-mosaiko-gold-light"
+                aria-label="Iscriviti"
+              >
+                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                  <path
+                    d="M5 12h14M13 6l6 6-6 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </form>
+          </div>
+
+          <div>
+            <SectionLabel>Contatti</SectionLabel>
+            <ul className="mt-6 space-y-4 text-sm text-white/70">
               <li>
                 <a href={`mailto:${location.email}`} className="hover:text-white">
                   {location.email}
                 </a>
               </li>
+              <li>{location.address}</li>
               <li>
                 <a href={`tel:${location.phone}`} className="hover:text-white">
                   {location.phone}
@@ -85,9 +133,11 @@ function Footer() {
           </div>
         </div>
 
-        <p className="mt-8 text-xs text-white/40">
-          © {new Date().getFullYear()} Mosaiko. Tutti i diritti riservati.
-        </p>
+        <div className="flex items-center justify-center rounded-xl bg-white/5 px-6 py-4">
+          <p className="text-xs text-white/40">
+            © {new Date().getFullYear()} Mosaiko. Tutti i diritti riservati.
+          </p>
+        </div>
       </div>
     </footer>
   )

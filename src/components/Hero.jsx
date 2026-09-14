@@ -4,34 +4,71 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen items-center overflow-hidden bg-mosaiko-navy pt-28"
+      className="relative flex min-h-[92vh] items-center overflow-hidden bg-mosaiko-navy pt-24"
     >
-      {/* Watermark mark + geometric accents */}
+      {/* full-bleed photo */}
       <img
-        src="/logo/mosaiko-mark-white.png"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-1/2 h-[130%] w-auto -translate-y-1/2 opacity-[0.06]"
+        src="/images/hero-networking.jpg"
+        alt="Persone che fanno networking durante un evento Mosaiko"
+        className="absolute inset-0 h-full w-full object-cover"
       />
-      <svg
-        className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 text-mosaiko-gold opacity-20"
-        viewBox="0 0 100 100"
-        fill="none"
-      >
-        <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="0.6" />
-      </svg>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="max-w-3xl">
-          <span className="inline-flex items-center rounded-full border border-mosaiko-gold/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold">
-            Eventi · Business · Networking
+      {/* legibility scrim */}
+      <div className="absolute inset-0 bg-gradient-to-r from-mosaiko-navy via-mosaiko-navy/85 to-mosaiko-navy/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-mosaiko-navy/70 via-transparent to-mosaiko-navy/50" />
+
+      {/* geometric gradient shards, over the photo */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          clipPath: 'polygon(38% 0%, 74% 0%, 48% 100%, 12% 100%)',
+          background: 'linear-gradient(135deg, rgba(21,40,65,0.9) 0%, rgba(21,40,65,0.05) 75%)',
+          mixBlendMode: 'multiply',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          clipPath: 'polygon(58% 0%, 92% 0%, 78% 100%, 44% 100%)',
+          background: 'linear-gradient(150deg, rgba(233,206,151,0.65) 0%, rgba(199,154,75,0) 70%)',
+          mixBlendMode: 'overlay',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          clipPath: 'polygon(80% 0%, 100% 0%, 100% 55%, 88% 100%, 66% 100%)',
+          background: 'linear-gradient(160deg, rgba(14,26,43,0.75) 0%, rgba(14,26,43,0) 65%)',
+          mixBlendMode: 'multiply',
+        }}
+      />
+
+      {/* vertical eyebrow label */}
+      <span
+        className="pointer-events-none absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 text-xs font-semibold uppercase tracking-[0.3em] text-white/45 lg:block"
+        style={{ writingMode: 'vertical-rl' }}
+      >
+        Eventi · Business · Networking
+      </span>
+
+      <span className="absolute bottom-10 right-8 z-10 hidden h-14 w-14 items-center justify-center rounded-xl border border-mosaiko-gold/50 bg-mosaiko-navy/70 shadow-lg backdrop-blur-sm sm:flex">
+        <span className="h-2.5 w-2.5 rounded-full bg-mosaiko-gold" />
+      </span>
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-10">
+        <div className="max-w-xl lg:pl-8">
+          <span className="inline-flex items-center rounded-lg border border-mosaiko-gold/40 bg-mosaiko-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold">
+            Mosaiko Enterprise
           </span>
 
-          <h1 className="mt-7 font-heading text-5xl font-medium leading-[1.1] text-white sm:text-6xl lg:text-7xl">
+          <h1 className="mt-7 font-heading text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[3.75rem]">
             Costruiamo connessioni che generano valore.
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 sm:text-lg">
             Mosaiko progetta eventi, esperienze di networking e occasioni di
             business che uniscono persone, imprese e territori — trasformando
             ogni incontro in un'opportunità concreta di crescita.

@@ -6,11 +6,21 @@ export const navLinks = [
   { label: 'Dove siamo', href: '#dove-siamo' },
 ]
 
+export const model = {
+  eyebrow: 'Il nostro modello',
+  heading: "Eventi e Rete d'impresa",
+  paragraphs: [
+    'Mosaiko non lavora "per" i propri clienti, ma insieme a loro. Ogni progetto nasce da un confronto, si sviluppa in co-creazione e si realizza con un piano operativo preciso, strutturato in più fasi. A rendere unico ogni progetto è la capacità di integrare competenze verticali (eventi, comunicazione, PR, catering, supporto tecnico) in un’ottica orizzontale, che mira a creare un sistema di valore condiviso.',
+    'Affidarsi a Mosaiko Enterprise significa scegliere un partner in grado di trasformare ogni occasione in una leva strategica per la crescita, la visibilità e il posizionamento del proprio brand.',
+    'In un contesto in cui la competizione si gioca sempre di più sul piano delle relazioni e dell’esperienza, Mosaiko rappresenta un valore aggiunto concreto, capace di connettere obiettivi, persone e opportunità.',
+  ],
+}
+
 export const stats = [
-  { value: '120+', label: 'Eventi organizzati' },
-  { value: '5.000+', label: 'Partecipanti coinvolti' },
-  { value: '80+', label: 'Aziende partner' },
-  { value: '15', label: 'Città raggiunte' },
+  { value: '140', label: 'Eventi' },
+  { value: '7', label: 'Attività' },
+  { value: '16', label: 'Partner' },
+  { value: '999', label: 'Progetti' },
 ]
 
 export const sponsors = [

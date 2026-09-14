@@ -1,46 +1,79 @@
-import { sponsors, stats } from '../data/content'
+import { model, sponsors, stats } from '../data/content'
 
 function SponsorsStats() {
   return (
-    <section id="sponsor" className="bg-mosaiko-navy py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="max-w-2xl">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold">
-            Numeri e sponsor
-          </span>
-          <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-white sm:text-5xl">
-            Una rete che cresce evento dopo evento
-          </h2>
+    <>
+      <section className="relative overflow-hidden bg-mosaiko-navy py-24 sm:py-32">
+        <svg
+          className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 text-mosaiko-gold opacity-[0.07]"
+          viewBox="0 0 100 100"
+          fill="none"
+        >
+          <rect x="10" y="10" width="80" height="80" rx="18" stroke="currentColor" strokeWidth="0.6" />
+        </svg>
+
+        <div className="relative mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold">
+              {model.eyebrow}
+            </span>
+            <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-white sm:text-5xl">
+              {model.heading}
+            </h2>
+
+            <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-white/10 pt-10">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <dt className="font-heading text-5xl font-semibold tracking-tight text-mosaiko-gold sm:text-6xl">
+                    {stat.value}
+                  </dt>
+                  <dd className="mt-2 text-sm font-medium uppercase tracking-[0.1em] text-white/60">
+                    {stat.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className="space-y-6 lg:pt-2">
+            {model.paragraphs.map((paragraph, i) => (
+              <p
+                key={i}
+                className={`text-base leading-relaxed ${
+                  i === 0 ? 'text-white/85 sm:text-lg' : 'text-white/55'
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <dt className="font-heading text-4xl font-semibold text-mosaiko-gold sm:text-5xl">
-                {stat.value}
-              </dt>
-              <dd className="mt-2 text-sm text-white/70">{stat.label}</dd>
-            </div>
-          ))}
-        </dl>
+      <section id="sponsor" className="bg-white py-20 sm:py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-gold-dark">
+              Partner
+            </span>
+            <h2 className="mt-4 font-heading text-3xl font-medium leading-tight text-mosaiko-navy sm:text-4xl">
+              I nostri sponsor
+            </h2>
+          </div>
 
-        <div className="mt-20 border-t border-white/10 pt-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-            Con il supporto di
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-12 gap-y-6">
+          <div className="mt-12 grid grid-cols-2 divide-x divide-y divide-mosaiko-navy/10 rounded-2xl border border-mosaiko-navy/10 sm:grid-cols-3 lg:grid-cols-6">
             {sponsors.map((sponsor) => (
               <span
                 key={sponsor}
-                className="font-heading text-lg font-medium text-white/45 transition-colors hover:text-white/80"
+                className="flex items-center justify-center px-6 py-10 text-center font-heading text-base font-medium text-mosaiko-ink/60 transition-colors hover:text-mosaiko-navy"
               >
                 {sponsor}
               </span>
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 

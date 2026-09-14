@@ -6,7 +6,7 @@ const VARIANTS = {
 
 function Button({ as: Component = 'a', variant = 'primary', className = '', children, ...props }) {
   const base =
-    'inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-colors duration-200'
+    'inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold tracking-wide transition-colors duration-200'
 
   return (
     <Component className={`${base} ${VARIANTS[variant]} ${className}`} {...props}>

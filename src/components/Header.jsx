@@ -15,20 +15,26 @@ function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-mosaiko-navy/95 shadow-lg shadow-black/10 backdrop-blur' : 'bg-transparent'
+        scrolled ? 'py-3' : 'py-5'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
         <a href="#top" className="shrink-0">
-          <img src="/logo/mosaiko-lockup-white.png" alt="Mosaiko" className="h-7 w-auto" />
+          <img src="/logo/mosaiko-mark-white.png" alt="Mosaiko" className="h-11 w-auto" />
         </a>
 
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav
+          className={`hidden items-center gap-1 rounded-xl border px-2 py-2 backdrop-blur-md transition-colors duration-300 lg:flex ${
+            scrolled
+              ? 'border-white/10 bg-mosaiko-navy/90 shadow-lg shadow-black/20'
+              : 'border-white/15 bg-mosaiko-navy/40'
+          }`}
+        >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-white/80 transition-colors hover:text-white"
+              className="rounded-lg px-5 py-2 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
             >
               {link.label}
             </a>
@@ -42,10 +48,10 @@ function Header() {
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-white lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-mosaiko-navy/60 text-white backdrop-blur-md lg:hidden"
           aria-label="Apri il menu"
         >
-          <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+          <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
             {open ? (
               <path
                 d="M6 6l12 12M18 6L6 18"
@@ -66,19 +72,19 @@ function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-mosaiko-navy px-6 py-6 lg:hidden">
-          <nav className="flex flex-col gap-5">
+        <div className="mx-6 mt-3 rounded-2xl border border-white/10 bg-mosaiko-navy/95 px-6 py-6 backdrop-blur-md lg:hidden">
+          <nav className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-base font-medium text-white/85"
+                className="rounded-lg px-4 py-3 text-base font-medium text-white/85 hover:bg-white/10"
               >
                 {link.label}
               </a>
             ))}
-            <Button href="#eventi" onClick={() => setOpen(false)} className="mt-2 w-full">
+            <Button href="#eventi" onClick={() => setOpen(false)} className="mt-3 w-full">
               Partecipa
             </Button>
           </nav>
