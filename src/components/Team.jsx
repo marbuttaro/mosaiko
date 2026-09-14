@@ -26,7 +26,7 @@ function Team() {
           {team.map((member) => (
             <div
               key={member.name}
-              className="flex items-center gap-6 rounded-2xl bg-white/[0.04] p-3 pr-8 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07]"
+              className="flex items-center gap-6 rounded-2xl bg-white/[0.04] p-5 pr-8 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07] sm:p-6"
             >
               <Placeholder
                 tone="cream"
@@ -39,6 +39,11 @@ function Team() {
                 <h3 className="mt-1 font-heading text-xl font-normal text-white">
                   {member.name}
                 </h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/50">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna
+                  aliqua.
+                </p>
               </div>
             </div>
           ))}
