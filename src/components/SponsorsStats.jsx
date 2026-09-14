@@ -61,14 +61,16 @@ function SponsorsStats() {
             </h2>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 divide-x divide-y divide-mosaiko-navy/10 rounded-2xl border border-mosaiko-navy/10 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-12 grid grid-cols-2 divide-x divide-y divide-mosaiko-navy/10 overflow-hidden rounded-2xl border border-mosaiko-navy/10 bg-mosaiko-cream/30 shadow-sm sm:grid-cols-3 lg:grid-cols-4">
             {sponsors.map((sponsor) => (
-              <span
+              <div
                 key={sponsor}
-                className="flex items-center justify-center px-6 py-10 text-center font-heading text-base font-medium text-mosaiko-ink/60 transition-colors hover:text-mosaiko-navy"
+                className="group flex items-center justify-center px-6 py-12 text-center transition-colors duration-300 hover:bg-white"
               >
-                {sponsor}
-              </span>
+                <span className="font-heading text-lg font-medium tracking-wide text-mosaiko-navy opacity-35 transition-opacity duration-300 group-hover:opacity-100">
+                  {sponsor}
+                </span>
+              </div>
             ))}
           </div>
         </div>

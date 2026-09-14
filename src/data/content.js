@@ -30,6 +30,12 @@ export const sponsors = [
   'Solandra',
   'Kaleido Studio',
   'Meridian & Co.',
+  'Borea Consulting',
+  'Quarzo Capital',
+  'Linfa Studio',
+  'Stratos Media',
+  'Palma Retail',
+  'Vertex Building',
 ]
 
 export const team = [
