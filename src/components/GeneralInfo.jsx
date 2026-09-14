@@ -1,9 +1,22 @@
 import Placeholder from './Placeholder'
+import Button from './Button'
 
 const SERVICES = [
-  { title: 'Eventi', image: '/images/servizi/eventi.jpg' },
-  { title: "Rete d'impresa", image: '/images/servizi/rete-impresa.jpg' },
-  { title: 'Business', image: '/images/servizi/business.jpg' },
+  {
+    title: 'Eventi',
+    text: 'Produzione di eventi e organizzazione',
+    image: '/images/servizi/eventi.jpg',
+  },
+  {
+    title: "Rete d'impresa",
+    text: 'Attività di networking',
+    image: '/images/servizi/rete-impresa.jpg',
+  },
+  {
+    title: 'Business',
+    text: 'Coordinamento e gestione di attività commerciali',
+    image: '/images/servizi/business.jpg',
+  },
 ]
 
 function GeneralInfo() {
@@ -52,10 +65,22 @@ function GeneralInfo() {
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-mosaiko-navy/55 via-mosaiko-navy/0 to-mosaiko-navy/0" />
-              <span className="absolute left-5 top-5 font-heading text-xl font-medium text-white sm:text-2xl">
+              <div className="absolute inset-0 bg-gradient-to-b from-mosaiko-navy/55 via-mosaiko-navy/0 to-mosaiko-navy/0 transition-opacity duration-300 group-hover:opacity-0" />
+              <span className="absolute left-5 top-5 font-heading text-xl font-medium text-white transition-opacity duration-300 group-hover:opacity-0 sm:text-2xl">
                 {service.title}
               </span>
+
+              <div className="absolute inset-0 flex flex-col items-start justify-end gap-4 bg-mosaiko-navy/80 p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <div>
+                  <h3 className="font-heading text-xl font-medium text-white sm:text-2xl">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/80">{service.text}</p>
+                </div>
+                <Button href="#eventi" className="px-5 py-2 text-xs">
+                  Scopri di più
+                </Button>
+              </div>
             </div>
           ))}
         </div>
