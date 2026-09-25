@@ -4,25 +4,34 @@ import Button from './Button'
 
 function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [onLight, setOnLight] = useState(false)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12)
+      // Logo navy quando l'header passa sopra una sezione chiara
+      const section = document
+        .elementsFromPoint(40, 40)
+        .find((el) => el.matches('section, footer'))
+      setOnLight(Boolean(section?.classList.contains('bg-mosaiko-sand')))
+    }
+    onScroll()
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-white/10 bg-mosaiko-navy/75 py-3 shadow-lg shadow-black/10 backdrop-blur-md'
-          : 'py-5'
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'py-3' : 'py-5'}`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
         <a href="#top" className="shrink-0">
-          <img src="/logo/mosaiko-mark-white.png" alt="Mosaiko" className="h-11 w-auto" />
+          <img
+            src={onLight ? '/logo/mosaiko-mark-navy.png' : '/logo/mosaiko-mark-white.png'}
+            alt="Mosaiko"
+            className="h-11 w-auto"
+          />
         </a>
 
         <nav
@@ -43,8 +52,8 @@ function Header() {
           ))}
         </nav>
 
-        <Button href="#eventi" className="hidden lg:inline-flex">
-          Partecipa
+        <Button href="#dove-siamo" className="hidden lg:inline-flex">
+          Contattaci
         </Button>
 
         <button
@@ -86,8 +95,8 @@ function Header() {
                 {link.label}
               </a>
             ))}
-            <Button href="#eventi" onClick={() => setOpen(false)} className="mt-3 w-full">
-              Partecipa
+            <Button href="#dove-siamo" onClick={() => setOpen(false)} className="mt-3 w-full">
+              Contattaci
             </Button>
           </nav>
         </div>

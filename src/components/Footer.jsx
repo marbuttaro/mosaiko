@@ -50,7 +50,7 @@ function Footer() {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white/70 transition-colors hover:border-mosaiko-yellow hover:text-mosaiko-yellow"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white/70 transition-colors hover:border-mosaiko-blue-light hover:text-mosaiko-blue-light"
                 >
                   <svg viewBox="0 0 24 24" className="h-4 w-4">
                     {social.icon}
@@ -95,11 +95,11 @@ function Footer() {
                 type="email"
                 required
                 placeholder="La tua email"
-                className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-mosaiko-yellow focus:outline-none"
+                className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-mosaiko-blue-light focus:outline-none"
               />
               <button
                 type="submit"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-mosaiko-yellow text-mosaiko-navy transition-colors hover:bg-mosaiko-yellow-light"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-mosaiko-beige text-mosaiko-navy transition-colors hover:bg-mosaiko-beige-light"
                 aria-label="Iscriviti"
               >
                 <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">

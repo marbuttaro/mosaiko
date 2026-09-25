@@ -48,30 +48,34 @@ function Hero() {
 
       {/* vertical eyebrow label */}
       <span
-        className="pointer-events-none absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 text-xs font-semibold uppercase tracking-[0.3em] text-white/45 lg:block"
+        className="pointer-events-none absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 rotate-180 text-xs font-semibold uppercase tracking-[0.3em] text-white/45 lg:block"
         style={{ writingMode: 'vertical-rl' }}
       >
-        Eventi · Business · Networking
+        Events · Networking · Business
       </span>
 
-      <span className="absolute bottom-10 right-8 z-10 hidden h-14 w-14 items-center justify-center rounded-xl border border-mosaiko-yellow/50 bg-mosaiko-navy/70 shadow-lg backdrop-blur-sm sm:flex">
-        <span className="h-2.5 w-2.5 rounded-full bg-mosaiko-yellow" />
+      <span className="absolute bottom-10 right-8 z-10 hidden h-14 w-14 items-center justify-center rounded-xl border border-mosaiko-beige/50 bg-mosaiko-navy/70 shadow-lg backdrop-blur-sm sm:flex">
+        <span className="h-2.5 w-2.5 rounded-full bg-mosaiko-blue-light" />
       </span>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-10">
         <div className="max-w-xl lg:pl-8">
-          <span className="inline-flex items-center rounded-lg border border-mosaiko-yellow/40 bg-mosaiko-yellow/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-yellow">
+          <span className="inline-flex items-center rounded-lg border border-mosaiko-beige/40 bg-mosaiko-beige/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige">
             Mosaiko Enterprise
           </span>
 
           <h1 className="mt-7 font-heading text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[3.75rem]">
-            Costruiamo connessioni che generano valore.
+            Dove le relazioni diventano valore.
           </h1>
 
           <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 sm:text-lg">
-            Mosaiko progetta eventi, esperienze di networking e occasioni di
-            business che uniscono persone, imprese e territori — trasformando
-            ogni incontro in un'opportunità concreta di crescita.
+            Mosaiko progetta e sviluppa eventi, esperienze di hospitality e
+            occasioni di networking capaci di connettere aziende, istituzioni,
+            professionisti e territori.
+          </p>
+          <p className="mt-4 max-w-md text-base leading-relaxed text-white/70 sm:text-lg">
+            Creiamo occasioni in cui essere insieme genera visibilità, relazioni
+            e nuove opportunità.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">

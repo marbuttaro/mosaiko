@@ -1,5 +1,5 @@
 const VARIANTS = {
-  primary: 'bg-mosaiko-yellow text-mosaiko-navy hover:bg-mosaiko-yellow-light',
+  primary: 'bg-mosaiko-beige text-mosaiko-navy hover:bg-mosaiko-beige-light',
   outline: 'border border-white/30 text-white hover:bg-white/10',
   outlineNavy: 'border border-mosaiko-navy/25 text-mosaiko-navy hover:bg-mosaiko-navy/5',
 }

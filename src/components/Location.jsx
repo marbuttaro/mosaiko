@@ -4,14 +4,14 @@ function Location() {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&output=embed`
 
   return (
-    <section id="dove-siamo" className="bg-white py-24 sm:py-32">
+    <section id="dove-siamo" className="bg-mosaiko-sand py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-yellow-dark">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige-dark">
             Dove siamo
           </span>
           <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-mosaiko-navy sm:text-5xl">
-            Vieni a trovarci
+            Il nostro mosaico
           </h2>
           <p className="mt-6 text-base leading-relaxed text-mosaiko-ink sm:text-lg">
             La nostra sede è il punto di partenza di una rete che si estende
@@ -21,39 +21,39 @@ function Location() {
         </div>
 
         <div className="mt-14 grid overflow-hidden rounded-2xl shadow-xl shadow-mosaiko-navy/10 lg:grid-cols-2">
-          <div className="flex flex-col justify-center gap-8 bg-mosaiko-yellow p-8 text-mosaiko-navy sm:p-12">
+          <div className="flex flex-col justify-center gap-8 bg-mosaiko-navy-2 p-8 text-white sm:p-12">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-navy/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+                Ragione sociale
+              </p>
+              <p className="mt-2 text-base font-medium text-white">{location.company}</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
                 Indirizzo
               </p>
-              <p className="mt-2 text-base font-medium leading-relaxed text-mosaiko-navy">
+              <p className="mt-2 text-base font-medium leading-relaxed text-white">
                 {location.address}
               </p>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-navy/60">
-                Città
-              </p>
-              <p className="mt-2 text-base font-medium text-mosaiko-navy">{location.city}</p>
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-navy/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
                 Email
               </p>
               <a
                 href={`mailto:${location.email}`}
-                className="mt-2 block text-base font-medium text-mosaiko-navy hover:underline"
+                className="mt-2 block text-base font-medium text-white hover:underline"
               >
                 {location.email}
               </a>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-navy/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
                 Telefono
               </p>
               <a
                 href={`tel:${location.phone}`}
-                className="mt-2 block text-base font-medium text-mosaiko-navy hover:underline"
+                className="mt-2 block text-base font-medium text-white hover:underline"
               >
                 {location.phone}
               </a>

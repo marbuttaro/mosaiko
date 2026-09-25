@@ -8,11 +8,11 @@ export const navLinks = [
 
 export const model = {
   eyebrow: 'Il nostro modello',
-  heading: "Eventi e Rete d'impresa",
+  heading: 'Eventi e Networking',
   paragraphs: [
-    'Mosaiko non lavora "per" i propri clienti, ma insieme a loro. Ogni progetto nasce da un confronto, si sviluppa in co-creazione e si realizza con un piano operativo preciso, strutturato in più fasi. A rendere unico ogni progetto è la capacità di integrare competenze verticali (eventi, comunicazione, PR, catering, supporto tecnico) in un’ottica orizzontale, che mira a creare un sistema di valore condiviso.',
-    'Affidarsi a Mosaiko Enterprise significa scegliere un partner in grado di trasformare ogni occasione in una leva strategica per la crescita, la visibilità e il posizionamento del proprio brand.',
-    'In un contesto in cui la competizione si gioca sempre di più sul piano delle relazioni e dell’esperienza, Mosaiko rappresenta un valore aggiunto concreto, capace di connettere obiettivi, persone e opportunità.',
+    'Progettiamo e realizziamo eventi capaci di trasformarsi in occasioni concrete di incontro, visibilità e business.',
+    'Le nostre iniziative diventano occasioni in cui connettere aziende, professionisti, partner e stakeholder, creando relazioni e nuove opportunità di collaborazione. Attraverso i nostri progetti offriamo inoltre alle aziende opportunità di visibilità, posizionamento e presenza qualificata all’interno di eventi, partnership, sponsorship e contesti ad alto valore relazionale.',
+    'Per Mosaiko, ogni evento è uno strumento per incontrare le persone giuste, rafforzare il proprio brand e generare nuove opportunità.',
   ],
 }
 
@@ -39,10 +39,11 @@ export const sponsors = [
 ]
 
 export const team = [
-  { name: 'Giulia Ferraro', role: 'Founder & Direttrice Eventi' },
-  { name: 'Marco Esposito', role: 'Business Development' },
-  { name: 'Chiara Romano', role: 'Community & Networking' },
-  { name: 'Davide Conte', role: 'Produzione & Logistica' },
+  { name: 'Guglielmo Esposito', role: 'Ruolo da definire' },
+  { name: 'Luca Ferraro', role: 'Ruolo da definire' },
+  { name: 'Antonietta Marcello', role: 'Ruolo da definire' },
+  { name: 'Raffaele Rippa', role: 'Ruolo da definire' },
+  { name: 'Roberto Ivone', role: 'Ruolo da definire' },
 ]
 
 export const events = [
@@ -67,9 +68,9 @@ export const events = [
 ]
 
 export const location = {
-  city: 'Napoli, Italia',
-  address: 'Via Placeholder 12, 80100 Napoli (NA)',
-  email: 'info@mosaiko.it',
-  phone: '+39 081 000 0000',
-  mapQuery: 'Napoli, Italia',
+  company: 'Mosaiko Enterprise srl',
+  address: 'Via Agnano Astroni 30, Napoli',
+  email: 'info@mosaiko.org',
+  phone: '+39 331 316 1556',
+  mapQuery: 'Via Agnano Astroni 30, Napoli',
 }
