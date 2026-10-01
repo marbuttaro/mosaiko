@@ -1,26 +1,26 @@
 import { location } from '../data/content'
+import Reveal from './Reveal'
+import SplitText from './SplitText'
 
 function Location() {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&output=embed`
 
   return (
-    <section id="dove-siamo" className="bg-mosaiko-sand py-24 sm:py-32">
+    <section id="dove-siamo" className="bg-mosaiko-sand pb-24 pt-8 sm:pb-32 sm:pt-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige-dark">
-            Dove siamo
-          </span>
-          <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-mosaiko-navy sm:text-5xl">
-            Il nostro mosaico
-          </h2>
-          <p className="mt-6 text-base leading-relaxed text-mosaiko-ink sm:text-lg">
+          <SplitText
+            text="Dove siamo"
+            className="font-heading uppercase tracking-[0.01em] text-3xl font-medium leading-tight text-mosaiko-navy sm:text-4xl"
+          />
+          <Reveal as="p" delay={150} className="mt-6 text-base leading-relaxed text-mosaiko-ink sm:text-lg">
             La nostra sede è il punto di partenza di una rete che si estende
             in tutta la regione. Passa a trovarci o scrivici per organizzare
             insieme il prossimo evento.
-          </p>
+          </Reveal>
         </div>
 
-        <div className="mt-14 grid overflow-hidden rounded-2xl shadow-xl shadow-mosaiko-navy/10 lg:grid-cols-2">
+        <Reveal className="mt-14 grid overflow-hidden rounded-2xl shadow-xl shadow-mosaiko-navy/10 lg:grid-cols-2">
           <div className="flex flex-col justify-center gap-8 bg-mosaiko-navy-2 p-8 text-white sm:p-12">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
@@ -69,7 +69,7 @@ function Location() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

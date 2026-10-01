@@ -1,41 +1,51 @@
 import { events } from '../data/content'
 import Placeholder from './Placeholder'
+import Reveal from './Reveal'
+import SplitText from './SplitText'
 
 function UpcomingEvents() {
   return (
-    <section id="eventi" className="bg-mosaiko-sand py-24 sm:py-32">
+    <section id="eventi" className="bg-mosaiko-sand py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige-dark">
+          <Reveal
+            as="span"
+            className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige"
+          >
             Calendario
-          </span>
-          <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-mosaiko-navy sm:text-5xl">
-            Prossimi eventi
-          </h2>
+          </Reveal>
+          <SplitText
+            text="Prossimi eventi"
+            className="mt-4 font-heading uppercase tracking-[0.01em] text-3xl font-medium leading-tight text-mosaiko-navy sm:text-4xl"
+          />
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5">
+        <div className="mt-12 grid gap-3 md:grid-cols-3 md:gap-8">
           {events.map((event, i) => (
-            <a
+            <Reveal
+              as="a"
               key={event.title}
+              delay={i * 90}
               href={`#evento-${i}`}
-              className="flex flex-col gap-2 rounded-xl border border-mosaiko-navy/10 bg-mosaiko-navy/5 px-6 py-6 transition-all hover:border-mosaiko-blue/40 hover:bg-white sm:px-8 sm:py-8"
+              className="flex flex-col gap-1.5 rounded-xl border border-mosaiko-navy/10 bg-mosaiko-navy/5 px-6 py-4 transition-all hover:border-mosaiko-blue/40 hover:bg-white sm:px-8 sm:py-5"
             >
               <span className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-blue sm:text-sm">
                 {event.date}
               </span>
-              <span className="font-heading text-3xl font-semibold leading-none text-mosaiko-navy sm:text-4xl">
+              <span className="font-heading text-xl font-semibold leading-none text-mosaiko-navy sm:text-2xl">
                 {event.tag}
               </span>
-            </a>
+            </Reveal>
           ))}
         </div>
 
         <div className="mt-14 grid gap-8 md:grid-cols-3">
           {events.map((event, i) => (
-            <article
+            <Reveal
+              as="article"
               id={`evento-${i}`}
               key={event.title}
+              delay={i * 120}
               className="group scroll-mt-28 rounded-2xl border border-mosaiko-navy/10 bg-white p-3 shadow-md shadow-mosaiko-navy/10 transition-shadow hover:shadow-xl hover:shadow-mosaiko-navy/15"
             >
               <div className="relative">
@@ -57,7 +67,7 @@ function UpcomingEvents() {
                 <div className="mt-5 flex items-center justify-between">
                   <a
                     href="#"
-                    className="inline-flex items-center rounded-lg bg-mosaiko-navy px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-mosaiko-navy-2"
+                    className="inline-flex items-center rounded-lg bg-mosaiko-navy px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-mosaiko-navy-2"
                   >
                     Scopri di più
                   </a>
@@ -78,7 +88,7 @@ function UpcomingEvents() {
                   </button>
                 </div>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>

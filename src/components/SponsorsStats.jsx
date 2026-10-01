@@ -1,81 +1,132 @@
-import { model, sponsors, stats } from '../data/content'
+import { featuredPartners, featuredSponsors, model, stats } from '../data/content'
+import Button from './Button'
+import CountUp from './CountUp'
+import LogoPlaceholder from './LogoPlaceholder'
+import Reveal from './Reveal'
+import SplitText from './SplitText'
 
-function SponsorsStats() {
+export function ModelSection() {
   return (
-    <>
-      <section className="relative overflow-hidden bg-mosaiko-navy py-24 sm:py-32">
-        <svg
-          className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 text-mosaiko-blue opacity-[0.12]"
-          viewBox="0 0 100 100"
-          fill="none"
+    <section className="relative overflow-hidden bg-mosaiko-navy rounded-t-[2rem] shadow-[0_-24px_60px_-28px_rgba(14,26,43,0.45)] sm:rounded-t-[2.5rem] py-24 sm:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+        <Reveal
+          as="span"
+          className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige"
         >
-          <rect x="10" y="10" width="80" height="80" rx="18" stroke="currentColor" strokeWidth="0.6" />
-        </svg>
+          {model.eyebrow}
+        </Reveal>
+        <SplitText
+          text={model.heading}
+          className="mt-4 font-heading uppercase tracking-[0.01em] text-3xl font-medium leading-tight text-white sm:text-4xl"
+        />
 
-        <div className="relative mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige">
-              {model.eyebrow}
-            </span>
-            <h2 className="mt-4 font-heading text-4xl font-medium leading-tight text-white sm:text-5xl">
-              {model.heading}
-            </h2>
-
-            <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-white/10 pt-10">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <dt className="font-heading text-5xl font-semibold tracking-tight text-mosaiko-beige sm:text-6xl">
-                    {stat.value}
-                  </dt>
-                  <dd className="mt-2 text-sm font-medium uppercase tracking-[0.1em] text-white/60">
-                    {stat.label}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          <div className="space-y-6 lg:pt-2">
+        {/* Testo a sinistra e numeri a destra; la linea sta solo sopra i numeri */}
+        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="space-y-6 lg:pt-[calc(2.5rem+1px)]">
             {model.paragraphs.map((paragraph, i) => (
-              <p
+              <Reveal
+                as="p"
                 key={i}
+                delay={i * 120}
                 className={`text-base leading-relaxed ${
                   i === 0 ? 'text-white/85 sm:text-lg' : 'text-white/55'
                 }`}
               >
                 {paragraph}
-              </p>
+              </Reveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section id="sponsor" className="bg-mosaiko-sand py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige-dark">
-              Partner
-            </span>
-            <h2 className="mt-4 font-heading text-3xl font-medium leading-tight text-mosaiko-navy sm:text-4xl">
-              I nostri sponsor
-            </h2>
-          </div>
-
-          <div className="mt-12 grid grid-cols-2 divide-x divide-y divide-mosaiko-navy/10 overflow-hidden rounded-2xl border border-mosaiko-navy/10 bg-mosaiko-navy/5 shadow-sm sm:grid-cols-3 lg:grid-cols-4">
-            {sponsors.map((sponsor) => (
-              <div
-                key={sponsor}
-                className="group flex items-center justify-center px-6 py-12 text-center transition-colors duration-300 hover:bg-white"
-              >
-                <span className="font-heading text-lg font-medium tracking-wide text-mosaiko-navy opacity-35 transition-opacity duration-300 group-hover:opacity-100">
-                  {sponsor}
-                </span>
-              </div>
+          <dl className="grid grid-cols-2 content-start gap-x-8 gap-y-10 border-t border-white/10 pt-10 lg:w-full lg:max-w-md lg:justify-self-end">
+            {stats.map((stat, i) => (
+              <Reveal key={stat.label} delay={i * 100}>
+                <dt className="font-heading text-5xl font-semibold tracking-tight text-mosaiko-beige sm:text-6xl">
+                  <CountUp to={Number(stat.value)} />
+                </dt>
+                <dd className="mt-2 text-sm font-medium uppercase tracking-[0.1em] text-white/60">
+                  {stat.label}
+                </dd>
+              </Reveal>
             ))}
-          </div>
+          </dl>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
+  )
+}
+
+// Righe dell'anteprima in home: etichetta a sinistra, loghi a destra
+function LogoRow({ label, children }) {
+  return (
+    <div className="grid gap-8 border-t border-mosaiko-navy/10 py-10 sm:py-12 lg:grid-cols-[12rem_1fr] lg:items-center lg:gap-12">
+      <h3 className="font-heading text-sm font-medium uppercase tracking-[0.1em] text-mosaiko-navy sm:text-base">
+        {label}
+      </h3>
+      <div className="min-w-0">{children}</div>
+    </div>
+  )
+}
+
+// Nastro di loghi in loop: la lista è duplicata e scorre di metà della sua larghezza
+function LogoMarquee({ names }) {
+  return (
+    <div className="logo-marquee overflow-hidden">
+      <div className="logo-marquee-track flex w-max">
+        {[0, 1].map((copy) => (
+          <ul key={copy} aria-hidden={copy === 1 || undefined} className="flex shrink-0 items-center">
+            {names.map((name, i) => (
+              <li key={name} className="px-6 opacity-60 transition-opacity duration-300 hover:opacity-100 sm:px-8">
+                <LogoPlaceholder name={name} index={i + 2} />
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function SponsorsStats() {
+  return (
+    <section id="sponsor" className="bg-mosaiko-sand py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="max-w-2xl">
+          <Reveal
+            as="span"
+            className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige"
+          >
+            Partner
+          </Reveal>
+          <SplitText
+            text="Il nostro mosaico"
+            className="mt-4 font-heading uppercase tracking-[0.01em] text-3xl font-medium leading-tight text-mosaiko-navy sm:text-4xl"
+          />
+        </div>
+
+        <Reveal className="mt-12 border-b border-mosaiko-navy/10">
+          <LogoRow label="Partner">
+            <ul className="grid grid-cols-1 items-center gap-8 sm:grid-cols-3">
+              {featuredPartners.map((name, i) => (
+                <li
+                  key={name}
+                  className="flex justify-center opacity-60 transition-opacity duration-300 hover:opacity-100 lg:justify-start"
+                >
+                  <LogoPlaceholder name={name} index={i} size="lg" />
+                </li>
+              ))}
+            </ul>
+          </LogoRow>
+          <LogoRow label="Sponsor">
+            <LogoMarquee names={featuredSponsors} />
+          </LogoRow>
+        </Reveal>
+
+        <Reveal delay={150} className="mt-12 flex justify-center">
+          {/* TODO: collegare alla pagina partner e sponsor quando sarà pronta */}
+          <Button href="/partner" variant="navy">Vedi tutti i partner</Button>
+        </Reveal>
+      </div>
+    </section>
   )
 }
 

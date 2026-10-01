@@ -23,6 +23,21 @@ export const stats = [
   { value: '999', label: 'Progetti' },
 ]
 
+// Anteprima in home: partner principali e sponsor in evidenza (placeholder)
+export const featuredPartners = ['Vertice Capital', 'Aurora Partners', 'Meridian & Co.']
+
+export const featuredSponsors = [
+  'Nimbus Group',
+  'Solandra',
+  'Kaleido Studio',
+  'Quarzo Capital',
+  'Stratos Media',
+  'Borea Consulting',
+  'Linfa Studio',
+  'Palma Retail',
+]
+
+// Elenco completo, per la futura pagina partner e sponsor
 export const sponsors = [
   'Nimbus Group',
   'Vertice Capital',
@@ -39,11 +54,61 @@ export const sponsors = [
 ]
 
 export const team = [
-  { name: 'Guglielmo Esposito', role: 'Ruolo da definire' },
-  { name: 'Luca Ferraro', role: 'Ruolo da definire' },
-  { name: 'Antonietta Marcello', role: 'Ruolo da definire' },
-  { name: 'Raffaele Rippa', role: 'Ruolo da definire' },
-  { name: 'Roberto Ivone', role: 'Ruolo da definire' },
+  {
+    name: 'Guglielmo Esposito',
+    role: 'Co-Founder & Relationship Strategist',
+    description:
+      'Guida lo sviluppo di Mosaiko, le relazioni strategiche e la crescita del network.',
+  },
+  {
+    name: 'Luca Ferraro',
+    role: 'Co-Founder & Operations Director',
+    description:
+      'Coordina organizzazione, logistica e sviluppo operativo dei progetti e degli eventi.',
+  },
+  {
+    name: 'Antonietta Marcello',
+    role: 'Partnership Manager',
+    description:
+      'Sviluppa e gestisce le relazioni con partner, aziende e realtà del network Mosaiko.',
+  },
+  {
+    name: 'Raffaele Rippa',
+    role: 'Business & Financial Coordinator',
+    description:
+      'Segue la pianificazione economica e lo sviluppo delle opportunità di business.',
+  },
+  {
+    name: 'Roberto Ivone',
+    role: 'Hospitality & F&B Manager',
+    description:
+      'Coordina le attività hospitality, food & beverage e la gestione operativa delle strutture.',
+  },
+]
+
+// News in evidenza in home (le altre andranno nella pagina dedicata). Contenuti placeholder.
+export const news = [
+  {
+    id: 'tennis-napoli-cup-1',
+    date: '1 Apr 2026',
+    title: 'Tennis Napoli Cup: Hospitality Management',
+    tags: ['Eventi', 'News'],
+    image: '/images/news/tennis-napoli-cup.jpg',
+  },
+  {
+    id: 'tennis-napoli-cup-2',
+    date: '1 Apr 2026',
+    title: 'Tennis Napoli Cup: Hospitality Management',
+    tags: ['Eventi', 'News'],
+    image: '/images/news/tennis-napoli-cup.jpg',
+  },
+  {
+    id: 'tennis-napoli-cup-3',
+    date: '1 Apr 2026',
+    title: 'Tennis Napoli Cup: Hospitality Management',
+    tags: ['Eventi', 'News'],
+    image: '/images/news/tennis-napoli-cup.jpg',
+  },
 ]
 
 export const events = [

@@ -52,7 +52,7 @@ function Header() {
           ))}
         </nav>
 
-        <Button href="#dove-siamo" className="hidden lg:inline-flex">
+        <Button href="#dove-siamo" variant={onLight ? 'navy' : 'primary'} className="hidden lg:inline-flex">
           Contattaci
         </Button>
 
