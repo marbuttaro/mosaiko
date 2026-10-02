@@ -6,7 +6,7 @@ function Location() {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&output=embed`
 
   return (
-    <section id="dove-siamo" className="bg-mosaiko-sand pb-24 pt-8 sm:pb-32 sm:pt-12">
+    <section id="dove-siamo" className="bg-mosaiko-sand pt-8 pb-24 sm:pt-12 sm:pb-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <SplitText

@@ -1,11 +1,10 @@
 import { events } from '../data/content'
-import Placeholder from './Placeholder'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
 
 function UpcomingEvents() {
   return (
-    <section id="eventi" className="bg-mosaiko-sand py-16 sm:py-20">
+    <section id="eventi" className="bg-[#fcfaf4] pt-24 pb-16 sm:pt-32 sm:pb-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal
@@ -46,16 +45,21 @@ function UpcomingEvents() {
               id={`evento-${i}`}
               key={event.title}
               delay={i * 120}
-              className="group scroll-mt-28 rounded-2xl border border-mosaiko-navy/10 bg-white p-3 shadow-md shadow-mosaiko-navy/10 transition-shadow hover:shadow-xl hover:shadow-mosaiko-navy/15"
+              className="group flex scroll-mt-28 flex-col overflow-hidden rounded-2xl bg-white shadow-md shadow-mosaiko-navy/10 transition-shadow duration-300 hover:shadow-xl hover:shadow-mosaiko-navy/15"
             >
-              <div className="relative">
-                <Placeholder tone="navy" className="aspect-[4/3] w-full rounded-xl" />
+              <div className="relative overflow-hidden">
+                <img
+                  src={event.image}
+                  alt=""
+                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
                 <span className="absolute left-4 top-4 rounded-lg bg-white/95 px-3 py-1 text-xs font-semibold text-mosaiko-navy">
                   {event.date}
                 </span>
               </div>
 
-              <div className="px-2 pb-2">
+              <div className="flex flex-1 flex-col items-start px-5 pb-5">
                 <span className="mt-5 inline-flex items-center rounded-md bg-mosaiko-blue px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-white">
                   {event.tag}
                 </span>
@@ -64,10 +68,10 @@ function UpcomingEvents() {
                 </h3>
                 <p className="mt-1 text-sm text-mosaiko-ink">{event.location}</p>
 
-                <div className="mt-5 flex items-center justify-between">
+                <div className="mt-auto flex w-full items-center justify-between pt-5">
                   <a
                     href="#"
-                    className="inline-flex items-center rounded-lg bg-mosaiko-navy px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-mosaiko-navy-2"
+                    className="inline-flex items-center rounded-lg bg-mosaiko-blue/10 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-mosaiko-blue transition-colors hover:bg-mosaiko-blue hover:text-white"
                   >
                     Scopri di più
                   </a>

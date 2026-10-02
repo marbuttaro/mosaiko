@@ -23,11 +23,11 @@ function App() {
         <News />
         {/* Pannelli colorati che salgono sopra la sezione precedente */}
         <div>
-          <StickyLayer id="chi-siamo">
+          <StickyLayer id="chi-siamo" hold={60}>
             <GeneralInfo />
           </StickyLayer>
           <div className="relative z-10">
-            <StickyLayer>
+            <StickyLayer hold={30}>
               <ModelSection />
             </StickyLayer>
             <div id="team" className="relative z-10">

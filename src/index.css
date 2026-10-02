@@ -62,10 +62,10 @@
   --color-mosaiko-ink: #55524c;
 
   --color-mosaiko-sand: #f9fafc; /* prova bianco freddo; prima: #fbf9f3 */
-  --color-mosaiko-beige: #cf9a33; /* prima: #d5ad62, originale: #bea16a */
+  --color-mosaiko-beige: #cba44d; /* prima: #cf9a33, #d5ad62, originale: #bea16a */
   --color-mosaiko-beige-light: #ebcf96; /* prima: #ead5ae, originale: #e2d5bc */
   --color-mosaiko-beige-dark: #6a5a3b;
-  --color-mosaiko-blue: #3b6aac;
+  --color-mosaiko-blue: #386092; /* prima: #3b6aac */
   --color-mosaiko-blue-light: #a7bcda;
   --color-mosaiko-blue-dark: #213b60;
 }

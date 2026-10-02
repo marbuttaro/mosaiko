@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 // Livello che resta fermo quando il suo fondo tocca il fondo dello schermo,
 // così il pannello successivo può scorrergli sopra (effetto "foglio che sale").
 // L'ancora è fuori dall'elemento sticky, così i link #id puntano alla posizione reale.
-function StickyLayer({ id, children }) {
+// `hold` (in vh) aggiunge una pausa: il livello resta fermo e visibile per quel tratto
+// di scroll prima che il pannello successivo inizi a salire.
+function StickyLayer({ id, hold = 0, children }) {
   const ref = useRef(null)
   const [top, setTop] = useState(0)
 
@@ -25,6 +27,7 @@ function StickyLayer({ id, children }) {
       <div ref={ref} className="sticky" style={{ top }}>
         {children}
       </div>
+      {hold > 0 && <div aria-hidden="true" style={{ height: `${hold}vh` }} />}
     </>
   )
 }

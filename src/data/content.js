@@ -116,18 +116,21 @@ export const events = [
     date: '14 Ott 2026',
     title: 'Networking Night — Business Campania',
     location: 'Napoli',
+    image: '/images/servizi/eventi.jpg', // placeholder
     tag: 'Networking',
   },
   {
     date: '05 Nov 2026',
     title: 'Mosaiko Summit — Imprese in Rete',
     location: 'Caserta',
+    image: '/images/servizi/rete-impresa.jpg', // placeholder
     tag: 'Conferenza',
   },
   {
     date: '21 Nov 2026',
     title: 'Workshop — Costruire Partnership che Durano',
     location: 'Salerno',
+    image: '/images/servizi/business.jpg', // placeholder
     tag: 'Workshop',
   },
 ]
