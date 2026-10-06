@@ -1,5 +1,4 @@
 import { team } from '../data/content'
-import Placeholder from './Placeholder'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
 
@@ -35,9 +34,13 @@ function Team() {
               delay={(i % 2) * 120}
               className="flex items-center gap-6 rounded-2xl bg-white/[0.04] p-5 pr-8 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07] sm:p-6"
             >
-              <Placeholder
-                tone="cream"
-                className="h-20 w-20 shrink-0 rounded-xl sm:h-24 sm:w-24"
+              <img
+                src={member.photo}
+                alt={member.name}
+                width="400"
+                height="400"
+                loading="lazy"
+                className="h-20 w-20 shrink-0 rounded-xl object-cover sm:h-24 sm:w-24"
               />
               <div>
                 <h3 className="font-heading text-[1.375rem] font-normal text-white">

@@ -56,30 +56,35 @@ export const sponsors = [
 export const team = [
   {
     name: 'Guglielmo Esposito',
+    photo: '/images/team/guglielmo-esposito.jpg',
     role: 'Co-Founder & Relationship Strategist',
     description:
       'Guida lo sviluppo di Mosaiko, le relazioni strategiche e la crescita del network.',
   },
   {
     name: 'Luca Ferraro',
+    photo: '/images/team/luca-ferraro.jpg',
     role: 'Co-Founder & Operations Director',
     description:
       'Coordina organizzazione, logistica e sviluppo operativo dei progetti e degli eventi.',
   },
   {
     name: 'Antonietta Marcello',
+    photo: '/images/team/antonietta-marcello.jpg',
     role: 'Partnership Manager',
     description:
       'Sviluppa e gestisce le relazioni con partner, aziende e realtà del network Mosaiko.',
   },
   {
     name: 'Raffaele Rippa',
+    photo: '/images/team/raffaele-rippa.jpg',
     role: 'Business & Financial Coordinator',
     description:
       'Segue la pianificazione economica e lo sviluppo delle opportunità di business.',
   },
   {
     name: 'Roberto Ivone',
+    photo: '/images/team/roberto-ivone.jpg',
     role: 'Hospitality & F&B Manager',
     description:
       'Coordina le attività hospitality, food & beverage e la gestione operativa delle strutture.',
