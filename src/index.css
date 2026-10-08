@@ -68,6 +68,7 @@
   --color-mosaiko-blue: #386092; /* prima: #3b6aac */
   --color-mosaiko-blue-light: #a7bcda;
   --color-mosaiko-blue-dark: #213b60;
+  --color-mosaiko-mist: #eaeff6; /* azzurro tenue di sfondo (blue-light al 18% sul bianco) */
 }
 
 html {
@@ -151,7 +152,7 @@ html.lenis {
   }
 }
 
-/* Sponsor in home: nastro di loghi in loop, sfumato ai bordi, in pausa al passaggio del mouse */
+/* Partner in home: nastro di loghi in loop, sfumato ai bordi, in pausa al passaggio del mouse */
 .logo-marquee {
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }

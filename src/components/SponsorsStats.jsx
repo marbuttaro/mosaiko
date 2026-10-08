@@ -1,7 +1,7 @@
-import { featuredPartners, featuredSponsors, model, stats } from '../data/content'
+import { model, partnerGroups, stats } from '../data/content'
 import Button from './Button'
 import CountUp from './CountUp'
-import LogoPlaceholder from './LogoPlaceholder'
+import PartnerLogo from './PartnerLogo'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
 
@@ -68,15 +68,15 @@ function LogoRow({ label, children }) {
 }
 
 // Nastro di loghi in loop: la lista è duplicata e scorre di metà della sua larghezza
-function LogoMarquee({ names }) {
+function LogoMarquee({ items }) {
   return (
     <div className="logo-marquee overflow-hidden">
       <div className="logo-marquee-track flex w-max">
         {[0, 1].map((copy) => (
           <ul key={copy} aria-hidden={copy === 1 || undefined} className="flex shrink-0 items-center">
-            {names.map((name, i) => (
-              <li key={name} className="px-6 opacity-60 transition-opacity duration-300 hover:opacity-100 sm:px-8">
-                <LogoPlaceholder name={name} index={i + 2} />
+            {items.map((item) => (
+              <li key={item.name} className="px-7 sm:px-10">
+                <PartnerLogo {...item} scale={5.5} />
               </li>
             ))}
           </ul>
@@ -87,6 +87,8 @@ function LogoMarquee({ names }) {
 }
 
 function SponsorsStats() {
+  const [partners, sponsors] = partnerGroups
+
   return (
     <section id="sponsor" className="bg-mosaiko-sand py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -105,24 +107,20 @@ function SponsorsStats() {
 
         <Reveal className="mt-12 border-b border-mosaiko-navy/10">
           <LogoRow label="Partner">
-            <ul className="grid grid-cols-1 items-center gap-8 sm:grid-cols-3">
-              {featuredPartners.map((name, i) => (
-                <li
-                  key={name}
-                  className="flex justify-center opacity-60 transition-opacity duration-300 hover:opacity-100 lg:justify-start"
-                >
-                  <LogoPlaceholder name={name} index={i} size="lg" />
+            <LogoMarquee items={partners.items} />
+          </LogoRow>
+          <LogoRow label="Sponsor">
+            <ul className="grid grid-cols-3 items-center gap-6">
+              {sponsors.items.map((item) => (
+                <li key={item.name} className="flex justify-center">
+                  <PartnerLogo {...item} scale={4.5} />
                 </li>
               ))}
             </ul>
           </LogoRow>
-          <LogoRow label="Sponsor">
-            <LogoMarquee names={featuredSponsors} />
-          </LogoRow>
         </Reveal>
 
         <Reveal delay={150} className="mt-12 flex justify-center">
-          {/* TODO: collegare alla pagina partner e sponsor quando sarà pronta */}
           <Button href="/partner" variant="navy">Vedi tutti i partner</Button>
         </Reveal>
       </div>

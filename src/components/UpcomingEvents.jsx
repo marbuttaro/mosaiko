@@ -4,7 +4,7 @@ import SplitText from './SplitText'
 
 function UpcomingEvents() {
   return (
-    <section id="eventi" className="bg-[#fcfaf4] pt-24 pb-16 sm:pt-32 sm:pb-20">
+    <section id="eventi" className="bg-mosaiko-mist pt-24 pb-16 sm:pt-32 sm:pb-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal
@@ -26,7 +26,7 @@ function UpcomingEvents() {
               key={event.title}
               delay={i * 90}
               href={`#evento-${i}`}
-              className="flex flex-col gap-1.5 rounded-xl border border-mosaiko-navy/10 bg-mosaiko-navy/5 px-6 py-4 transition-all hover:border-mosaiko-blue/40 hover:bg-white sm:px-8 sm:py-5"
+              className="flex flex-col gap-1.5 rounded-xl border border-mosaiko-navy/10 bg-white/60 px-6 py-4 transition-all hover:border-mosaiko-blue/40 hover:bg-white sm:px-8 sm:py-5"
             >
               <span className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-blue sm:text-sm">
                 {event.date}

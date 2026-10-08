@@ -10,34 +10,48 @@ import UpcomingEvents from './components/UpcomingEvents'
 import Location from './components/Location'
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'
+import PartnersPage from './components/PartnersPage'
+import { isPartnerPage } from './lib/route'
 import { initSmoothScroll } from './lib/smoothScroll'
 
 function App() {
   useEffect(() => initSmoothScroll(), [])
 
+  // Arrivando da un'altra pagina con un'ancora (es. /#team) la sezione esiste solo dopo il render
+  useEffect(() => {
+    const target = window.location.hash && document.querySelector(window.location.hash)
+    if (target) requestAnimationFrame(() => target.scrollIntoView())
+  }, [])
+
   return (
     <div className="min-h-screen bg-mosaiko-sand">
       <Header />
       <main>
-        <Hero />
-        <News />
-        {/* Pannelli colorati che salgono sopra la sezione precedente */}
-        <div>
-          <StickyLayer id="chi-siamo" hold={60}>
-            <GeneralInfo />
-          </StickyLayer>
-          <div className="relative z-10">
-            <StickyLayer hold={30}>
-              <ModelSection />
-            </StickyLayer>
-            <div id="team" className="relative z-10">
-              <Team />
+        {isPartnerPage ? (
+          <PartnersPage />
+        ) : (
+          <>
+            <Hero />
+            <News />
+            {/* Pannelli colorati che salgono sopra la sezione precedente */}
+            <div>
+              <StickyLayer id="chi-siamo" hold={60}>
+                <GeneralInfo />
+              </StickyLayer>
+              <div className="relative z-10">
+                <StickyLayer hold={30}>
+                  <ModelSection />
+                </StickyLayer>
+                <div id="team" className="relative z-10">
+                  <Team />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <SponsorsStats />
-        <UpcomingEvents />
-        <Location />
+            <SponsorsStats />
+            <UpcomingEvents />
+            <Location />
+          </>
+        )}
       </main>
       <Footer />
       <BackToTop />

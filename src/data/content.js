@@ -23,34 +23,44 @@ export const stats = [
   { value: '999', label: 'Progetti' },
 ]
 
-// Anteprima in home: partner principali e sponsor in evidenza (placeholder)
-export const featuredPartners = ['Vertice Capital', 'Aurora Partners', 'Meridian & Co.']
+// Loghi monocromatici in /public/images/partner; ratio = larghezza/altezza, serve a bilanciarne le dimensioni.
+// In home vanno solo partner e sponsor, nella pagina /partner anche le collaborazioni.
+const logo = (name, file, ratio) => ({ name, logo: `/images/partner/${file}.png`, ratio })
 
-export const featuredSponsors = [
-  'Nimbus Group',
-  'Solandra',
-  'Kaleido Studio',
-  'Quarzo Capital',
-  'Stratos Media',
-  'Borea Consulting',
-  'Linfa Studio',
-  'Palma Retail',
-]
-
-// Elenco completo, per la futura pagina partner e sponsor
-export const sponsors = [
-  'Nimbus Group',
-  'Vertice Capital',
-  'Aurora Partners',
-  'Solandra',
-  'Kaleido Studio',
-  'Meridian & Co.',
-  'Borea Consulting',
-  'Quarzo Capital',
-  'Linfa Studio',
-  'Stratos Media',
-  'Palma Retail',
-  'Vertex Building',
+export const partnerGroups = [
+  {
+    id: 'partner',
+    title: 'Partner',
+    items: [
+      logo('Bey Studio', 'bey-studio', 2.646),
+      logo('Sport Media House', 'sport-media-house', 2.158),
+      logo('QMS', 'qms', 0.919),
+      logo('Luema', 'luema', 3.373),
+      logo('Maxima Holding', 'maxima', 4.569),
+      logo('Arda Consulting', 'arda-consulting', 2.75),
+    ],
+  },
+  {
+    id: 'sponsor',
+    title: 'Sponsor',
+    items: [
+      logo('Energia Sociale', 'energia-sociale', 5.521),
+      logo('Clima Convenienza', 'clima-convenienza', 0.986),
+      logo('Strega', 'strega', 1),
+    ],
+  },
+  {
+    id: 'collaborazioni',
+    title: 'Collaborazioni',
+    items: [
+      logo('Città della Scienza', 'citta-della-scienza', 1.308),
+      logo('Ippodromo di Agnano', 'ippodromo-agnano', 1.297),
+      logo('Circolo Nautico Posillipo', 'circolo-posillipo', 1.119),
+      logo('PalaDennerlein', 'paladennerlein', 1.87),
+      logo('Radio Kiss Kiss', 'radio-kiss-kiss', 1.317),
+      logo('Fairmont Monte Carlo', 'fairmont', 2.618),
+    ],
+  },
 ]
 
 export const team = [

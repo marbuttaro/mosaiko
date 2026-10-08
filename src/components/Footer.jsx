@@ -1,4 +1,5 @@
 import { location, navLinks } from '../data/content'
+import { homeHref } from '../lib/route'
 
 const SOCIALS = [
   {
@@ -24,7 +25,10 @@ const SOCIALS = [
 ]
 
 function Footer() {
-  const links = [...navLinks, { label: 'Contatti', href: `mailto:${location.email}` }]
+  const links = [
+    ...navLinks.map((link) => ({ ...link, href: homeHref(link.href) })),
+    { label: 'Contatti', href: `mailto:${location.email}` },
+  ]
   const half = Math.ceil(links.length / 2)
 
   return (
