@@ -2,4 +2,4 @@
 export const isPartnerPage = /^\/partner\/?$/.test(window.location.pathname)
 
 // Le ancore della home funzionano anche dalle altre pagine
-export const homeHref = (hash) => (isPartnerPage ? `/${hash}` : hash)
+export const homeHref = (href) => (isPartnerPage && href.startsWith('#') ? `/${href}` : href)
