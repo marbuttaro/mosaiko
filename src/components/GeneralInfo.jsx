@@ -74,7 +74,7 @@ function Tile({ position, delay, className = '' }) {
   return <Reveal delay={delay} className={`bg-mosaiko-navy ${TILE} ${className}`} style={position} />
 }
 
-const PILOT = { l: 39, t: 28.6, w: 21.8, h: 39.3 }
+const PILOT = { l: 39, t: 21.8, w: 21.8, h: 51.7 }
 
 function TitleBlock({ light = false }) {
   return (
@@ -87,7 +87,7 @@ function TitleBlock({ light = false }) {
       </Reveal>
       <SplitText
         text="Un Mosaiko d’impresa"
-        className={`mt-4 font-heading uppercase tracking-[0.01em] text-3xl font-medium leading-tight sm:text-4xl lg:mt-[0.5cqw] lg:max-w-[50cqw] lg:text-[5.8cqw] lg:font-semibold lg:leading-[1.05] ${
+        className={`mt-4 font-heading uppercase tracking-[0.01em] text-[1.75rem] font-medium leading-tight sm:text-[2rem] lg:mt-[0.5cqw] lg:max-w-[50cqw] lg:text-[5cqw] lg:font-semibold lg:leading-[1.05] ${
           light ? 'text-white' : 'text-mosaiko-navy'
         }`}
       />
@@ -103,10 +103,10 @@ function GeneralInfo() {
   return (
     <section className="bg-mosaiko-sand">
       {/* Fascia azzurra solo dietro "Un mosaico di impresa", come la sezione eventi */}
-      <div className="bg-mosaiko-mist">
-        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-10">
-          <div className="@container grid grid-cols-2 gap-2.5 sm:gap-3.5 lg:relative lg:block lg:aspect-[1252/718]">
-            <div className={`col-span-2 ${PIECE} lg:z-10`} style={pos(0, 18)}>
+      <div className="mt-20 bg-mosaiko-mist sm:mt-24">
+        <div className="mx-auto max-w-7xl px-6 pt-20 pb-14 sm:pt-24 sm:pb-16 lg:px-10">
+          <div className="@container grid grid-cols-2 gap-2.5 sm:gap-3.5 lg:relative lg:block lg:aspect-[1252/546]">
+            <div className={`col-span-2 ${PIECE} lg:z-10`} style={pos(0, 8)}>
               <TitleBlock />
             </div>
             {/* Copia bianca del titolo, visibile solo dove passa sopra la foto del pilota */}
@@ -115,12 +115,12 @@ function GeneralInfo() {
               className="pointer-events-none absolute inset-0 z-10 hidden lg:block"
               style={{ clipPath: `inset(${PILOT.t}% ${100 - PILOT.l - PILOT.w}% ${100 - PILOT.t - PILOT.h}% ${PILOT.l}% round 0.5rem)` }}
             >
-              <div className={PIECE} style={pos(0, 18)}>
+              <div className={PIECE} style={pos(0, 8)}>
                 <TitleBlock light />
               </div>
             </div>
 
-            <Reveal delay={150} className={`col-span-2 mb-6 space-y-[1.4em] ${BODY} ${PIECE} lg:mb-0`} style={pos(0, 50, 32)}>
+            <Reveal delay={150} className={`col-span-2 mb-6 space-y-[1.4em] ${BODY} ${PIECE} lg:mb-0`} style={pos(0, 46, 32)}>
               <p>
                 Mosaiko nasce da una convinzione semplice: il valore più importante
                 di ogni progetto sono{' '}
@@ -135,24 +135,24 @@ function GeneralInfo() {
             </Reveal>
 
             <Photo name="pilota" position={pos(PILOT.l, PILOT.t, PILOT.w, PILOT.h)} className="col-span-2 aspect-[1.17] lg:aspect-auto" />
-            <Tile position={pos(41.1, 68.8, 8.5, 16)} delay={80} className="aspect-[1.17] lg:aspect-auto" />
-            <Photo name="networking" position={pos(50.2, 68.8, 10.6, 18.9)} delay={160} className="aspect-[1.17] lg:aspect-auto" />
+            <Tile position={pos(41.1, 74.7, 8.5, 21.1)} delay={80} className="aspect-[1.17] lg:aspect-auto" />
+            <Photo name="networking" position={pos(50.2, 74.7, 10.6, 24.9)} delay={160} className="aspect-[1.17] lg:aspect-auto" />
 
-            <Tile position={pos(69.4, 12, 12.8, 19.1)} delay={120} className="hidden lg:block" />
+            <Tile position={pos(69.4, 0, 12.8, 25.1)} delay={120} className="hidden lg:block" />
             <Photo
               name="networking-cena"
-              position={pos(61.4, 32.1, 21, 21.7)}
+              position={pos(61.4, 26.4, 21, 28.6)}
               delay={80}
               className="order-1 col-span-2 aspect-[1.68] lg:order-none lg:aspect-auto"
             />
-            <Photo name="rally-wide" position={pos(82.9, 37.7, 17.1, 16)} delay={200} className="order-last col-span-2 aspect-[1.85] lg:order-none lg:aspect-auto" />
-            <Photo name="pista" position={pos(61.4, 54.9, 12.5, 19.7)} delay={160} className="aspect-[1.11] lg:aspect-auto" />
-            <Tile position={pos(74.6, 54.9, 16.3, 13.7)} delay={240} className="aspect-[1.11] lg:aspect-auto" />
+            <Photo name="rally-wide" position={pos(82.9, 33.8, 17.1, 21.1)} delay={200} className="order-last col-span-2 aspect-[1.85] lg:order-none lg:aspect-auto" />
+            <Photo name="pista" position={pos(61.4, 56.4, 12.5, 25.9)} delay={160} className="aspect-[1.11] lg:aspect-auto" />
+            <Tile position={pos(74.6, 56.4, 16.3, 18)} delay={240} className="aspect-[1.11] lg:aspect-auto" />
           </div>
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 sm:pt-20 sm:pb-32 lg:px-10">
         <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
           {SERVICES.map((service, i) => (
             <Reveal
