@@ -1,8 +1,70 @@
+import { useState } from 'react'
 import { events } from '../data/content'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
 
+// Selettore vista solo mobile: elenco compatto o schede estese con foto
+const VIEWS = [
+  {
+    id: 'cards',
+    label: 'Vista estesa',
+    icon: (
+      <>
+        <rect x="4" y="4" width="7" height="7" rx="2.2" />
+        <rect x="13" y="4" width="7" height="7" rx="2.2" />
+        <rect x="4" y="13" width="7" height="7" rx="2.2" />
+        <rect x="13" y="13" width="7" height="7" rx="2.2" />
+      </>
+    ),
+  },
+  {
+    id: 'list',
+    label: 'Vista elenco',
+    icon: (
+      <>
+        <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+        <path d="M7.5 8.5h.01M7.5 12h.01M7.5 15.5h.01M10.5 8.5h6M10.5 12h6M10.5 15.5h6" />
+      </>
+    ),
+  },
+]
+
+function ViewToggle({ view, onChange }) {
+  return (
+    <div className="mt-8 flex justify-center gap-2.5 md:hidden" role="group" aria-label="Visualizzazione eventi">
+      {VIEWS.map((v) => (
+        <button
+          key={v.id}
+          type="button"
+          onClick={() => onChange(v.id)}
+          aria-label={v.label}
+          aria-pressed={view === v.id}
+          className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-xl transition-colors ${
+            view === v.id
+              ? 'bg-mosaiko-navy text-mosaiko-blue-light shadow-md shadow-mosaiko-navy/20'
+              : 'border border-mosaiko-navy/10 bg-white/60 text-mosaiko-navy/50'
+          }`}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" className="h-6 w-6">
+            {v.icon}
+          </svg>
+        </button>
+      ))}
+    </div>
+  )
+}
+
 function UpcomingEvents() {
+  const [view, setView] = useState('list')
+
+  // Da mobile, in vista elenco, il tocco su un evento apre la vista estesa su quella scheda
+  const openEvent = (e, i) => {
+    if (view !== 'list' || window.matchMedia('(min-width: 768px)').matches) return
+    e.preventDefault()
+    setView('cards')
+    requestAnimationFrame(() => document.getElementById(`evento-${i}`)?.scrollIntoView({ behavior: 'smooth' }))
+  }
+
   return (
     <section id="eventi" className="bg-mosaiko-mist pt-24 pb-16 sm:pt-32 sm:pb-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -19,26 +81,39 @@ function UpcomingEvents() {
           />
         </div>
 
-        <div className="mt-12 grid gap-3 md:grid-cols-3 md:gap-8">
+        <ViewToggle view={view} onChange={setView} />
+
+        <div className={`mt-8 gap-3 md:mt-12 md:grid md:grid-cols-3 md:gap-8 ${view === 'list' ? 'grid' : 'hidden'}`}>
           {events.map((event, i) => (
             <Reveal
               as="a"
               key={event.title}
               delay={i * 90}
               href={`#evento-${i}`}
+              onClick={(e) => openEvent(e, i)}
               className="flex flex-col gap-1.5 rounded-xl border border-mosaiko-navy/10 bg-white/60 px-6 py-4 transition-all hover:border-mosaiko-blue/40 hover:bg-white sm:px-8 sm:py-5"
             >
               <span className="text-xs font-semibold uppercase tracking-[0.15em] text-mosaiko-blue sm:text-sm">
                 {event.date}
               </span>
-              <span className="font-heading text-xl font-semibold leading-none text-mosaiko-navy sm:text-2xl">
+              <span className="hidden font-heading text-2xl font-semibold leading-none text-mosaiko-navy md:block">
                 {event.tag}
+              </span>
+              {/* Da mobile l'elenco mostra le info complete dell'evento */}
+              <span className="font-heading text-lg font-medium leading-snug text-mosaiko-navy md:hidden">
+                {event.title}
+              </span>
+              <span className="flex items-center gap-2 text-sm text-mosaiko-ink md:hidden">
+                <span className="rounded-md bg-mosaiko-blue px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-white">
+                  {event.tag}
+                </span>
+                {event.location}
               </span>
             </Reveal>
           ))}
         </div>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
+        <div className={`mt-8 gap-5 md:mt-14 md:grid md:grid-cols-3 md:gap-8 ${view === 'cards' ? 'grid' : 'hidden'}`}>
           {events.map((event, i) => (
             <Reveal
               as="article"
@@ -51,7 +126,7 @@ function UpcomingEvents() {
                 <img
                   src={event.image}
                   alt=""
-                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="aspect-[16/10] w-full object-cover md:aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <span className="absolute left-4 top-4 rounded-lg bg-white/95 px-3 py-1 text-xs font-semibold text-mosaiko-navy">

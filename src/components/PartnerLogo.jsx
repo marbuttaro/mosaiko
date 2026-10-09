@@ -11,7 +11,8 @@ function PartnerLogo({ name, logo, ratio, scale = 7, className = '' }) {
       height={Math.round((width * 16) / ratio)}
       loading="lazy"
       className={`h-auto max-w-full opacity-55 transition-opacity duration-300 hover:opacity-100 ${className}`}
-      style={{ width: `${width}rem` }}
+      // --logo-scale permette di rimpicciolire i loghi da mobile
+      style={{ width: `calc(${width}rem * var(--logo-scale, 1))` }}
     />
   )
 }

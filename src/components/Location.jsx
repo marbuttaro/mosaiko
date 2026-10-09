@@ -20,8 +20,9 @@ function Location() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-14 grid overflow-hidden rounded-2xl shadow-xl shadow-mosaiko-navy/10 lg:grid-cols-2">
-          <div className="flex flex-col justify-center gap-8 bg-mosaiko-navy-2 p-8 text-white sm:p-12">
+        {/* Da mobile info e mappa sono due blocchi separati, da desktop un unico riquadro */}
+        <Reveal className="mt-14 grid gap-3 lg:grid-cols-2 lg:gap-0 lg:overflow-hidden lg:rounded-2xl lg:shadow-xl lg:shadow-mosaiko-navy/10">
+          <div className="flex flex-col justify-center gap-8 bg-mosaiko-navy-2 p-8 text-white max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-mosaiko-navy/10 sm:p-12">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
                 Ragione sociale
@@ -60,7 +61,7 @@ function Location() {
             </div>
           </div>
 
-          <div className="aspect-[4/3] w-full lg:aspect-auto">
+          <div className="aspect-[4/5] w-full max-lg:overflow-hidden max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-mosaiko-navy/10 sm:aspect-[4/3] lg:aspect-auto">
             <iframe
               title="Mappa Mosaiko"
               src={mapSrc}

@@ -38,8 +38,9 @@ function ContactForm() {
   return (
     <section id="contatti" className="scroll-mt-24 bg-mosaiko-sand py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="grid overflow-hidden rounded-2xl shadow-xl shadow-mosaiko-navy/10 lg:grid-cols-[2fr_3fr]">
-          <div className="flex flex-col gap-8 bg-mosaiko-navy-2 p-8 text-white sm:p-12">
+        {/* Da mobile testo e form sono due blocchi separati, da desktop un unico riquadro */}
+        <Reveal className="grid gap-3 lg:grid-cols-[2fr_3fr] lg:gap-0 lg:overflow-hidden lg:rounded-2xl lg:shadow-xl lg:shadow-mosaiko-navy/10">
+          <div className="flex flex-col gap-8 bg-mosaiko-navy-2 p-8 text-white max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-mosaiko-navy/10 sm:p-12">
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-mosaiko-beige">
                 Contatti
@@ -71,7 +72,7 @@ function ContactForm() {
             </div>
           </div>
 
-          <form onSubmit={onSubmit} className="bg-white/60 p-8 sm:p-12">
+          <form onSubmit={onSubmit} className="bg-white/60 p-8 max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-mosaiko-navy/10 sm:p-12">
             <div className="grid gap-6 sm:grid-cols-2">
               {FIELDS.map((field) => (
                 <label key={field.name} className="block">

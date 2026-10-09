@@ -37,7 +37,7 @@ export function ModelSection() {
             ))}
           </div>
 
-          <dl className="grid grid-cols-2 content-start gap-x-8 gap-y-10 border-t border-white/10 pt-10 lg:w-full lg:max-w-md lg:justify-self-end">
+          <dl className="grid grid-cols-2 content-start max-lg:text-center gap-x-8 gap-y-10 border-t border-white/10 pt-10 lg:w-full lg:max-w-md lg:justify-self-end">
             {stats.map((stat, i) => (
               <Reveal key={stat.label} delay={i * 100}>
                 <dt className="font-heading text-5xl font-semibold tracking-tight text-mosaiko-beige sm:text-6xl">
@@ -90,7 +90,7 @@ function SponsorsStats() {
   const [partners, sponsors] = partnerGroups
 
   return (
-    <section id="sponsor" className="bg-mosaiko-sand py-20 sm:py-24">
+    <section id="sponsor" className="bg-mosaiko-sand py-20 max-sm:[--logo-scale:0.75] sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
           <Reveal

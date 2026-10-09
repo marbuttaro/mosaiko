@@ -7,7 +7,6 @@ import SplitText from './SplitText'
 const SERVICES = [
   {
     title: 'Eventi',
-    text: 'Produzione di eventi e organizzazione',
     image: '/images/servizi/eventi.jpg',
     details: [
       'Ideazione e progettazione eventi',
@@ -22,7 +21,6 @@ const SERVICES = [
   },
   {
     title: 'Visibilità & Networking',
-    text: 'Attività di networking',
     image: '/images/servizi/rete-impresa.jpg',
     details: [
       'Partnership e Sponsorship',
@@ -37,7 +35,6 @@ const SERVICES = [
   },
   {
     title: 'Business',
-    text: 'Coordinamento e gestione di attività commerciali',
     image: '/images/servizi/business.jpg',
     details: [
       'Business Development',
@@ -135,8 +132,8 @@ function GeneralInfo() {
             </Reveal>
 
             <Photo name="pilota" position={pos(PILOT.l, PILOT.t, PILOT.w, PILOT.h)} className="col-span-2 aspect-[1.17] lg:aspect-auto" />
-            <Tile position={pos(41.1, 74.7, 8.5, 21.1)} delay={80} className="aspect-[1.17] lg:aspect-auto" />
-            <Photo name="networking" position={pos(50.2, 74.7, 10.6, 24.9)} delay={160} className="aspect-[1.17] lg:aspect-auto" />
+            <Tile position={pos(41.1, 74.7, 8.5, 21.1)} delay={80} className="hidden lg:block" />
+            <Photo name="networking" position={pos(50.2, 74.7, 10.6, 24.9)} delay={160} className="aspect-[1.11] lg:aspect-auto" />
 
             <Tile position={pos(69.4, 0, 12.8, 25.1)} delay={120} className="hidden lg:block" />
             <Photo
@@ -147,7 +144,7 @@ function GeneralInfo() {
             />
             <Photo name="rally-wide" position={pos(82.9, 33.8, 17.1, 21.1)} delay={200} className="order-last col-span-2 aspect-[1.85] lg:order-none lg:aspect-auto" />
             <Photo name="pista" position={pos(61.4, 56.4, 12.5, 25.9)} delay={160} className="aspect-[1.11] lg:aspect-auto" />
-            <Tile position={pos(74.6, 56.4, 16.3, 18)} delay={240} className="aspect-[1.11] lg:aspect-auto" />
+            <Tile position={pos(74.6, 56.4, 16.3, 18)} delay={240} className="hidden lg:block" />
           </div>
         </div>
       </div>
@@ -167,8 +164,8 @@ function GeneralInfo() {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-mosaiko-navy/55 via-mosaiko-navy/0 to-mosaiko-navy/0" />
-              {/* Overlay scuro: su mobile al tocco, su desktop all'hover */}
-              <div className="absolute inset-0 bg-mosaiko-navy/80 opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100" />
+              {/* Overlay scuro solo su desktop, all'hover */}
+              <div className="absolute inset-0 bg-mosaiko-navy/80 opacity-0 transition-opacity duration-300 lg:group-hover:opacity-100" />
 
               {/* Il titolo resta fisso; su desktop all'hover sotto compare l'elenco delle attività */}
               <div className="absolute inset-x-0 top-0 p-6 xl:p-8">
@@ -185,9 +182,8 @@ function GeneralInfo() {
                 </ul>
               </div>
 
-              {/* Solo mobile/tablet: descrizione e pulsante che apre il popup */}
-              <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-4 p-6 opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100 lg:hidden">
-                <p className="text-sm leading-relaxed text-white/80">{service.text}</p>
+              {/* Solo mobile/tablet: pulsante sempre visibile che apre il popup */}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-mosaiko-navy/50 to-mosaiko-navy/0 p-6 pt-16 lg:hidden">
                 <Button
                   as="button"
                   type="button"

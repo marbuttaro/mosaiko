@@ -59,7 +59,7 @@ function Header() {
           ))}
         </nav>
 
-        <Button href={contactHref} variant={onLight ? 'navy' : 'primary'} className="hidden lg:inline-flex">
+        <Button href={contactHref} variant={onLight ? 'navy' : 'primary'} className="max-lg:hidden">
           Contattaci
         </Button>
 

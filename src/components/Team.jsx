@@ -32,7 +32,7 @@ function Team() {
             <Reveal
               key={member.name}
               delay={(i % 2) * 120}
-              className="flex items-center gap-6 rounded-2xl bg-white/[0.04] p-5 pr-8 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07] sm:p-6"
+              className="flex items-start gap-6 rounded-2xl sm:items-center bg-white/[0.04] p-5 pr-8 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07] sm:p-6"
             >
               <img
                 src={member.photo}
