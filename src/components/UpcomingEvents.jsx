@@ -31,7 +31,7 @@ const VIEWS = [
 
 function ViewToggle({ view, onChange }) {
   return (
-    <div className="mt-8 flex justify-center gap-2.5 md:hidden" role="group" aria-label="Visualizzazione eventi">
+    <div className="mt-8 flex justify-end gap-2.5 md:hidden" role="group" aria-label="Visualizzazione eventi">
       {VIEWS.map((v) => (
         <button
           key={v.id}
