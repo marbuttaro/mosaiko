@@ -90,7 +90,7 @@ function SponsorsStats() {
   const [partners, sponsors] = partnerGroups
 
   return (
-    <section id="sponsor" className="bg-mosaiko-sand py-20 max-sm:[--logo-scale:0.6] sm:py-24">
+    <section id="sponsor" className="bg-mosaiko-sand py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
           <Reveal

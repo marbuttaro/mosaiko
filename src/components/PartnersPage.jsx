@@ -5,10 +5,11 @@ import PartnerLogo from './PartnerLogo'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
 
-// Gerarchia: i loghi si riducono scendendo di categoria
+// Gerarchia: i loghi si riducono scendendo di categoria.
+// Da mobile i partner sono più contenuti (scala e margini laterali) ma restano sopra gli sponsor.
 const GROUP_STYLES = {
-  partner: { scale: 6.5, cell: 'h-28 sm:h-36' },
-  sponsor: { scale: 5, cell: 'h-24 sm:h-28' },
+  partner: { scale: 6.5, cell: 'h-24 max-sm:px-4 max-sm:[--logo-scale:0.9] sm:h-36' },
+  sponsor: { scale: 5, cell: 'h-24 max-sm:px-6 sm:h-28' },
   collaborazioni: { scale: 4, cell: 'h-20 sm:h-24' },
 }
 
