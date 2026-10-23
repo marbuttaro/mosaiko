@@ -101,31 +101,6 @@ export const team = [
   },
 ]
 
-// News in evidenza in home (le altre andranno nella pagina dedicata). Contenuti placeholder.
-export const news = [
-  {
-    id: 'tennis-napoli-cup-1',
-    date: '1 Apr 2026',
-    title: 'Tennis Napoli Cup: Hospitality Management',
-    tags: ['Eventi', 'News'],
-    image: '/images/news/tennis-napoli-cup.jpg',
-  },
-  {
-    id: 'tennis-napoli-cup-2',
-    date: '1 Apr 2026',
-    title: 'Tennis Napoli Cup: Hospitality Management',
-    tags: ['Eventi', 'News'],
-    image: '/images/news/tennis-napoli-cup.jpg',
-  },
-  {
-    id: 'tennis-napoli-cup-3',
-    date: '1 Apr 2026',
-    title: 'Tennis Napoli Cup: Hospitality Management',
-    tags: ['Eventi', 'News'],
-    image: '/images/news/tennis-napoli-cup.jpg',
-  },
-]
-
 export const events = [
   {
     date: '23 Ott 2026',

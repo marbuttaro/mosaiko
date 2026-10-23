@@ -1,27 +1,27 @@
-import { news } from '../data/content'
+import { news } from '../data/news'
+import { newsHref } from '../lib/route'
 import Button from './Button'
 import Reveal from './Reveal'
 
-function NewsCard({ item }) {
+export function NewsCard({ item }) {
   return (
-    // TODO: collegare alla pagina della singola news quando sarà pronta
     <a
-      href="/news"
+      href={newsHref(item.slug)}
       className="group grid h-full grid-cols-[42%_1fr] overflow-hidden rounded-xl bg-white shadow-md shadow-mosaiko-navy/10 transition-shadow duration-300 hover:shadow-xl hover:shadow-mosaiko-navy/15"
     >
       <div className="relative overflow-hidden">
         <img
           src={item.image}
-          alt=""
+          alt={item.imageAlt}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
       </div>
 
       <div className="flex min-h-56 flex-col p-5 sm:p-6">
-        <time className="self-end text-xs text-mosaiko-ink sm:text-sm">{item.date}</time>
+        <time dateTime={item.isoDate} className="self-end text-xs text-mosaiko-ink sm:text-sm">{item.date}</time>
         <h3 className="mt-4 font-heading text-lg font-medium uppercase leading-tight tracking-[0.01em] text-mosaiko-navy sm:text-xl lg:text-lg xl:text-xl">
-          {item.title}
+          {item.shortTitle}
         </h3>
         <ul className="mt-3 flex flex-wrap gap-1.5">
           {item.tags.map((tag) => (
@@ -58,7 +58,7 @@ function News() {
         </Reveal>
 
         <div className="mt-6 grid gap-5 lg:grid-cols-3 lg:gap-6">
-          {news.map((item, i) => (
+          {news.slice(0, 3).map((item, i) => (
             <Reveal key={item.id} delay={i * 120}>
               <NewsCard item={item} />
             </Reveal>
@@ -66,7 +66,6 @@ function News() {
         </div>
 
         <Reveal delay={150} className="mt-10 flex justify-center">
-          {/* TODO: collegare alla pagina news quando sarà pronta */}
           <Button href="/news" variant="navy">Scopri tutte le news</Button>
         </Reveal>
       </div>

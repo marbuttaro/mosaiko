@@ -11,7 +11,8 @@ import Location from './components/Location'
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'
 import PartnersPage from './components/PartnersPage'
-import { isPartnerPage } from './lib/route'
+import { NewsArticlePage, NewsIndexPage } from './components/NewsPages'
+import { isNewsIndex, isPartnerPage, newsSlug } from './lib/route'
 import { initSmoothScroll } from './lib/smoothScroll'
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
       <main>
         {isPartnerPage ? (
           <PartnersPage />
+        ) : isNewsIndex ? (
+          <NewsIndexPage />
+        ) : newsSlug ? (
+          <NewsArticlePage slug={newsSlug} />
         ) : (
           <>
             <Hero />

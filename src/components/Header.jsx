@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { navLinks } from '../data/content'
 import Button from './Button'
-import { homeHref, isPartnerPage } from '../lib/route'
+import { homeHref, isHome, isPartnerPage } from '../lib/route'
 
 // Sfondi chiari delle sezioni: sopra di questi logo e bottone passano alla versione scura
 const LIGHT_BGS = ['bg-mosaiko-sand', 'bg-mosaiko-mist']
@@ -26,14 +26,14 @@ function Header() {
   }, [])
 
   // Nella pagina partner il form è in fondo alla pagina stessa
-  const contactHref = isPartnerPage ? '#contatti' : '#dove-siamo'
+  const contactHref = isPartnerPage ? '#contatti' : homeHref('#dove-siamo')
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'py-3' : 'py-5'}`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
-        <a href={isPartnerPage ? '/' : '#top'} className="shrink-0">
+        <a href={isHome ? '#top' : '/'} className="shrink-0">
           <img
             src={onLight ? '/logo/mosaiko-mark-navy.png' : '/logo/mosaiko-mark-white.png'}
             alt="Mosaiko"
