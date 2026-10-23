@@ -128,25 +128,40 @@ export const news = [
 
 export const events = [
   {
-    date: '14 Ott 2026',
-    title: 'Networking Night — Business Campania',
-    location: 'Napoli',
-    image: '/images/servizi/eventi.jpg', // placeholder
-    tag: 'Networking',
+    date: '23 Ott 2026',
+    fullDate: 'Venerdì 23 ottobre 2026',
+    time: '20:30',
+    title: 'Napoli Futsal – Sporting Sala Consilina',
+    location: 'PalaVesuvio – Napoli',
+    image: '/images/eventi/napoli-futsal.jpg',
+    tag: 'Futsal',
+    description:
+      "Il Napoli Futsal affronta lo Sporting Sala Consilina in una nuova sfida del campionato di Serie A. Un appuntamento che unisce la passione sportiva all'esperienza hospitality firmata Mosaiko, creando occasioni di incontro e networking in un contesto dinamico e coinvolgente.",
+    contact: 'info@mosaiko.org',
   },
   {
-    date: '05 Nov 2026',
-    title: 'Mosaiko Summit — Imprese in Rete',
-    location: 'Caserta',
-    image: '/images/servizi/rete-impresa.jpg', // placeholder
-    tag: 'Conferenza',
+    date: '27 Ott 2026',
+    fullDate: 'Martedì 27 ottobre 2026',
+    time: 'Dalle 15:00',
+    title: 'Gran Premio ANACT Stakes+ – Batterie di qualificazione',
+    location: 'Ippodromo di Agnano – Napoli',
+    image: '/images/eventi/ippodromo-agnano.jpg',
+    tag: 'Ippica',
+    description:
+      "L'Ippodromo di Agnano ospita le batterie di qualificazione del Gran Premio ANACT Stakes+, prestigioso appuntamento dedicato ai giovani talenti del trotto italiano. Un pomeriggio all'insegna dello sport ippico, dell'eccellenza e della convivialità, nella suggestiva cornice dell'ippodromo napoletano.",
+    contact: 'info@mosaiko.org',
   },
   {
-    date: '21 Nov 2026',
-    title: 'Workshop — Costruire Partnership che Durano',
-    location: 'Salerno',
-    image: '/images/servizi/business.jpg', // placeholder
-    tag: 'Workshop',
+    date: '28 Ott 2026',
+    fullDate: 'Mercoledì 28 ottobre 2026',
+    time: '20:00',
+    title: 'Juve Stabia – Hellas Verona',
+    location: 'Stadio Romeo Menti – Castellammare di Stabia',
+    image: '/images/eventi/juve-stabia.jpg',
+    tag: 'Calcio',
+    description:
+      "La Juve Stabia ospita l'Hellas Verona per una nuova sfida del campionato di Serie BKT. Una serata di grande calcio e partecipazione, in cui Mosaiko contribuisce all'esperienza del pubblico attraverso i propri servizi presso lo stadio Romeo Menti.",
+    contact: 'info@mosaiko.org',
   },
 ]
 

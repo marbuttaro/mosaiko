@@ -56,6 +56,15 @@ function ViewToggle({ view, onChange }) {
 
 function UpcomingEvents() {
   const [view, setView] = useState('list')
+  const [expanded, setExpanded] = useState(() => new Set())
+
+  const toggleEvent = (i) =>
+    setExpanded((prev) => {
+      const next = new Set(prev)
+      if (next.has(i)) next.delete(i)
+      else next.add(i)
+      return next
+    })
 
   // Da mobile, in vista elenco, il tocco su un evento apre la vista estesa su quella scheda
   const openEvent = (e, i) => {
@@ -113,8 +122,11 @@ function UpcomingEvents() {
           ))}
         </div>
 
-        <div className={`mt-8 gap-5 md:mt-14 md:grid md:grid-cols-3 md:gap-8 ${view === 'cards' ? 'grid' : 'hidden'}`}>
-          {events.map((event, i) => (
+        {/* items-start: aprendo una scheda si allunga solo quella, non le altre della riga */}
+        <div className={`mt-8 items-start gap-5 md:mt-14 md:grid md:grid-cols-3 md:gap-8 ${view === 'cards' ? 'grid' : 'hidden'}`}>
+          {events.map((event, i) => {
+            const isOpen = expanded.has(i)
+            return (
             <Reveal
               as="article"
               id={`evento-${i}`}
@@ -126,7 +138,7 @@ function UpcomingEvents() {
                 <img
                   src={event.image}
                   alt=""
-                  className="aspect-[16/10] w-full object-cover md:aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
+                  className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <span className="absolute left-4 top-4 rounded-lg bg-white/95 px-3 py-1 text-xs font-semibold text-mosaiko-navy">
@@ -138,18 +150,51 @@ function UpcomingEvents() {
                 <span className="mt-5 inline-flex items-center rounded-md bg-mosaiko-blue px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-white">
                   {event.tag}
                 </span>
-                <h3 className="mt-2 font-heading text-xl font-normal leading-snug text-mosaiko-navy">
+                <h3 className="mt-2 font-heading text-xl font-normal leading-snug text-mosaiko-navy md:min-h-[3.5rem]">
                   {event.title}
                 </h3>
                 <p className="mt-1 text-sm text-mosaiko-ink">{event.location}</p>
 
+                {/* Dettagli completi: il box si allunga con un'animazione su grid-rows */}
+                <div
+                  id={`evento-${i}-dettagli`}
+                  className={`grid w-full transition-[grid-template-rows,opacity] duration-500 ease-out ${
+                    isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  }`}
+                  inert={!isOpen}
+                >
+                  <div className="overflow-hidden">
+                    <dl className="mt-5 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 border-t border-mosaiko-navy/10 pt-5 text-sm text-mosaiko-navy">
+                      <dt className="font-semibold">Data:</dt>
+                      <dd>{event.fullDate}</dd>
+                      <dt className="font-semibold">Orario:</dt>
+                      <dd>{event.time}</dd>
+                      <dt className="font-semibold">Luogo:</dt>
+                      <dd>{event.location}</dd>
+                    </dl>
+                    <p className="mt-4 text-sm leading-relaxed text-mosaiko-ink">{event.description}</p>
+                    <p className="mt-4 text-sm text-mosaiko-navy">
+                      <span className="font-semibold">Per contatti:</span>{' '}
+                      <a href={`mailto:${event.contact}`} className="text-mosaiko-blue underline-offset-4 hover:underline">
+                        {event.contact}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
                 <div className="mt-auto flex w-full items-center justify-between pt-5">
-                  <a
-                    href="#"
-                    className="inline-flex items-center rounded-lg bg-mosaiko-blue/10 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-mosaiko-blue transition-colors hover:bg-mosaiko-blue hover:text-white"
+                  <button
+                    type="button"
+                    onClick={() => toggleEvent(i)}
+                    aria-expanded={isOpen}
+                    aria-controls={`evento-${i}-dettagli`}
+                    className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-mosaiko-blue/10 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-mosaiko-blue transition-colors hover:bg-mosaiko-blue hover:text-white"
                   >
-                    Scopri di più
-                  </a>
+                    {isOpen ? 'Chiudi' : 'Scopri di più'}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`h-3.5 w-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
                   <button
                     type="button"
                     aria-label="Condividi"
@@ -168,7 +213,8 @@ function UpcomingEvents() {
                 </div>
               </div>
             </Reveal>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
