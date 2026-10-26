@@ -133,7 +133,7 @@ function GeneralInfo() {
 
             <Photo name="pilota" position={pos(PILOT.l, PILOT.t, PILOT.w, PILOT.h)} className="col-span-2 aspect-[1.17] lg:aspect-auto" />
             <Tile position={pos(41.1, 74.7, 8.5, 21.1)} delay={80} className="hidden lg:block" />
-            <Photo name="networking" position={pos(50.2, 74.7, 10.6, 24.9)} delay={160} className="aspect-[1.11] lg:aspect-auto" />
+            <Photo name="meeting" position={pos(50.2, 74.7, 10.6, 24.9)} delay={160} className="aspect-[1.11] lg:aspect-auto" />
 
             <Tile position={pos(69.4, 0, 12.8, 25.1)} delay={120} className="hidden lg:block" />
             <Photo

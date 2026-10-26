@@ -3,6 +3,7 @@ export const navLinks = [
   { label: 'Team', href: '#team' },
   { label: 'Partner', href: '/partner' },
   { label: 'Eventi', href: '#eventi' },
+  { label: 'News', href: '/news' },
   { label: 'Dove siamo', href: '#dove-siamo' },
 ]
 
