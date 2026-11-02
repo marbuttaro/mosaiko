@@ -1,15 +1,13 @@
-// Routing minimo: home, pagina partner e news; il resto lo serve index.html (vedi vercel.json)
-const path = window.location.pathname.replace(/\/+$/, '') || '/'
-
-export const isHome = path === '/'
-export const isPartnerPage = path === '/partner'
-export const isNewsIndex = path === '/news'
-
-// /news/<slug> → pagina della singola news
-const newsMatch = path.match(/^\/news\/([^/]+)$/)
-export const newsSlug = newsMatch ? decodeURIComponent(newsMatch[1]) : null
-
-export const newsHref = (slug) => `/news/${slug}`
+// Percorsi del sito. Con trailingSlash attivo (next.config.mjs) tutte le pagine finiscono con "/", come su WordPress.
+export function routeFlags(pathname = '/') {
+  const path = pathname.replace(/\/+$/, '') || '/'
+  return { isHome: path === '/', isPartnerPage: path === '/partner' }
+}
 
 // Le ancore della home funzionano anche dalle altre pagine
-export const homeHref = (href) => (!isHome && href.startsWith('#') ? `/${href}` : href)
+export const homeHref = (isHome, href) => (!isHome && href.startsWith('#') ? `/${href}` : href)
+
+// Gli articoli stanno in radice con lo stesso slug del vecchio sito WordPress: gli URL già indicizzati non cambiano
+export const newsHref = (slug) => `/${slug}/`
+
+export const newsPageHref = (page) => (page > 1 ? `/news/page/${page}/` : '/news/')

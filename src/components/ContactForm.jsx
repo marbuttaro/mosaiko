@@ -1,3 +1,5 @@
+'use client'
+
 import { location } from '../data/content'
 import Button from './Button'
 import Reveal from './Reveal'

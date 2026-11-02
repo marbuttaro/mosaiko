@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 
 // Livello che resta fermo quando il suo fondo tocca il fondo dello schermo,

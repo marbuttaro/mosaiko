@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef } from 'react'
 import Button from './Button'
 import Reveal from './Reveal'

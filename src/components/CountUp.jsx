@@ -1,18 +1,21 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 
 // Conta da 0 al valore quando entra in viewport (effetto "Count Up" di React Bits)
 function CountUp({ to, duration = 2, className = '' }) {
   const ref = useRef(null)
-  const [reduceMotion] = useState(() =>
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  )
-  const [value, setValue] = useState(reduceMotion ? to : 0)
+  const [value, setValue] = useState(0)
 
   useEffect(() => {
     const el = ref.current
-    if (!el || reduceMotion) return
-
+    if (!el) return
     let frame
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      frame = requestAnimationFrame(() => setValue(to))
+      return () => cancelAnimationFrame(frame)
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return
@@ -34,7 +37,7 @@ function CountUp({ to, duration = 2, className = '' }) {
       observer.disconnect()
       cancelAnimationFrame(frame)
     }
-  }, [to, duration, reduceMotion])
+  }, [to, duration])
 
   return (
     <span ref={ref} className={`tabular-nums ${className}`}>

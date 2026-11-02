@@ -50,7 +50,7 @@
 }
 
 @theme {
-  --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif; /* prima: "Bilmond", "Space Grotesk" */
+  --font-heading: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif; /* prima: "Bilmond", "Space Grotesk" */
   --font-sans: "Satoshi", "Inter", ui-sans-serif, system-ui, sans-serif; /* prima: "Inter" */
 
   --color-mosaiko-navy: #0e1a2b;

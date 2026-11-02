@@ -1,23 +1,81 @@
-import { useEffect } from 'react'
-import { news } from '../data/news'
-import { newsHref } from '../lib/route'
-import Button from './Button'
+import { allNews, NEWS_PER_PAGE, newsPageCount } from '../data/tutte-le-news'
+import { newsHref, newsPageHref } from '../lib/route'
 import { NewsCard } from './News'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
 
-// Nel testo delle news le parti tra **asterischi** sono i passaggi chiave da evidenziare
+// Nel testo delle news le parti tra **asterischi** sono i passaggi chiave da evidenziare,
+// [testo](indirizzo) è un link (negli articoli importati da WordPress)
 function RichText({ text }) {
-  return text.split('**').map((part, i) =>
-    i % 2 ? (
-      <strong key={i} className="font-semibold text-mosaiko-navy">
-        {part}
-      </strong>
-    ) : (
-      part
-    ),
-  )
+  return text.split(/(\[[^\]]+\]\([^)\s]+\))/).map((chunk, c) => {
+    const link = chunk.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/)
+    if (link) {
+      const external = /^https?:/.test(link[2]) && !link[2].includes('mosaiko.org')
+      return (
+        <a
+          key={c}
+          href={link[2]}
+          className="font-medium text-mosaiko-blue underline underline-offset-2 hover:text-mosaiko-navy"
+          {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          {link[1].replace(/\*\*/g, '')}
+        </a>
+      )
+    }
+    return chunk.split('**').map((part, i) =>
+      i % 2 ? (
+        <strong key={`${c}-${i}`} className="font-semibold text-mosaiko-navy">
+          {part}
+        </strong>
+      ) : (
+        part
+      ),
+    )
+  })
 }
+
+// Blocchi del corpo: paragrafi (stringhe) e, negli articoli d'archivio, titoletti, elenchi, citazioni, immagini e video
+function BodyBlock({ block }) {
+  if (typeof block === 'string') return <p><RichText text={block} /></p>
+  if (block.heading) return <h2 className="pt-4 font-heading text-xl font-medium text-mosaiko-navy sm:text-2xl">{block.heading.replace(/\*\*/g, '')}</h2>
+  if (block.list)
+    return (
+      <ul className="list-disc space-y-2 pl-5 marker:text-mosaiko-blue">
+        {block.list.map((item) => (
+          <li key={item.slice(0, 40)}><RichText text={item} /></li>
+        ))}
+      </ul>
+    )
+  if (block.quote)
+    return (
+      <blockquote className="space-y-4 border-l-2 border-mosaiko-gold pl-5 italic text-mosaiko-navy/80">
+        {[].concat(block.quote).map((paragraph) => (
+          <p key={paragraph.slice(0, 40)}><RichText text={paragraph} /></p>
+        ))}
+      </blockquote>
+    )
+  if (block.image)
+    return (
+      <figure className="overflow-hidden rounded-2xl shadow-md shadow-mosaiko-navy/10">
+        <img src={block.image} alt={block.alt} className="w-full object-cover" loading="lazy" />
+      </figure>
+    )
+  if (block.video)
+    return (
+      <div className="aspect-video overflow-hidden rounded-2xl">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${block.video}`}
+          title="Video"
+          className="h-full w-full"
+          loading="lazy"
+          allowFullScreen
+        />
+      </div>
+    )
+  return null
+}
+
+const blockKey = (block, i) => `${i}-${typeof block === 'string' ? block.slice(0, 24) : Object.keys(block)[0]}`
 
 function Tags({ tags }) {
   return (
@@ -68,11 +126,12 @@ function SidebarCard({ item }) {
   )
 }
 
-function ArrowLink({ href, direction, children }) {
+function ArrowLink({ href, direction, children, ...props }) {
   return (
     <a
       href={href}
       className="inline-flex items-center gap-2 text-sm font-medium text-mosaiko-navy/60 transition-colors hover:text-mosaiko-navy"
+      {...props}
     >
       {direction === 'prev' && <span aria-hidden="true">‹</span>}
       {children}
@@ -81,37 +140,21 @@ function ArrowLink({ href, direction, children }) {
   )
 }
 
-// Pagina /news/<slug>: articolo a sinistra, "Altre news" a destra (layout ripreso dal sito Caruso, con la foto)
+// Pagina dell'articolo (/<slug>/): articolo a sinistra, "Altre news" a destra (layout ripreso dal sito Caruso, con la foto)
 export function NewsArticlePage({ slug }) {
-  const index = news.findIndex((item) => item.slug === slug)
-  const article = news[index]
+  const index = allNews.findIndex((item) => item.slug === slug)
+  const article = allNews[index]
 
-  useEffect(() => {
-    document.title = article ? `${article.shortTitle} — Mosaiko` : 'News non trovata — Mosaiko'
-  }, [article])
-
-  if (!article) {
-    return (
-      <section className="bg-mosaiko-sand pb-24 pt-40 sm:pt-48">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
-          <h1 className="font-heading text-3xl font-medium uppercase text-mosaiko-navy sm:text-4xl">News non trovata</h1>
-          <p className="mt-4 text-mosaiko-ink">L&apos;articolo che cerchi non esiste o è stato spostato.</p>
-          <Button href="/news" variant="navy" className="mt-8">Tutte le news</Button>
-        </div>
-      </section>
-    )
-  }
-
-  const prev = news[(index - 1 + news.length) % news.length]
-  const next = news[(index + 1) % news.length]
-  const others = news.filter((item) => item.slug !== slug).slice(0, 3)
+  const prev = allNews[(index - 1 + allNews.length) % allNews.length]
+  const next = allNews[(index + 1) % allNews.length]
+  const others = allNews.filter((item) => item.slug !== slug).slice(0, 3)
 
   return (
     <section className="bg-mosaiko-sand pb-24 pt-32 sm:pb-32 sm:pt-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex items-center justify-between border-b border-mosaiko-navy/10 pb-5">
-          <ArrowLink href="/news" direction="prev">Tutte le news</ArrowLink>
-          {news.length > 1 && (
+          <ArrowLink href="/news/" direction="prev">Tutte le news</ArrowLink>
+          {allNews.length > 1 && (
             <div className="flex gap-6">
               <ArrowLink href={newsHref(prev.slug)} direction="prev">Indietro</ArrowLink>
               <ArrowLink href={newsHref(next.slug)} direction="next">Prossimo</ArrowLink>
@@ -132,19 +175,21 @@ export function NewsArticlePage({ slug }) {
             >
               {article.title}
             </Reveal>
-            <Reveal as="p" delay={160} className="mt-5 text-lg leading-relaxed text-mosaiko-navy/75 sm:text-xl">
-              {article.subtitle}
-            </Reveal>
+            {article.subtitle && (
+              <Reveal as="p" delay={160} className="mt-5 text-lg leading-relaxed text-mosaiko-navy/75 sm:text-xl">
+                {article.subtitle}
+              </Reveal>
+            )}
 
-            <Reveal delay={220} className="mt-10 overflow-hidden rounded-2xl shadow-md shadow-mosaiko-navy/10">
-              <img src={article.image} alt={article.imageAlt} className="aspect-[3/2] w-full object-cover" />
-            </Reveal>
+            {article.image && (
+              <Reveal delay={220} className="mt-10 overflow-hidden rounded-2xl shadow-md shadow-mosaiko-navy/10">
+                <img src={article.image} alt={article.imageAlt} className="aspect-[3/2] w-full object-cover" />
+              </Reveal>
+            )}
 
             <div className="mt-10 space-y-5 text-base leading-relaxed text-mosaiko-ink sm:text-[17px]">
-              {article.body.map((paragraph) => (
-                <p key={paragraph.slice(0, 40)}>
-                  <RichText text={paragraph} />
-                </p>
+              {article.body.map((block, i) => (
+                <BodyBlock key={blockKey(block, i)} block={block} />
               ))}
             </div>
           </article>
@@ -165,11 +210,36 @@ export function NewsArticlePage({ slug }) {
   )
 }
 
-// Pagina /news: elenco di tutte le news con le stesse card della home
-export function NewsIndexPage() {
-  useEffect(() => {
-    document.title = 'News — Mosaiko'
-  }, [])
+// Numeri di pagina in fondo all'elenco: link veri, così ogni articolo resta raggiungibile anche dai motori di ricerca
+function Pagination({ page }) {
+  if (newsPageCount < 2) return null
+  const pages = Array.from({ length: newsPageCount }, (_, i) => i + 1)
+  return (
+    <nav aria-label="Pagine delle news" className="mt-14 flex items-center justify-center gap-6 border-t border-mosaiko-navy/10 pt-8">
+      {page > 1 && <ArrowLink href={newsPageHref(page - 1)} direction="prev" rel="prev">Precedenti</ArrowLink>}
+      <ul className="flex gap-2">
+        {pages.map((p) => (
+          <li key={p}>
+            <a
+              href={newsPageHref(p)}
+              aria-current={p === page ? 'page' : undefined}
+              className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm font-medium transition-colors ${
+                p === page ? 'bg-mosaiko-navy text-white' : 'text-mosaiko-navy/70 hover:bg-mosaiko-navy/10'
+              }`}
+            >
+              {p}
+            </a>
+          </li>
+        ))}
+      </ul>
+      {page < newsPageCount && <ArrowLink href={newsPageHref(page + 1)} direction="next" rel="next">Successive</ArrowLink>}
+    </nav>
+  )
+}
+
+// Pagina /news/ (e /news/page/N/): prima le news nuove, poi l'archivio, con le stesse card della home
+export function NewsIndexPage({ page = 1 }) {
+  const items = allNews.slice((page - 1) * NEWS_PER_PAGE, page * NEWS_PER_PAGE)
 
   return (
     <section className="bg-mosaiko-sand pb-24 pt-40 sm:pb-32 sm:pt-48">
@@ -184,12 +254,14 @@ export function NewsIndexPage() {
         />
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3 lg:gap-6">
-          {news.map((item, i) => (
+          {items.map((item, i) => (
             <Reveal key={item.slug} delay={(i % 3) * 120}>
               <NewsCard item={item} />
             </Reveal>
           ))}
         </div>
+
+        <Pagination page={page} />
       </div>
     </section>
   )

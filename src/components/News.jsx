@@ -66,7 +66,7 @@ function News() {
         </div>
 
         <Reveal delay={150} className="mt-10 flex justify-center">
-          <Button href="/news" variant="navy">Scopri tutte le news</Button>
+          <Button href="/news/" variant="navy">Scopri tutte le news</Button>
         </Reveal>
       </div>
     </section>

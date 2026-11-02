@@ -1,7 +1,10 @@
+'use client'
+
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { navLinks } from '../data/content'
 import Button from './Button'
-import { homeHref, isHome, isPartnerPage } from '../lib/route'
+import { homeHref, routeFlags } from '../lib/route'
 
 // Sfondi chiari delle sezioni: sopra di questi logo e bottone passano alla versione scura
 const LIGHT_BGS = ['bg-mosaiko-sand', 'bg-mosaiko-mist']
@@ -10,6 +13,7 @@ function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [onLight, setOnLight] = useState(false)
   const [open, setOpen] = useState(false)
+  const { isHome, isPartnerPage } = routeFlags(usePathname())
 
   useEffect(() => {
     const onScroll = () => {
@@ -26,7 +30,7 @@ function Header() {
   }, [])
 
   // Nella pagina partner il form è in fondo alla pagina stessa
-  const contactHref = isPartnerPage ? '#contatti' : homeHref('#dove-siamo')
+  const contactHref = isPartnerPage ? '#contatti' : homeHref(isHome, '#dove-siamo')
 
   return (
     <header
@@ -51,7 +55,7 @@ function Header() {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={homeHref(link.href)}
+              href={homeHref(isHome, link.href)}
               className="rounded-lg px-5 py-2 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
             >
               {link.label}
@@ -95,7 +99,7 @@ function Header() {
             {navLinks.map((link) => (
               <a
                 key={link.href}
-                href={homeHref(link.href)}
+                href={homeHref(isHome, link.href)}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-4 py-3 text-base font-medium text-white/85 hover:bg-white/10"
               >

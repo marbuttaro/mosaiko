@@ -121,7 +121,7 @@ function SponsorsStats() {
         </Reveal>
 
         <Reveal delay={150} className="mt-12 flex justify-center">
-          <Button href="/partner" variant="navy">Vedi tutti i partner</Button>
+          <Button href="/partner/" variant="navy">Vedi tutti i partner</Button>
         </Reveal>
       </div>
     </section>

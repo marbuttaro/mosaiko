@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { partnerGroups } from '../data/content'
 import ContactForm from './ContactForm'
 import PartnerLogo from './PartnerLogo'
@@ -51,10 +50,6 @@ function PartnerGroup({ group, dark = false }) {
 
 // Pagina /partner: intro, poi un blocco per categoria (titolo a sinistra, loghi a destra) e form in fondo
 function PartnersPage() {
-  useEffect(() => {
-    document.title = 'Partner e sponsor — Mosaiko'
-  }, [])
-
   return (
     <>
       <section className="bg-mosaiko-sand pb-12 pt-40 sm:pb-16 sm:pt-48">

@@ -1,9 +1,9 @@
 export const navLinks = [
   { label: 'Chi siamo', href: '#chi-siamo' },
   { label: 'Team', href: '#team' },
-  { label: 'Partner', href: '/partner' },
+  { label: 'Partner', href: '/partner/' },
   { label: 'Eventi', href: '#eventi' },
-  { label: 'News', href: '/news' },
+  { label: 'News', href: '/news/' },
   { label: 'Dove siamo', href: '#dove-siamo' },
 ]
 

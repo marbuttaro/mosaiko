@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { events } from '../data/content'
 import Reveal from './Reveal'

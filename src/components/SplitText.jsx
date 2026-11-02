@@ -1,3 +1,5 @@
+'use client'
+
 import { Fragment, useRef } from 'react'
 import { useInView } from '../lib/useInView'
 
