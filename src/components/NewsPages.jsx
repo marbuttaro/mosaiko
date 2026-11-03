@@ -1,4 +1,5 @@
-import { allNews, NEWS_PER_PAGE, newsPageCount } from '../data/tutte-le-news'
+import { NEWS_PER_PAGE } from '../data/tutte-le-news'
+import { safeLink } from '../lib/cms/schema'
 import { newsHref, newsPageHref } from '../lib/route'
 import { NewsCard } from './News'
 import Reveal from './Reveal'
@@ -9,7 +10,7 @@ import SplitText from './SplitText'
 function RichText({ text }) {
   return text.split(/(\[[^\]]+\]\([^)\s]+\))/).map((chunk, c) => {
     const link = chunk.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/)
-    if (link) {
+    if (link && safeLink(link[2])) {
       const external = /^https?:/.test(link[2]) && !link[2].includes('mosaiko.org')
       return (
         <a
@@ -35,7 +36,7 @@ function RichText({ text }) {
 }
 
 // Blocchi del corpo: paragrafi (stringhe) e, negli articoli d'archivio, titoletti, elenchi, citazioni, immagini e video
-function BodyBlock({ block }) {
+function BodyBlock({ block, imageAlt }) {
   if (typeof block === 'string') return <p><RichText text={block} /></p>
   if (block.heading) return <h2 className="pt-4 font-heading text-xl font-medium text-mosaiko-navy sm:text-2xl">{block.heading.replace(/\*\*/g, '')}</h2>
   if (block.list)
@@ -57,7 +58,7 @@ function BodyBlock({ block }) {
   if (block.image)
     return (
       <figure className="overflow-hidden rounded-2xl shadow-md shadow-mosaiko-navy/10">
-        <img src={block.image} alt={block.alt} className="w-full object-cover" loading="lazy" />
+        <img src={block.image} alt={block.alt || imageAlt} className="w-full object-cover" loading="lazy" />
       </figure>
     )
   if (block.video)
@@ -141,7 +142,7 @@ function ArrowLink({ href, direction, children, ...props }) {
 }
 
 // Pagina dell'articolo (/<slug>/): articolo a sinistra, "Altre news" a destra (layout ripreso dal sito Caruso, con la foto)
-export function NewsArticlePage({ slug }) {
+export function NewsArticlePage({ slug, allNews }) {
   const index = allNews.findIndex((item) => item.slug === slug)
   const article = allNews[index]
 
@@ -183,13 +184,13 @@ export function NewsArticlePage({ slug }) {
 
             {article.image && (
               <Reveal delay={220} className="mt-10 overflow-hidden rounded-2xl shadow-md shadow-mosaiko-navy/10">
-                <img src={article.image} alt={article.imageAlt} className="aspect-[3/2] w-full object-cover" />
+                <img src={article.image} alt={article.imageAlt} fetchPriority="high" loading="eager" className="aspect-[3/2] w-full object-cover" />
               </Reveal>
             )}
 
             <div className="mt-10 space-y-5 text-base leading-relaxed text-mosaiko-ink sm:text-[17px]">
               {article.body.map((block, i) => (
-                <BodyBlock key={blockKey(block, i)} block={block} />
+                <BodyBlock key={blockKey(block, i)} block={block} imageAlt={article.title} />
               ))}
             </div>
           </article>
@@ -211,7 +212,7 @@ export function NewsArticlePage({ slug }) {
 }
 
 // Numeri di pagina in fondo all'elenco: link veri, così ogni articolo resta raggiungibile anche dai motori di ricerca
-function Pagination({ page }) {
+function Pagination({ page, newsPageCount }) {
   if (newsPageCount < 2) return null
   const pages = Array.from({ length: newsPageCount }, (_, i) => i + 1)
   return (
@@ -238,7 +239,8 @@ function Pagination({ page }) {
 }
 
 // Pagina /news/ (e /news/page/N/): prima le news nuove, poi l'archivio, con le stesse card della home
-export function NewsIndexPage({ page = 1 }) {
+export function NewsIndexPage({ page = 1, allNews }) {
+  const newsPageCount = Math.ceil(allNews.length / NEWS_PER_PAGE)
   const items = allNews.slice((page - 1) * NEWS_PER_PAGE, page * NEWS_PER_PAGE)
 
   return (
@@ -256,12 +258,12 @@ export function NewsIndexPage({ page = 1 }) {
         <div className="mt-12 grid gap-5 lg:grid-cols-3 lg:gap-6">
           {items.map((item, i) => (
             <Reveal key={item.slug} delay={(i % 3) * 120}>
-              <NewsCard item={item} />
+              <NewsCard item={item} priority={i === 0} />
             </Reveal>
           ))}
         </div>
 
-        <Pagination page={page} />
+        <Pagination page={page} newsPageCount={newsPageCount} />
       </div>
     </section>
   )

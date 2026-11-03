@@ -1,18 +1,18 @@
 import { NewsArticlePage } from '../../components/NewsPages'
-import { allNews, findNews, newsDescription } from '../../data/tutte-le-news'
+import { newsDescription } from '../../data/tutte-le-news'
+import { getNews } from '../../lib/cms/public'
+import { notFound } from 'next/navigation'
 import { newsHref } from '../../lib/route'
 import { JsonLd, SITE_URL, organizationJsonLd } from '../../lib/site'
 
 // Articoli in radice con lo slug di WordPress: solo quelli noti, ogni altro percorso dà 404
-export const dynamicParams = false
-
-export function generateStaticParams() {
-  return allNews.map((item) => ({ slug: item.slug }))
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const item = findNews(slug)
+  const allNews = await getNews()
+  const item = allNews.find(item => item.slug === slug)
+  if (!item) notFound()
   const url = newsHref(item.slug)
   return {
     title: item.title,
@@ -32,7 +32,9 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { slug } = await params
-  const item = findNews(slug)
+  const allNews = await getNews()
+  const item = allNews.find(item => item.slug === slug)
+  if (!item) notFound()
   const url = `${SITE_URL}${newsHref(item.slug)}`
   return (
     <>
@@ -45,7 +47,7 @@ export default async function Page({ params }) {
           datePublished: item.isoDate,
           dateModified: item.modified ?? item.isoDate,
           mainEntityOfPage: url,
-          ...(item.image ? { image: [`${SITE_URL}${item.image}`] } : {}),
+          ...(item.image ? { image: [new URL(item.image, SITE_URL).href] } : {}),
           author: { '@type': 'Organization', name: organizationJsonLd.name, url: `${SITE_URL}/` },
           publisher: { '@type': 'Organization', name: organizationJsonLd.name, logo: { '@type': 'ImageObject', url: organizationJsonLd.logo } },
         }}
@@ -61,7 +63,7 @@ export default async function Page({ params }) {
           ],
         }}
       />
-      <NewsArticlePage slug={item.slug} />
+      <NewsArticlePage slug={item.slug} allNews={allNews} />
     </>
   )
 }

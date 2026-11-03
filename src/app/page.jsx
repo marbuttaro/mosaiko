@@ -1,3 +1,7 @@
+import { getNews, getEvents } from '../lib/cms/public'
+
+export const dynamic = 'force-dynamic'
+
 import Hero from '../components/Hero'
 import GeneralInfo from '../components/GeneralInfo'
 import News from '../components/News'
@@ -15,12 +19,13 @@ export const metadata = {
   openGraph: { images: [DEFAULT_IMAGE], url: '/' },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [news, events] = await Promise.all([getNews(), getEvents()])
   return (
     <>
       <JsonLd data={organizationJsonLd} />
       <Hero />
-      <News />
+      <News news={news} />
       {/* Pannelli colorati che salgono sopra la sezione precedente */}
       <div>
         <StickyLayer id="chi-siamo" hold={60}>
@@ -36,7 +41,7 @@ export default function HomePage() {
         </div>
       </div>
       <SponsorsStats />
-      <UpcomingEvents />
+      <UpcomingEvents events={events} />
       <Location />
     </>
   )

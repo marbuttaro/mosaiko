@@ -1,3 +1,10 @@
+# Credenziali e risultati locali
+.env*
+!.env.example
+*.private.*
+playwright-report/
+test-results/
+
 # Logs
 logs
 *.log

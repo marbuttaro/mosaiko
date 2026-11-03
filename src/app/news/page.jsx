@@ -1,3 +1,6 @@
+import { getNews } from '../../lib/cms/public'
+export const dynamic = 'force-dynamic'
+
 import { NewsIndexPage } from '../../components/NewsPages'
 import { DEFAULT_IMAGE } from '../../lib/site'
 
@@ -8,6 +11,6 @@ export const metadata = {
   openGraph: { images: [DEFAULT_IMAGE], url: '/news/', title: 'News – Mosaiko' },
 }
 
-export default function Page() {
-  return <NewsIndexPage page={1} />
+export default async function Page() {
+  return <NewsIndexPage page={1} allNews={await getNews()} />
 }

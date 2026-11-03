@@ -1,9 +1,13 @@
-import { allNews, newsPageCount } from '../data/tutte-le-news'
+import { NEWS_PER_PAGE } from '../data/tutte-le-news'
+import { getNews } from '../lib/cms/public'
+export const dynamic = 'force-dynamic'
 import { newsHref, newsPageHref } from '../lib/route'
 import { SITE_URL } from '../lib/site'
 
 // Solo URL canonici (con slash finale) che rispondono 200
-export default function sitemap() {
+export default async function sitemap() {
+  const allNews = await getNews()
+  const newsPageCount = Math.max(1, Math.ceil(allNews.length / NEWS_PER_PAGE))
   const latest = allNews.map((item) => item.modified ?? item.isoDate).sort().at(-1)
   return [
     { url: `${SITE_URL}/`, lastModified: latest },

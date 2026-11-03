@@ -1,9 +1,8 @@
-import { news } from '../data/news'
 import { newsHref } from '../lib/route'
 import Button from './Button'
 import Reveal from './Reveal'
 
-export function NewsCard({ item }) {
+export function NewsCard({ item, priority = false }) {
   return (
     <a
       href={newsHref(item.slug)}
@@ -14,15 +13,16 @@ export function NewsCard({ item }) {
           src={item.image}
           alt={item.imageAlt}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
         />
       </div>
 
       <div className="flex min-h-56 flex-col p-5 sm:p-6">
         <time dateTime={item.isoDate} className="self-end text-xs text-mosaiko-ink sm:text-sm">{item.date}</time>
-        <h3 className="mt-4 font-heading text-lg font-medium uppercase leading-tight tracking-[0.01em] text-mosaiko-navy sm:text-xl lg:text-lg xl:text-xl">
+        <h2 className="mt-4 font-heading text-lg font-medium uppercase leading-tight tracking-[0.01em] text-mosaiko-navy sm:text-xl lg:text-lg xl:text-xl">
           {item.shortTitle}
-        </h3>
+        </h2>
         <ul className="mt-3 flex flex-wrap gap-1.5">
           {item.tags.map((tag) => (
             <li
@@ -46,7 +46,7 @@ export function NewsCard({ item }) {
   )
 }
 
-function News() {
+function News({ news }) {
   return (
     <section id="news" className="bg-mosaiko-sand pt-20 sm:pt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -59,7 +59,7 @@ function News() {
 
         <div className="mt-6 grid gap-5 lg:grid-cols-3 lg:gap-6">
           {news.slice(0, 3).map((item, i) => (
-            <Reveal key={item.id} delay={i * 120}>
+            <Reveal key={item.slug} delay={i * 120}>
               <NewsCard item={item} />
             </Reveal>
           ))}

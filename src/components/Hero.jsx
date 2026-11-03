@@ -37,6 +37,8 @@ function Hero() {
       <div ref={parallaxRef} className="absolute inset-0 will-change-transform">
         <img
           src="/images/hero-networking.jpg"
+          fetchPriority="high"
+          loading="eager"
           alt="Persone che fanno networking durante un evento Mosaiko"
           className="hero-image h-full w-full object-cover"
         />

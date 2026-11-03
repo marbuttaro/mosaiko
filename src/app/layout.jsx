@@ -14,6 +14,7 @@ export const metadata = {
   description: DEFAULT_DESCRIPTION,
   openGraph: { siteName: SITE_NAME, locale: 'it_IT', type: 'website', images: [DEFAULT_IMAGE] },
   twitter: { card: 'summary_large_image' },
+  alternates: { types: { 'application/rss+xml': `${SITE_URL}/feed/` } },
   icons: { icon: '/favicon.png' },
 }
 

@@ -1,0 +1,435 @@
+{
+  "date": "2026-11-03",
+  "baselineCommit": "f18489405bf75ef67a7a437dfd554821de8e6180",
+  "build": "pass",
+  "lint": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "npmAuditVulnerabilities": 0,
+  "databaseValidationTests": {
+    "passed": 2,
+    "backend": "PGlite PostgreSQL; production SQL migration"
+  },
+  "endToEndTests": {
+    "passed": 10,
+    "supabase": "local HTTP fixture; not live Supabase"
+  },
+  "crawl": {
+    "sitemapPages": 51,
+    "internalLinks": 1064,
+    "uniqueImages": 89,
+    "issues": []
+  },
+  "visual": [
+    {
+      "path": "/",
+      "viewport": 1440,
+      "dimensions": [
+        [
+          1440,
+          8295
+        ],
+        [
+          1440,
+          8295
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/news/",
+      "viewport": 1440,
+      "dimensions": [
+        [
+          1440,
+          2152
+        ],
+        [
+          1440,
+          2152
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/news/page/2/",
+      "viewport": 1440,
+      "dimensions": [
+        [
+          1440,
+          2157
+        ],
+        [
+          1440,
+          2157
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/2-8/",
+      "viewport": 1440,
+      "dimensions": [
+        [
+          1440,
+          2580
+        ],
+        [
+          1440,
+          2580
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/2-5/",
+      "viewport": 1440,
+      "dimensions": [
+        [
+          1440,
+          5384
+        ],
+        [
+          1440,
+          5384
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/partner/",
+      "viewport": 1440,
+      "dimensions": [
+        [
+          1440,
+          2952
+        ],
+        [
+          1440,
+          2952
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/",
+      "viewport": 390,
+      "dimensions": [
+        [
+          390,
+          11298
+        ],
+        [
+          390,
+          11298
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/news/",
+      "viewport": 390,
+      "dimensions": [
+        [
+          390,
+          4154
+        ],
+        [
+          390,
+          4154
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/news/page/2/",
+      "viewport": 390,
+      "dimensions": [
+        [
+          390,
+          4207
+        ],
+        [
+          390,
+          4207
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/2-8/",
+      "viewport": 390,
+      "dimensions": [
+        [
+          390,
+          4453
+        ],
+        [
+          390,
+          4453
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/2-5/",
+      "viewport": 390,
+      "dimensions": [
+        [
+          390,
+          5059
+        ],
+        [
+          390,
+          5059
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    },
+    {
+      "path": "/partner/",
+      "viewport": 390,
+      "dimensions": [
+        [
+          390,
+          4099
+        ],
+        [
+          390,
+          4099
+        ]
+      ],
+      "differentPixels": 0,
+      "ratio": 0
+    }
+  ],
+  "lighthouseMobileLocal": [
+    {
+      "name": "home",
+      "scores": {
+        "performance": 75,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "LCP": 7657.644,
+      "CLS": 0.008906768350388068,
+      "TBT": 78.5,
+      "issues": [
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "value": "1.2 s"
+        },
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "value": "7.7 s"
+        },
+        {
+          "id": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "value": "80 ms"
+        },
+        {
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "value": "210 ms"
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "value": "8.0 s"
+        },
+        {
+          "id": "unsized-images",
+          "title": "Image elements do not have explicit `width` and `height`"
+        },
+        {
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio."
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "value": "Est savings of 52 KiB"
+        },
+        {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "value": "Est savings of 1,873 KiB"
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "value": "Est savings of 14 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree"
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "value": "Est savings of 360 ms"
+        }
+      ]
+    },
+    {
+      "name": "news",
+      "scores": {
+        "performance": 75,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "LCP": 8408.975299999998,
+      "CLS": 0,
+      "TBT": 88,
+      "issues": [
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "value": "8.4 s"
+        },
+        {
+          "id": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "value": "90 ms"
+        },
+        {
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "value": "230 ms"
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "value": "8.8 s"
+        },
+        {
+          "id": "unsized-images",
+          "title": "Image elements do not have explicit `width` and `height`"
+        },
+        {
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio."
+        },
+        {
+          "id": "total-byte-weight",
+          "title": "Avoid enormous network payloads",
+          "value": "Total size was 3,851 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "value": "Est savings of 52 KiB"
+        },
+        {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "value": "Est savings of 3,489 KiB"
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "value": "Est savings of 14 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree"
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "value": "Est savings of 90 ms"
+        }
+      ]
+    },
+    {
+      "name": "article",
+      "scores": {
+        "performance": 77,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "LCP": 6532.3886,
+      "CLS": 0.0001243551788451976,
+      "TBT": 78.5,
+      "issues": [
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "value": "6.5 s"
+        },
+        {
+          "id": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "value": "80 ms"
+        },
+        {
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "value": "210 ms"
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "value": "6.8 s"
+        },
+        {
+          "id": "unsized-images",
+          "title": "Image elements do not have explicit `width` and `height`"
+        },
+        {
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio."
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "value": "Est savings of 52 KiB"
+        },
+        {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "value": "Est savings of 1,350 KiB"
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "value": "Est savings of 14 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree"
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "value": "Est savings of 410 ms"
+        }
+      ]
+    }
+  ],
+  "notVerified": [
+    "Live Supabase provisioning and CRUD",
+    "Aruba login and WordPress backup",
+    "DNS migration and production custom-domain SSL",
+    "Google Search Console and Analytics",
+    "Google Rich Results Test and field Core Web Vitals"
+  ]
+}

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { events } from '../data/content'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
 
@@ -56,7 +55,7 @@ function ViewToggle({ view, onChange }) {
   )
 }
 
-function UpcomingEvents() {
+function UpcomingEvents({ events }) {
   const [view, setView] = useState('list')
   const [expanded, setExpanded] = useState(() => new Set())
 
@@ -139,7 +138,7 @@ function UpcomingEvents() {
               <div className="relative overflow-hidden">
                 <img
                   src={event.image}
-                  alt=""
+                  alt={event.imageAlt || event.title}
                   className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
