@@ -2,67 +2,63 @@
 
 ## Stato effettivo
 
-Il codice del CMS e gli interventi SEO sono implementati, pubblicati su GitHub e distribuiti tramite la CLI Vercel autenticata `marbuttaro`. Il deploy `dpl_BMnfcnkfe89LsWhiHryjui8reE6y` è pronto e verificato su `https://mosaiko-ten.vercel.app`. **Attivazione Supabase e cambio DNS restano da completare**. Gmail è accessibile; Supabase blocca il login sul controllo di sicurezza. L’account Aruba salvato in Chrome accede correttamente, ma non contiene mosaiko.org: occorre l’account che gestisce quel dominio. Il dominio pubblico punta ancora al vecchio hosting Aruba. `/admin/` mostra “in configurazione” fino all’inserimento delle variabili Supabase e al relativo nuovo deploy.
+**Supabase e dashboard sono attivi su Vercel.** L’account `mosaikoenterprise@gmail.com` è verificato; il progetto Free `mosaiko` (`rctuxnshrrxtyekvwqbn`) è operativo in Irlanda (`eu-west-1`). Il sito legge dal database i 45 articoli e i 3 eventi importati. Dashboard: `https://mosaiko-ten.vercel.app/admin/`.
+
+Il deploy CLI `dpl_2sh6jWxCApyakCP2GNkcR6HUE6us` è pronto e collaudato sul dominio Vercel. **Aruba e la migrazione DNS sono rinviati su richiesta esplicita dell’utente.** Nessun record DNS modificato: `mosaiko.org` e `www.mosaiko.org` continuano a servire il vecchio hosting Aruba. I canonical del nuovo sito restano sul dominio definitivo.
 
 | Attività | Stato ed evidenza |
 | --- | --- |
-| Repository | `marbuttaro/mosaiko`, cartella locale `SMDev/Mosaiko/app`; accesso collaboratore risolto accettando l’invito esistente. |
-| Account Supabase | Gmail Mosaiko autenticato e mail di conferma ricevuta. Link precedente scaduto; login con credenziali salvate arrestato dal controllo di sicurezza Supabase. Nessun progetto remoto creato. |
-| Schema database | Migrazione SQL pronta, RLS testata su PostgreSQL/PGlite. Lettura pubblica solo dei contenuti pubblicati; scritture e upload solo admin. Non ancora applicata a Supabase remoto. |
-| Dashboard | CRUD news/eventi, bozze, categorie/tipologie, ordine, blocchi editoriali, upload, anteprima e gestione delle modifiche concorrenti. Test browser/API con servizio Supabase simulato superati. |
-| Importazione | Validati 45 articoli (42 WordPress + 3 recenti) e 3 eventi. Script idempotente, senza sovrascrivere record già presenti. |
+| Repository | `marbuttaro/mosaiko`, cartella locale `SMDev/Mosaiko/app`; codice e istruzioni sotto controllo Git. |
+| Supabase | Organizzazione `Mosaiko`, piano Free, database attivo in Irlanda. Email confermata tramite il nuovo link ricevuto in Gmail. |
+| Schema e permessi | Applicate entrambe le migrazioni SQL: tabelle contenuti/admin, RLS, immutabilità tipo/slug, revisione concorrente e bucket immagini. Le funzioni non richiedono privilegi del proprietario dai client. |
+| Importazione | 45 news (42 WordPress + 3 recenti), 3 eventi pubblicati, un amministratore CMS. Importazione idempotente senza sovrascrivere modifiche editoriali. |
+| Dashboard | CRUD news/eventi, bozze, pubblicazione, categorie/tipologie, ordine, blocchi, upload, anteprima, conflitti e ricerca. Verificata nel browser contro Supabase reale anche sul deploy Vercel. |
+| Autenticazione | Registrazioni pubbliche e accessi anonimi disabilitati; conferma email richiesta. Admin con email verificata e password casuale distinta dagli altri account. Site URL: `https://mosaiko-ten.vercel.app/admin/`. |
+| Chiavi | Nuove chiavi publishable/secret. Su Vercel soltanto URL e chiave pubblicabile, negli ambienti Production/Preview/Development. Chiave privilegiata e credenziali in `SMDev/Mosaiko/.env`, fuori dal repository e dal deploy. |
 | Vercel | CLI autenticata `marbuttaro`, team `marbuttaros-projects`, progetto `mosaiko` (`prj_NeYu3FER1NPSWnUVLfQQ3K4QtmAn`). |
-| Deploy | Blocco precedente risolto: il repository risulta ora pubblico. La CLI ha completato `dpl_BMnfcnkfe89LsWhiHryjui8reE6y`, versione con CMS e SEO, sul progetto corretto. Non sono stati modificati dall'agente visibilità del repository o autori Git. |
-| Dominio | Aggiunti `www.mosaiko.org` e `mosaiko.org` al progetto corretto. Configurato redirect 308 da apex a www. DNS pubblici ancora Aruba, `89.46.110.9`. |
-| Aruba | Password dell’immagine rifiutata in precedenza; nessun OTP ricevuto dalla casella Mosaiko. Provato quindi, su indicazione dell’utente, l’account salvato in Chrome: login riuscito, ma mosaiko.org non compare tra i servizi disponibili. Serve l’account corretto. Nessun record DNS modificato. |
-| Search Console | Aperta con la casella Mosaiko e preparata la proprietà dominio `mosaiko.org`; record TXT pronto localmente. Verifica DNS e invio sitemap pendenti. |
+| Dominio | Apex e www associati al progetto, redirect apex → www predisposto. DNS ancora Aruba, `89.46.110.9`, per scelta dell’utente. |
+| Search Console | Proprietà `mosaiko.org` preparata con Gmail Mosaiko; TXT conservato localmente. Verifica e invio sitemap dipendono dal futuro accesso DNS. |
 
 ## Verifiche eseguite
 
-- Build di produzione riuscita; lint senza errori o avvisi; `npm audit` senza vulnerabilità.
-- Commit implementazione `91ac65d`, esclusioni upload `7ecdd35`, entrambi su `main`. [Pipeline GitHub del codice completata con successo](https://github.com/marbuttaro/mosaiko/actions/runs/41624510712).
-- 2 test SQL/validazione superati: RLS anonimo/utente/admin, divieto di autoassegnazione admin, bozze, scritture, upload, immutabilità URL e input pericolosi.
-- 10 test browser/API/SEO superati: login/logout, CRUD news e eventi, visibilità bozza/pubblicato, aggiornamento SSR e sitemap, duplicati, conflitti, upload PNG e rifiuto SVG, schermi 1440 e 390 px, 404 reali, RSS e redirect.
-- 5 test pubblici aggiuntivi superati sul deploy Vercel reale: desktop/mobile, 51 pagine con metadati e JSON-LD, tutti gli 841 redirect e 51 ID WordPress, RSS, robots e 404. Nessuna scrittura al database remoto durante questi test.
-- Crawl della build: 51 pagine nella sitemap, 1.064 collegamenti interni, 89 immagini distinte; nessun link o immagine interno mancante, metadati e canonical validi.
-- Ripetuto lo stesso crawl sul deploy reale: 51 pagine, 1.064 collegamenti e 89 immagini; zero problemi.
-- Confronto con il commit iniziale `f184894`: home, news, pagina 2, due articoli e partner su desktop/mobile. **12 schermate, 0 pixel diversi**, con animazioni ed embed esterni neutralizzati solo nei browser di test.
-- Lighthouse mobile locale su home/news/articolo: SEO 100/100, best practices 100/100, accessibilità 96/100; performance 75/75/77. Le metriche di laboratorio non costituiscono una verifica dei Core Web Vitals reali né una garanzia di posizionamento.
+- Build di produzione riuscita; lint senza errori o avvisi. L’audit dipendenze già eseguito non rileva vulnerabilità; nessuna dipendenza aggiunta durante l’attivazione.
+- 2 test PostgreSQL/PGlite e validazione superati, con entrambe le migrazioni. Confermati RLS, protezione bozze, scritture riservate, divieto di autoassegnazione admin, immutabilità URL e funzioni con privilegi limitati.
+- 10 test browser/API/SEO con servizio simulato superati dopo l’aggiornamento alle chiavi pubblicabili.
+- **Collaudo Supabase reale superato**, dalla build locale e dal sito Vercel: permessi anonimo/utente/admin, news/eventi CRUD, bozze, pubblicazione, SSR e sitemap, duplicati/conflitti, URL immutabili, rifiuto input pericolosi/SVG, upload PNG integro, login/modifica/eliminazione/logout nel browser. Ripetuto sul deploy dopo il restringimento finale dei permessi SQL.
+- Fixture, immagini e utenze temporanee rimosse. Inventario e revisioni dei contenuti preesistenti verificati identici prima/dopo.
+- 5 smoke test pubblici superati sul deploy con Supabase attivo: desktop/mobile, 51 pagine con metadati e JSON-LD, 841 redirect e 51 ID WordPress, RSS, robots e 404.
+- Crawl online con Supabase attivo: **51 pagine, 1.064 collegamenti interni, 89 immagini distinte, zero problemi**.
+- Confronto visivo già eseguito con il commit iniziale `f184894`: 12 schermate desktop/mobile, **0 pixel diversi**, neutralizzando animazioni/embed solo nei browser di test. L’attivazione Supabase non cambia componenti o CSS pubblici.
+- Lighthouse mobile locale già eseguito su home/news/articolo: SEO 100/100, best practices 100/100, accessibilità 96/100; performance 75/75/77. Questi risultati precedono l’attivazione del database e non sono misure dei Core Web Vitals reali.
 
-I test di integrazione simulano l’HTTP Supabase; **non sostituiscono il collaudo del progetto Supabase reale**, che resta da eseguire dopo l’attivazione. Le prove locali sono riproducibili tramite i comandi nel README.
-
-Preparato anche `scripts/test-cms-live.mjs`: verifica il progetto reale tramite API, RLS, storage e browser e ripulisce solo le proprie fixture temporanee. Sintassi e lint verificati; **non ancora eseguito**, perché il progetto Supabase non è stato creato.
+`scripts/test-cms-live.mjs` riproduce il collaudo reale con fixture UUID e pulizia finale. I test locali/GitHub simulati restano distinti dal collaudo reale. Comandi nel README; riepilogo in `qa-summary.json`.
 
 ## Interventi SEO senza modificare la grafica
 
-- Preservati slug, testi, immagini, classi CSS e impaginazione pubblica. Migliorati alt mancanti e priorità di caricamento dell’immagine principale.
-- Sitemap dinamica e metadati leggono la stessa fonte dei contenuti. Cancellazioni e bozze non vengono ripubblicate dai dati statici dopo l’attivazione del CMS.
-- Conservati canonical, Open Graph, NewsArticle e BreadcrumbList; descrizione di riserva per le nuove news; aggiunto feed RSS e relativa discovery.
-- Dashboard e API escluse dall’indicizzazione. Le anteprime Vercel mantengono `X-Robots-Tag: noindex`; il dominio definitivo resta indicizzabile.
-- 841 redirect espliciti per percorsi storici e varianti delle immagini, più 51 ID WordPress. Verificati 308 e destinazioni interne dirette 200.
-- Recuperati 4 PDF pubblici dagli uploads WordPress, mantenendo il percorso originale; checksum in `legacy-pdf-manifest.json`.
-- Inventario della sitemap WordPress: 211 URL, di cui 44 conservati con 200, 15 reindirizzati e 152 senza equivalente, lasciati 404. L’elenco completo è in `legacy-url-map.csv`. Include molti layout, tassonomie e contenuti dimostrativi del tema: non vengono mascherati con redirect generici alla homepage.
-- `/video-gallery/` reindirizza al canale YouTube Mosaiko già collegato nella pagina originale. `/comments/feed/`, login e admin WordPress restano 404.
+- Preservati testi, immagini, slug, classi CSS e impaginazione pubblica. Migliorati alt mancanti, gerarchia semantica e priorità dell’immagine principale.
+- Sitemap, RSS, metadati e pagine leggono solo i contenuti pubblicati. Bozze e cancellazioni non ripristinano dati statici.
+- Canonical, Open Graph, NewsArticle e BreadcrumbList, descrizioni di riserva e discovery RSS.
+- Dashboard/API non indicizzabili; anteprime `*.vercel.app` con `X-Robots-Tag: noindex`; dominio definitivo predisposto all’indicizzazione.
+- 841 redirect espliciti più 51 ID WordPress, con destinazioni dirette verificate. Conservati gli URL dei 42 articoli WordPress e 4 PDF originali con checksum.
+- Inventario WordPress di 211 URL: 44 conservati con 200, 15 reindirizzati, 152 senza equivalente lasciati 404 (molti layout/tassonomie/contenuti dimostrativi del tema). Dettagli in `legacy-url-map.csv`.
+- `/video-gallery/` reindirizza al canale YouTube Mosaiko già collegato nell’originale; feed commenti/login/admin WordPress restano 404.
 
-## Passaggio DNS preparato
+## Migrazione dominio rinviata
 
-Valori consigliati con priorità 1 dall'API Vercel, riverificati tramite la CLI il 3 novembre 2026; da controllare nuovamente prima della modifica:
+Alla ripresa, riverificare nell’API Vercel i valori consigliati prima di modificare i DNS:
 
-| Record | Nome | Valore |
+| Record | Nome | Valore rilevato il 3 novembre 2026 |
 | --- | --- | --- |
 | CNAME | www | `8dde7fdfc350b4ff.vercel-dns-017.com.` |
 | A | @ | `216.198.79.1` |
 | A | @ | `64.29.17.1` |
 
-Modificare solo i record web dopo aver ottenuto l’accesso Aruba. Conservare MX, TXT, record di posta e nameserver esistenti. Lo snapshot pubblico rileva MX `mx.mosaiko.org`, priorità 10. Dopo il cambio: verificare DNS autoritativi, certificato HTTPS, redirect apex/www, canonical, robots, sitemap, contenuti e accesso CMS. L’IP web precedente `89.46.110.9` è conservato per il ripristino; il vecchio hosting non è stato cancellato.
+Conservare MX, TXT, record di posta e nameserver. Lo snapshot pubblico rileva MX `mx.mosaiko.org`, priorità 10. Prima della migrazione resta da acquisire/verificare un backup completo WordPress (file + SQL); la copia delle API pubbliche e dei PDF non lo sostituisce. IP precedente `89.46.110.9` conservato per il ripristino; vecchio hosting non cancellato.
 
-## Attività ancora aperte
+Dopo il futuro cambio: controllare DNS autoritativi, HTTPS, redirect apex/www, canonical, robots, sitemap, contenuti e CMS; completare Search Console e inviare la sitemap. Le credenziali Aruba del file risultano rifiutate; l’account salvato in Chrome non contiene mosaiko.org.
 
-1. Rilascio Vercel completato; rimane il nuovo deploy dopo il collegamento Supabase.
-2. Completare il controllo di sicurezza del login Supabase, rinnovare la conferma email, creare progetto Free, applicare migrazione, importare dati, creare admin e configurare Vercel. Eseguire CRUD reale e rimuovere i contenuti di prova.
-3. Accesso Aruba valido; ottenere backup completo WordPress (file + SQL), verificarne integrità e ripristino, poi applicare il cambio DNS e collaudare il dominio.
-4. Concludere la verifica DNS della proprietà Search Console preparata e inviare la sitemap dopo la migrazione. Nessuna proprietà verificata preesistente era visibile nell'account Mosaiko. Analytics, backlink, benchmark keyword, priorità di traffico e conversioni non verificati; nessun ID di tracciamento inventato o aggiunto.
-5. Rich Results Test Google e Core Web Vitals sul dominio dopo il passaggio non ancora verificati. JSON-LD parsabile verificato localmente.
-6. Prestazioni mobile: immagini pesanti e animazioni preesistenti limitano LCP. Contrasti cromatici segnalati da Lighthouse sono conservati per rispettare il vincolo grafico. La vecchia `/privacy-policy/` contiene il testo dimostrativo di AncoraThemes: non è stata trasformata in un’informativa legale Mosaiko inventata.
+## Limiti e attività residue
 
-La copia delle API pubbliche WordPress e dei PDF è un recupero di contenuti, **non un backup completo del sito originale**.
+- La protezione contro password già trapelate non è inclusa nel piano Free richiesto: [documentazione Supabase](https://supabase.com/docs/guides/auth/password-security). Registrazioni pubbliche disabilitate e password CMS casuale distinta. Nessun upgrade a pagamento effettuato.
+- Analytics, backlink, benchmark keyword, priorità di traffico/conversioni e Rich Results Test Google non verificati. Nessun ID di tracciamento inventato. Verifica DNS Search Console e Core Web Vitals del nuovo ambiente sul dominio definitivo rinviati con il passaggio DNS.
+- Immagini pesanti e animazioni preesistenti limitano LCP; colori e contrasti conservati per rispettare il vincolo grafico. La vecchia `/privacy-policy/` contiene testo dimostrativo di AncoraThemes: non è stata trasformata in un’informativa legale inventata.

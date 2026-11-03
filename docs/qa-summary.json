@@ -2,18 +2,18 @@
   "date": "2026-11-03",
   "baselineCommit": "f18489405bf75ef67a7a437dfd554821de8e6180",
   "liveVercel": {
-    "deploymentId": "dpl_BMnfcnkfe89LsWhiHryjui8reE6y",
+    "deploymentId": "dpl_2sh6jWxCApyakCP2GNkcR6HUE6us",
     "baseURL": "https://mosaiko-ten.vercel.app",
     "ready": true,
     "publicSmokeTestsPassed": 5,
     "crawl": {
-      "checkedAt": "2026-11-03T12:48:28.982Z",
+      "checkedAt": "2026-11-03T14:38:28.577Z",
       "sitemapPages": 51,
       "internalLinks": 1064,
       "uniqueImages": 89,
       "issues": []
     },
-    "supabaseConfigured": false,
+    "supabaseConfigured": true,
     "customDomainDnsMigrated": false
   },
   "build": "pass",
@@ -441,10 +441,36 @@
     }
   ],
   "notVerified": [
-    "Live Supabase provisioning and CRUD",
     "Aruba login and WordPress backup",
     "DNS migration and production custom-domain SSL",
     "Search Console DNS verification and sitemap submission; Analytics",
     "Google Rich Results Test and field Core Web Vitals"
+  ],
+  "liveSupabase": {
+    "projectRef": "rctuxnshrrxtyekvwqbn",
+    "region": "eu-west-1",
+    "plan": "Free",
+    "news": 45,
+    "events": 3,
+    "admins": 1,
+    "publicSignupsEnabled": false,
+    "anonymousSignInsEnabled": false,
+    "publicKeyType": "publishable",
+    "serverKeyDeployed": false,
+    "sqlMigrations": [
+      "202611030001_cms.sql",
+      "202611030002_function_permissions.sql"
+    ],
+    "crudRlsStorageBrowserLocal": "pass",
+    "crudRlsStorageBrowserVercel": "pass; repeated after function permission migration",
+    "fixtureCleanup": "verified; original content IDs and revisions unchanged",
+    "securityAdvisor": {
+      "errors": 0,
+      "warnings": 1,
+      "remainingWarning": "Leaked Password Protection Disabled; unavailable on requested Free plan"
+    }
+  },
+  "deferredByUser": [
+    "Aruba access and domain DNS migration"
   ]
 }

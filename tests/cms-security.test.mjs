@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { readFile } from 'node:fs/promises'
+import { readFile, readdir } from 'node:fs/promises'
 import { PGlite } from '@electric-sql/pglite'
 import { contentSchema } from '../src/lib/cms/schema.js'
 
@@ -15,7 +15,11 @@ test('database RLS: anonymous and regular users cannot read drafts, write conten
     alter table storage.objects enable row level security;
     grant select,insert,delete on storage.objects to authenticated;
     insert into auth.users values ('00000000-0000-4000-8000-000000000001'),('00000000-0000-4000-8000-000000000002');`)
-  await db.exec(await readFile(new URL('../supabase/migrations/202611030001_cms.sql',import.meta.url),'utf8'))
+  const migrationDir=new URL('../supabase/migrations/',import.meta.url)
+  for(const file of (await readdir(migrationDir)).filter(file=>file.endsWith('.sql')).sort()) {
+    await db.exec(await readFile(new URL(file,migrationDir),'utf8'))
+  }
+  assert.equal((await db.query("select prosecdef from pg_proc where oid='public.is_cms_admin()'::regprocedure")).rows[0].prosecdef,false)
   await db.exec(`insert into public.cms_admins(user_id) values('00000000-0000-4000-8000-000000000001');`)
   async function as(role,id,fn) {
     await db.exec(`set role ${role}`)
@@ -34,8 +38,10 @@ test('database RLS: anonymous and regular users cannot read drafts, write conten
     assert.deepEqual((await db.query('select slug from cms_content')).rows.map(x=>x.slug),['test-published'])
     await assert.rejects(()=>insert('published','attacker'))
     await assert.rejects(()=>db.query('select * from cms_admins'))
+    await assert.rejects(()=>db.query('select public.is_cms_admin()'))
   })
   await as('authenticated','00000000-0000-4000-8000-000000000002',async()=>{
+    assert.equal((await db.query('select public.is_cms_admin() as allowed')).rows[0].allowed,false)
     assert.equal((await db.query('select * from cms_content')).rows.length,1)
     assert.equal((await db.query('select * from cms_admins')).rows.length,0)
     await assert.rejects(()=>insert('published','attacker'))
@@ -45,6 +51,7 @@ test('database RLS: anonymous and regular users cannot read drafts, write conten
     await assert.rejects(()=>db.query(`insert into storage.objects(bucket_id,name) values('cms-images','bad.png')`))
   })
   await as('authenticated','00000000-0000-4000-8000-000000000001',async()=>{
+    assert.equal((await db.query('select public.is_cms_admin() as allowed')).rows[0].allowed,true)
     const updated=(await db.query(`update cms_content set status='published' where id=$1 returning *`,[draft.id])).rows[0]
     assert.notEqual(updated.updated_at,draft.updated_at)
     await assert.rejects(()=>db.query(`update cms_content set slug='changed-url',data='{"title":"Test","slug":"changed-url"}' where id=$1`,[draft.id]))

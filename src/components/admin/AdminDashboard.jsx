@@ -22,7 +22,7 @@ const blockType=(block)=>typeof block==='string'?'paragraph':Object.keys(block)[
 const newBlock=(type)=>({paragraph:'',heading:{heading:''},list:{list:['']},quote:{quote:['']},image:{image:'',alt:''},video:{video:''}}[type])
 let browserClient
 function getBrowserClient() {
-  const url=process.env.NEXT_PUBLIC_SUPABASE_URL, key=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const url=process.env.NEXT_PUBLIC_SUPABASE_URL, key=process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   if(!url || !key) return null
   // One GoTrue client per browser prevents competing session locks in Strict Mode.
   if(typeof window==='undefined') return null
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
     <div className="mb-8 flex flex-wrap items-center justify-between gap-4"><div><h1 className="text-3xl font-semibold">Gestione news ed eventi</h1><p className="mt-2 text-slate-600">Crea, modifica e pubblica i contenuti di Mosaiko.</p></div>{session && <button type="button" className={smallClass} onClick={logout} disabled={busy}>Esci</button>}</div>
     {error && <p role="alert" className="mb-5 rounded-lg border border-red-200 bg-red-50 p-4 text-red-800">{error}</p>}
     {message && <p role="status" className="mb-5 rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">{message}</p>}
-    {!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? <p className="rounded-xl bg-white p-6">La dashboard è in configurazione. L’accesso sarà disponibile dopo l’attivazione del database.</p>
+    {!process.env.NEXT_PUBLIC_SUPABASE_URL || !(process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) ? <p className="rounded-xl bg-white p-6">La dashboard è in configurazione. L’accesso sarà disponibile dopo l’attivazione del database.</p>
       : initializing ? <p role="status">Caricamento…</p>
       : !session ? <form onSubmit={login} className="grid max-w-md gap-5 rounded-xl bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold">Accesso amministratore</h2>

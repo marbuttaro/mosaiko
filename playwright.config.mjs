@@ -7,6 +7,6 @@ export default defineConfig({
   reporter:[['list'],['html',{open:'never'}]],
   webServer:remoteBaseURL?undefined:[
     {command:'node tests/mock-supabase.mjs',url:'http://127.0.0.1:54329/health',reuseExistingServer:false},
-    {command:'npm run dev -- --port 3100',url:'http://127.0.0.1:3100',timeout:120000,reuseExistingServer:false,env:{NEXT_PUBLIC_SUPABASE_URL:'http://127.0.0.1:54329',NEXT_PUBLIC_SUPABASE_ANON_KEY:'test-anon-key'}},
+    {command:'npm run dev -- --port 3100',url:'http://127.0.0.1:3100',timeout:120000,reuseExistingServer:false,env:{NEXT_PUBLIC_SUPABASE_URL:'http://127.0.0.1:54329',NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:'test-publishable-key',NEXT_PUBLIC_SUPABASE_ANON_KEY:'test-anon-key'}},
   ],
 })

@@ -7,11 +7,11 @@ import { chromium } from '@playwright/test'
 const {
   CMS_LIVE_BASE_URL: base,
   NEXT_PUBLIC_SUPABASE_URL: url,
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: anonKey,
-  SUPABASE_SERVICE_ROLE_KEY: serviceKey,
   CMS_ADMIN_EMAIL: email,
   CMS_ADMIN_PASSWORD: password,
 } = process.env
+const anonKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const serviceKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
 if (!base || !url || !anonKey || !serviceKey || !email || !password) {
   throw new Error('Imposta CMS_LIVE_BASE_URL e le credenziali Supabase/CMS in un file privato locale. Questo test modifica solo fixture temporanee.')
 }

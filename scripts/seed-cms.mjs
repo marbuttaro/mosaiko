@@ -10,8 +10,8 @@ const rows=[
 if(process.argv.includes('--validate')) {
   console.log(`Validi: ${allNews.length} articoli e ${events.length} eventi.`)
 } else {
-  const url=process.env.NEXT_PUBLIC_SUPABASE_URL, key=process.env.SUPABASE_SERVICE_ROLE_KEY
-  if(!url || !key) throw new Error('Mancano URL Supabase o service role locale')
+  const url=process.env.NEXT_PUBLIC_SUPABASE_URL, key=process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
+  if(!url || !key) throw new Error('Mancano URL Supabase o chiave server locale')
   const db=createClient(url,key,{auth:{persistSession:false}})
   // Ripetibile: importa solo le righe assenti, senza sovrascrivere modifiche editoriali.
   const {error}=await db.from('cms_content').upsert(rows,{onConflict:'kind,slug',ignoreDuplicates:true})

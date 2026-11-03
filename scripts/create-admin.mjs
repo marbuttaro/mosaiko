@@ -1,6 +1,7 @@
 import {createClient} from '@supabase/supabase-js'
-const {NEXT_PUBLIC_SUPABASE_URL:url,SUPABASE_SERVICE_ROLE_KEY:key,CMS_ADMIN_EMAIL:email,CMS_ADMIN_PASSWORD:password}=process.env
-if(!url||!key||!email||!password||password.length<14)throw new Error('Imposta URL, service role, CMS_ADMIN_EMAIL e una password distinta di almeno 14 caratteri in un file locale escluso da Git.')
+const {NEXT_PUBLIC_SUPABASE_URL:url,CMS_ADMIN_EMAIL:email,CMS_ADMIN_PASSWORD:password}=process.env
+const key=process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
+if(!url||!key||!email||!password||password.length<14)throw new Error('Imposta URL, chiave server, CMS_ADMIN_EMAIL e una password distinta di almeno 14 caratteri in un file locale escluso da Git.')
 const db=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}})
 let existing
 for(let page=1; ;page++) {

@@ -6,13 +6,13 @@ import { events } from '../../data/content'
 // un elenco vuoto deve restare vuoto, senza ripubblicare contenuti eliminati o bozze.
 const getPublished = cache(async (kind) => {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   if (!url && !key) return kind === 'news' ? allNews : events
   if (!url || !key) throw new Error('Configurazione CMS incompleta')
   const items = []
   for (let offset = 0; ; offset += 500) {
     const response = await fetch(`${url}/rest/v1/cms_content?select=data&kind=eq.${kind}&status=eq.published&order=sort_order.asc,created_at.desc,id.asc&limit=500&offset=${offset}`, {
-      headers: { apikey: key, Authorization: `Bearer ${key}` },
+      headers: { apikey: key },
       cache: 'no-store', signal: AbortSignal.timeout(10000),
     })
     if (!response.ok) throw new Error('Contenuti CMS temporaneamente non disponibili')

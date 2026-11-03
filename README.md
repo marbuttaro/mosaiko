@@ -22,32 +22,32 @@ I test SQL applicano la migrazione a PostgreSQL tramite PGlite e verificano i pe
 ## Attivazione Supabase
 
 1. Creare un progetto **Free** nell’account Mosaiko, preferibilmente in una regione UE. Salvare password e chiavi in un file privato fuori dal repository.
-2. Eseguire `supabase/migrations/202611030001_cms.sql` nel SQL editor del progetto. Crea `cms_content`, `cms_admins`, le policy RLS e il bucket pubblico `cms-images` (scrittura solo admin).
-3. Impostare in un file locale `.env.local` le variabili di `.env.example`. Il sito e le API usano solo URL e chiave anon. La service role serve esclusivamente agli script di provisioning e non va inserita in Vercel né in variabili `NEXT_PUBLIC_*`.
+2. Eseguire i file SQL in `supabase/migrations/` in ordine di nome nel SQL editor del progetto. Creano `cms_content`, `cms_admins`, le policy RLS e il bucket pubblico `cms-images` (scrittura solo admin). La seconda migrazione limita l’esecuzione delle funzioni: la verifica admin usa i permessi dell’utente e la sua membership protetta da RLS, senza privilegi del proprietario.
+3. Impostare in `.env.local` solo `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Il sito e le API usano la chiave pubblicabile con RLS e il token dell’utente. Conservare `SUPABASE_SECRET_KEY` e le credenziali CMS in un file privato fuori dal repository (qui `../.env`): servono agli script locali, mai al deploy Vercel o a variabili `NEXT_PUBLIC_*`. I nomi precedenti `NEXT_PUBLIC_SUPABASE_ANON_KEY` e `SUPABASE_SERVICE_ROLE_KEY` restano supportati come compatibilità.
 4. Importare i 45 articoli e i 3 eventi esistenti:
 
    ```bash
-   node --env-file=.env.local scripts/seed-cms.mjs
+   node --env-file=../.env scripts/seed-cms.mjs
    ```
 
    L’importazione è ripetibile: gli elementi già presenti vengono conservati, senza sovrascrivere modifiche editoriali.
 5. Creare l’utente amministratore con email verificata e password distinta da Gmail/Supabase Dashboard, aggiungendo localmente `CMS_ADMIN_EMAIL` e `CMS_ADMIN_PASSWORD`:
 
    ```bash
-   node --env-file=.env.local scripts/create-admin.mjs
+   node --env-file=../.env scripts/create-admin.mjs
    ```
 
    L’accesso al pannello Supabase e l’accesso al CMS del sito sono account distinti. Lo script non cambia password di utenti già esistenti. Disabilitare le iscrizioni pubbliche in Authentication → Settings: il CMS non offre registrazione pubblica.
-6. Configurare `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` negli ambienti Vercel richiesti, poi ricostruire il deploy. Verificare login e CRUD reali su `/admin/` con contenuti di prova riconoscibili e rimuoverli al termine.
+6. Configurare `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` negli ambienti Vercel richiesti, poi ricostruire il deploy. Verificare login e CRUD reali su `/admin/` con contenuti di prova riconoscibili e rimuoverli al termine.
 
 Senza entrambe le variabili il sito conserva i dati statici originali e il pannello mostra “in configurazione”. Quando Supabase è configurato, il database è l’unica fonte: bozze, cancellazioni e un archivio vuoto non ripristinano dati statici. Un errore del servizio viene segnalato e non mascherato con contenuti obsoleti.
 
 ### Collaudo del progetto reale
 
-Dopo il provisioning, avviare una build locale collegata al progetto Supabase reale prima di configurare le variabili del deploy pubblico. Con le stesse variabili e la service role presenti soltanto nel file privato locale, eseguire:
+Dopo il provisioning, avviare una build locale collegata al progetto Supabase reale prima di configurare le variabili del deploy pubblico. Con le stesse variabili e la chiave server presenti nel file privato fuori dal repository, eseguire:
 
 ```bash
-CMS_LIVE_BASE_URL=http://127.0.0.1:3000 node --env-file=.env.local scripts/test-cms-live.mjs
+CMS_LIVE_BASE_URL=http://127.0.0.1:3000 node --env-file=../.env scripts/test-cms-live.mjs
 ```
 
 Il comando richiede esplicitamente URL del sito, chiavi Supabase e credenziali CMS. Verifica RLS anonimo/utente/admin, CRUD news/eventi, bozze e pubblicazione, conflitti, SSR e sitemap, upload e login/logout dal browser. Crea un utente senza privilegi e contenuti con un prefisso UUID univoco, poi elimina solo queste fixture e controlla che l’inventario dei contenuti preesistenti sia invariato. Non eseguirlo durante modifiche editoriali contemporanee. Un’esecuzione sul sito pubblico rende brevemente visibili le fixture pubblicate: preferire la build locale prima del collegamento in produzione. Il successo dei test simulati non implica il successo di questo collaudo.
