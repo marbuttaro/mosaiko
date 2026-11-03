@@ -1,6 +1,21 @@
 {
   "date": "2026-11-03",
   "baselineCommit": "f18489405bf75ef67a7a437dfd554821de8e6180",
+  "liveVercel": {
+    "deploymentId": "dpl_BMnfcnkfe89LsWhiHryjui8reE6y",
+    "baseURL": "https://mosaiko-ten.vercel.app",
+    "ready": true,
+    "publicSmokeTestsPassed": 5,
+    "crawl": {
+      "checkedAt": "2026-11-03T12:48:28.982Z",
+      "sitemapPages": 51,
+      "internalLinks": 1064,
+      "uniqueImages": 89,
+      "issues": []
+    },
+    "supabaseConfigured": false,
+    "customDomainDnsMigrated": false
+  },
   "build": "pass",
   "lint": {
     "errors": 0,
@@ -429,7 +444,7 @@
     "Live Supabase provisioning and CRUD",
     "Aruba login and WordPress backup",
     "DNS migration and production custom-domain SSL",
-    "Google Search Console and Analytics",
+    "Search Console DNS verification and sitemap submission; Analytics",
     "Google Rich Results Test and field Core Web Vitals"
   ]
 }

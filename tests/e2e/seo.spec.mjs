@@ -21,13 +21,13 @@ test('all seeded articles and sitemap entries have unique canonical, title, desc
   for(const item of allNews)expect(urls).toContain(`https://www.mosaiko.org/${item.slug}/`)
 })
 
-test('all migration redirects resolve in one hop to their explicit destination',async({request})=>{
-  test.setTimeout(180000)
+test('all migration redirects resolve in one hop to their explicit destination',async({request,baseURL})=>{
+  test.setTimeout(process.env.SMOKE_BASE_URL?600000:180000)
   for(const [path,destination] of Object.entries(migration.paths)) {
     const res=await request.get(path,{maxRedirects:0})
     expect(res.status(),path).toBe(308)
-    const actual=new URL(res.headers().location,'http://127.0.0.1:3100')
-    const expected=new URL(destination,'http://127.0.0.1:3100')
+    const actual=new URL(res.headers().location,baseURL)
+    const expected=new URL(destination,baseURL)
     expect(actual.href,path).toBe(expected.href)
   }
   for(const target of new Set(Object.values(migration.paths))) {
@@ -37,7 +37,7 @@ test('all migration redirects resolve in one hop to their explicit destination',
   for(const [id,target] of Object.entries(migration.ids)) {
     const response=await request.get(`/?p=${id}`,{maxRedirects:0})
     expect(response.status(),id).toBe(308)
-    expect(new URL(response.headers().location,'http://127.0.0.1:3100').href).toBe(new URL(target,'http://127.0.0.1:3100').href)
+    expect(new URL(response.headers().location,baseURL).href).toBe(new URL(target,baseURL).href)
   }
   expect((await request.get('/?p=99999999')).status()).toBe(404)
 })

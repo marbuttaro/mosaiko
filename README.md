@@ -60,6 +60,9 @@ Per verificare un deploy:
 node scripts/audit-site.mjs https://mosaiko-ten.vercel.app
 node scripts/lighthouse-audit.mjs http://127.0.0.1:3000
 node scripts/verify-visual.mjs http://127.0.0.1:3101 http://127.0.0.1:3102
+SMOKE_BASE_URL=https://mosaiko-ten.vercel.app npm run test:smoke
 ```
+
+Con `SMOKE_BASE_URL` vengono eseguiti solo controlli pubblici in lettura sul sito indicato (desktop/mobile, metadati, redirect, RSS e robots); non partono server locali né test CRUD sul database remoto.
 
 Il confronto visivo richiede due build in esecuzione e disattiva solo nei browser di test animazioni ed embed esterni. I risultati sono in `test-results/`, esclusa da Git. Stato della migrazione e limiti dei controlli: `docs/implementation-status.md`.
