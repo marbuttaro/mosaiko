@@ -42,6 +42,16 @@ I test SQL applicano la migrazione a PostgreSQL tramite PGlite e verificano i pe
 
 Senza entrambe le variabili il sito conserva i dati statici originali e il pannello mostra “in configurazione”. Quando Supabase è configurato, il database è l’unica fonte: bozze, cancellazioni e un archivio vuoto non ripristinano dati statici. Un errore del servizio viene segnalato e non mascherato con contenuti obsoleti.
 
+### Collaudo del progetto reale
+
+Dopo il provisioning, avviare una build locale collegata al progetto Supabase reale prima di configurare le variabili del deploy pubblico. Con le stesse variabili e la service role presenti soltanto nel file privato locale, eseguire:
+
+```bash
+CMS_LIVE_BASE_URL=http://127.0.0.1:3000 node --env-file=.env.local scripts/test-cms-live.mjs
+```
+
+Il comando richiede esplicitamente URL del sito, chiavi Supabase e credenziali CMS. Verifica RLS anonimo/utente/admin, CRUD news/eventi, bozze e pubblicazione, conflitti, SSR e sitemap, upload e login/logout dal browser. Crea un utente senza privilegi e contenuti con un prefisso UUID univoco, poi elimina solo queste fixture e controlla che l’inventario dei contenuti preesistenti sia invariato. Non eseguirlo durante modifiche editoriali contemporanee. Un’esecuzione sul sito pubblico rende brevemente visibili le fixture pubblicate: preferire la build locale prima del collegamento in produzione. Il successo dei test simulati non implica il successo di questo collaudo.
+
 ## Uso della dashboard
 
 `/admin/` permette di cercare, creare, modificare, pubblicare e cancellare news ed eventi. La news supporta categorie, titoli, date, descrizione SEO, immagini, paragrafi, titoletti, elenchi, citazioni e video YouTube. Gli eventi mantengono tutti i campi già presenti nel sito. Gli upload accettano JPG, PNG e WebP fino a 4 MB. L’anteprima usa gli stessi componenti del sito.

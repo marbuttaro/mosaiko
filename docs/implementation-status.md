@@ -2,7 +2,7 @@
 
 ## Stato effettivo
 
-Il codice del CMS e gli interventi SEO sono implementati, pubblicati su GitHub e distribuiti tramite la CLI Vercel autenticata `marbuttaro`. Il deploy `dpl_BMnfcnkfe89LsWhiHryjui8reE6y` è pronto e verificato su `https://mosaiko-ten.vercel.app`. **Attivazione Supabase e cambio DNS restano da completare**. Gmail è accessibile; Supabase blocca il login sul controllo di sicurezza e Aruba richiede un CAPTCHA per l'accesso via email. Il dominio pubblico punta ancora al vecchio hosting Aruba. `/admin/` mostra “in configurazione” fino all’inserimento delle variabili Supabase e al relativo nuovo deploy.
+Il codice del CMS e gli interventi SEO sono implementati, pubblicati su GitHub e distribuiti tramite la CLI Vercel autenticata `marbuttaro`. Il deploy `dpl_BMnfcnkfe89LsWhiHryjui8reE6y` è pronto e verificato su `https://mosaiko-ten.vercel.app`. **Attivazione Supabase e cambio DNS restano da completare**. Gmail è accessibile; Supabase blocca il login sul controllo di sicurezza. L’account Aruba salvato in Chrome accede correttamente, ma non contiene mosaiko.org: occorre l’account che gestisce quel dominio. Il dominio pubblico punta ancora al vecchio hosting Aruba. `/admin/` mostra “in configurazione” fino all’inserimento delle variabili Supabase e al relativo nuovo deploy.
 
 | Attività | Stato ed evidenza |
 | --- | --- |
@@ -14,7 +14,7 @@ Il codice del CMS e gli interventi SEO sono implementati, pubblicati su GitHub e
 | Vercel | CLI autenticata `marbuttaro`, team `marbuttaros-projects`, progetto `mosaiko` (`prj_NeYu3FER1NPSWnUVLfQQ3K4QtmAn`). |
 | Deploy | Blocco precedente risolto: il repository risulta ora pubblico. La CLI ha completato `dpl_BMnfcnkfe89LsWhiHryjui8reE6y`, versione con CMS e SEO, sul progetto corretto. Non sono stati modificati dall'agente visibilità del repository o autori Git. |
 | Dominio | Aggiunti `www.mosaiko.org` e `mosaiko.org` al progetto corretto. Configurato redirect 308 da apex a www. DNS pubblici ancora Aruba, `89.46.110.9`. |
-| Aruba | Password dell’immagine rifiutata in precedenza. Preparato accesso ufficiale senza password alla casella Mosaiko; CAPTCHA in attesa. Nessun record DNS modificato. |
+| Aruba | Password dell’immagine rifiutata in precedenza; nessun OTP ricevuto dalla casella Mosaiko. Provato quindi, su indicazione dell’utente, l’account salvato in Chrome: login riuscito, ma mosaiko.org non compare tra i servizi disponibili. Serve l’account corretto. Nessun record DNS modificato. |
 | Search Console | Aperta con la casella Mosaiko e preparata la proprietà dominio `mosaiko.org`; record TXT pronto localmente. Verifica DNS e invio sitemap pendenti. |
 
 ## Verifiche eseguite
@@ -30,6 +30,8 @@ Il codice del CMS e gli interventi SEO sono implementati, pubblicati su GitHub e
 - Lighthouse mobile locale su home/news/articolo: SEO 100/100, best practices 100/100, accessibilità 96/100; performance 75/75/77. Le metriche di laboratorio non costituiscono una verifica dei Core Web Vitals reali né una garanzia di posizionamento.
 
 I test di integrazione simulano l’HTTP Supabase; **non sostituiscono il collaudo del progetto Supabase reale**, che resta da eseguire dopo l’attivazione. Le prove locali sono riproducibili tramite i comandi nel README.
+
+Preparato anche `scripts/test-cms-live.mjs`: verifica il progetto reale tramite API, RLS, storage e browser e ripulisce solo le proprie fixture temporanee. Sintassi e lint verificati; **non ancora eseguito**, perché il progetto Supabase non è stato creato.
 
 ## Interventi SEO senza modificare la grafica
 
