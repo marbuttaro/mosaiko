@@ -2,7 +2,7 @@
 
 ## Stato effettivo
 
-Il codice del CMS e gli interventi SEO sono implementati. **L’attivazione Supabase e il cambio DNS non sono completati**, perché gli accessi forniti a Gmail e Aruba vengono rifiutati. Il sito continua a mostrare i contenuti originali; `/admin/` rimane in configurazione fino all’inserimento delle variabili Supabase e al nuovo deploy.
+Il codice del CMS e gli interventi SEO sono implementati e pubblicati su GitHub. **Deploy Vercel, attivazione Supabase e cambio DNS non sono completati**. Gmail e Aruba rifiutano gli accessi forniti; Vercel blocca l’autore dei commit sul piano Hobby. Il sito online è ancora alla versione precedente. Il nuovo codice mostra `/admin/` “in configurazione” fino all’inserimento delle variabili Supabase e al deploy riuscito.
 
 | Attività | Stato ed evidenza |
 | --- | --- |
@@ -12,17 +12,19 @@ Il codice del CMS e gli interventi SEO sono implementati. **L’attivazione Supa
 | Dashboard | CRUD news/eventi, bozze, categorie/tipologie, ordine, blocchi editoriali, upload, anteprima e gestione delle modifiche concorrenti. Test browser/API con servizio Supabase simulato superati. |
 | Importazione | Validati 45 articoli (42 WordPress + 3 recenti) e 3 eventi. Script idempotente, senza sovrascrivere record già presenti. |
 | Vercel | CLI autenticata `marbuttaro`, team `marbuttaros-projects`, progetto `mosaiko` (`prj_NeYu3FER1NPSWnUVLfQQ3K4QtmAn`). |
+| Deploy | Tentativo CLI `dpl_EKeEQC6tz7zb7D7WRpLT5q6q5HoC` e deploy Git bloccati: `TEAM_ACCESS_REQUIRED`. Vercel richiede che l’autore del commit sia il titolare del team Hobby; Git locale era configurato come `Giulianomlodi`. Nessuna versione nuova promossa in produzione. |
 | Dominio | Aggiunti `www.mosaiko.org` e `mosaiko.org` al progetto corretto. Configurato redirect 308 da apex a www. DNS pubblici ancora Aruba, `89.46.110.9`. |
 | Aruba | Login con i dati dell’immagine fornita rifiutato. Nessun record DNS modificato. |
 
 ## Verifiche eseguite
 
 - Build di produzione riuscita; lint senza errori o avvisi; `npm audit` senza vulnerabilità.
+- Commit implementazione `91ac65d`, esclusioni upload `7ecdd35`, entrambi su `main`. [Pipeline GitHub del codice completata con successo](https://github.com/marbuttaro/mosaiko/actions/runs/41624510712).
 - 2 test SQL/validazione superati: RLS anonimo/utente/admin, divieto di autoassegnazione admin, bozze, scritture, upload, immutabilità URL e input pericolosi.
 - 10 test browser/API/SEO superati: login/logout, CRUD news e eventi, visibilità bozza/pubblicato, aggiornamento SSR e sitemap, duplicati, conflitti, upload PNG e rifiuto SVG, schermi 1440 e 390 px, 404 reali, RSS e redirect.
 - Crawl della build: 51 pagine nella sitemap, 1.064 collegamenti interni, 89 immagini distinte; nessun link o immagine interno mancante, metadati e canonical validi.
 - Confronto con il commit iniziale `f184894`: home, news, pagina 2, due articoli e partner su desktop/mobile. **12 schermate, 0 pixel diversi**, con animazioni ed embed esterni neutralizzati solo nei browser di test.
-- Lighthouse mobile locale su home/news/articolo: SEO 100/100 e best practices 100/100. Le metriche di laboratorio non costituiscono una verifica dei Core Web Vitals reali né una garanzia di posizionamento.
+- Lighthouse mobile locale su home/news/articolo: SEO 100/100, best practices 100/100, accessibilità 96/100; performance 75/75/77. Le metriche di laboratorio non costituiscono una verifica dei Core Web Vitals reali né una garanzia di posizionamento.
 
 I test di integrazione simulano l’HTTP Supabase; **non sostituiscono il collaudo del progetto Supabase reale**, che resta da eseguire dopo l’attivazione. Le prove locali sono riproducibili tramite i comandi nel README.
 
@@ -51,10 +53,11 @@ Modificare solo i record web dopo aver ottenuto l’accesso Aruba. Conservare MX
 
 ## Attività ancora aperte
 
-1. Password Gmail aggiornata o accesso manuale dell’utente; confermare l’account Supabase, creare progetto Free, applicare migrazione, importare dati, creare admin e configurare Vercel. Eseguire CRUD reale e rimuovere i contenuti di prova.
-2. Accesso Aruba valido; ottenere backup completo WordPress (file + SQL), verificarne integrità e ripristino, poi applicare il cambio DNS e collaudare il dominio.
-3. Accessi Search Console/Analytics non disponibili: proprietà, backlink, benchmark keyword, priorità di traffico, conversioni e invio sitemap non verificati. Non è stato inventato né aggiunto un ID di tracciamento.
-4. Rich Results Test Google e Core Web Vitals sul dominio dopo il passaggio non ancora verificati. JSON-LD parsabile verificato localmente.
-5. Prestazioni mobile: immagini pesanti e animazioni preesistenti limitano LCP. Contrasti cromatici segnalati da Lighthouse sono conservati per rispettare il vincolo grafico. La vecchia `/privacy-policy/` contiene il testo dimostrativo di AncoraThemes: non è stata trasformata in un’informativa legale Mosaiko inventata.
+1. Sbloccare il rilascio tramite l’account GitHub/Vercel titolare o una configurazione di collaborazione consentita dal piano. Non sono stati falsificati autori Git, reso pubblico il repository o acquistati upgrade. [Requisiti Vercel](https://vercel.com/docs/deployments/troubleshoot-project-collaboration).
+2. Password Gmail aggiornata o accesso manuale dell’utente; confermare l’account Supabase, creare progetto Free, applicare migrazione, importare dati, creare admin e configurare Vercel. Eseguire CRUD reale e rimuovere i contenuti di prova.
+3. Accesso Aruba valido; ottenere backup completo WordPress (file + SQL), verificarne integrità e ripristino, poi applicare il cambio DNS e collaudare il dominio.
+4. Accessi Search Console/Analytics non disponibili: proprietà, backlink, benchmark keyword, priorità di traffico, conversioni e invio sitemap non verificati. Non è stato inventato né aggiunto un ID di tracciamento.
+5. Rich Results Test Google e Core Web Vitals sul dominio dopo il passaggio non ancora verificati. JSON-LD parsabile verificato localmente.
+6. Prestazioni mobile: immagini pesanti e animazioni preesistenti limitano LCP. Contrasti cromatici segnalati da Lighthouse sono conservati per rispettare il vincolo grafico. La vecchia `/privacy-policy/` contiene il testo dimostrativo di AncoraThemes: non è stata trasformata in un’informativa legale Mosaiko inventata.
 
 La copia delle API pubbliche WordPress e dei PDF è un recupero di contenuti, **non un backup completo del sito originale**.
