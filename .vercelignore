@@ -1,0 +1,11 @@
+.git
+.env*
+*.private.*
+node_modules
+.next
+test-results
+playwright-report
+docs
+tests
+.github
+C:*
