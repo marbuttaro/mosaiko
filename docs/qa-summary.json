@@ -1,20 +1,21 @@
 {
-  "date": "2026-11-03",
+  "date": "2026-11-04",
   "baselineCommit": "f18489405bf75ef67a7a437dfd554821de8e6180",
   "liveVercel": {
-    "deploymentId": "dpl_2sh6jWxCApyakCP2GNkcR6HUE6us",
-    "baseURL": "https://mosaiko-ten.vercel.app",
+    "deploymentId": "dpl_B2bCg7WY3RoRCJNMTRwGaigoeYvq",
+    "baseURL": "https://www.mosaiko.org",
     "ready": true,
     "publicSmokeTestsPassed": 5,
     "crawl": {
-      "checkedAt": "2026-11-03T14:38:28.577Z",
+      "checkedAt": "2026-11-04T17:54:38.925Z",
       "sitemapPages": 51,
       "internalLinks": 1064,
       "uniqueImages": 89,
       "issues": []
     },
     "supabaseConfigured": true,
-    "customDomainDnsMigrated": false
+    "customDomainDnsMigrated": true,
+    "verificationTransport": "During DNS propagation, a loopback HTTPS CONNECT proxy used Google public DNS with normal end-to-end TLS validation. No hosts-file changes or certificate bypass."
   },
   "build": "pass",
   "lint": {
@@ -31,6 +32,7 @@
     "supabase": "local HTTP fixture; not live Supabase"
   },
   "crawl": {
+    "checkedAt": "2026-11-04T17:54:38.925Z",
     "sitemapPages": 51,
     "internalLinks": 1064,
     "uniqueImages": 89,
@@ -441,10 +443,8 @@
     }
   ],
   "notVerified": [
-    "Aruba login and WordPress backup",
-    "DNS migration and production custom-domain SSL",
-    "Search Console DNS verification and sitemap submission; Analytics",
-    "Google Rich Results Test and field Core Web Vitals"
+    "Analytics, backlink and keyword benchmarks",
+    "Field Core Web Vitals and future Google indexing/ranking outcomes"
   ],
   "liveSupabase": {
     "projectRef": "rctuxnshrrxtyekvwqbn",
@@ -463,14 +463,121 @@
     ],
     "crudRlsStorageBrowserLocal": "pass",
     "crudRlsStorageBrowserVercel": "pass; repeated after function permission migration",
-    "fixtureCleanup": "verified; original content IDs and revisions unchanged",
+    "fixtureCleanup": "verified after custom-domain test; original content IDs and revisions unchanged",
     "securityAdvisor": {
       "errors": 0,
       "warnings": 1,
       "remainingWarning": "Leaked Password Protection Disabled; unavailable on requested Free plan"
-    }
+    },
+    "siteURL": "https://www.mosaiko.org/admin/",
+    "crudRlsStorageBrowserCustomDomain": "pass on 2026-11-04; real production database and browser"
   },
-  "deferredByUser": [
-    "Aruba access and domain DNS migration"
-  ]
+  "deferredByUser": [],
+  "codeCommit": "7cd00d119862da9b153213b34c4470e07c74cfe9",
+  "articleMetadataTests": {
+    "passed": 2,
+    "originalWordPressTimestamps": 42,
+    "fabricatedTimestamps": false
+  },
+  "totalUnitTestsPassed": 4,
+  "visualVerifiedAt": "2026-11-03",
+  "visualNote": "12 baseline comparisons, zero changed pixels. November 4 changes affect metadata and documentation only; no public UI or CSS edits.",
+  "lighthouseMobileLocalVerifiedAt": "2026-11-03",
+  "arubaBackup": {
+    "completedBeforeDnsCutover": true,
+    "filesystemFiles": 46565,
+    "filesystemDirectories": 8138,
+    "filesystemBytes": 1569370065,
+    "filesystemHashesVerified": true,
+    "databaseTables": 84,
+    "databaseGzipCrcValid": true,
+    "databaseRestoreTest": "pass; 84 tables restored in isolated MariaDB 10.11 container with network disabled",
+    "archive": {
+      "created_at": "2026-11-04T17:30:35.283510+00:00",
+      "file": "mosaiko-wordpress-backup-2026-11-04.zip",
+      "bytes": 1160158392,
+      "entries": 54711,
+      "sha256": "7a12a18f857be682f97fd9255362967bcf7018cad5da9068c1404bf669c2fb14",
+      "zip_crc_valid": true,
+      "source_hashes_verified": true
+    },
+    "location": "Private backup-aruba-2026-11-04 folder in the Windows task workspace; outside Git and Vercel"
+  },
+  "domainMigration": {
+    "records": [
+      {
+        "name": "@",
+        "type": "A",
+        "ttl": 300,
+        "value": "216.198.79.1"
+      },
+      {
+        "name": "@",
+        "type": "A",
+        "ttl": 300,
+        "value": "64.29.17.1"
+      },
+      {
+        "name": "www",
+        "type": "A",
+        "ttl": 300,
+        "value": "216.198.79.1"
+      },
+      {
+        "name": "www",
+        "type": "A",
+        "ttl": 300,
+        "value": "64.29.17.1"
+      }
+    ],
+    "obsoleteWebIPv6Removed": true,
+    "unchangedDnsRecords": 50,
+    "mailAndNameserversPreserved": true,
+    "oldHostingPreserved": true,
+    "vercelApexMisconfigured": false,
+    "vercelWwwMisconfigured": false,
+    "dnsChecks": {
+      "checkedAt": "2026-11-04T18:04:31.504456+00:00",
+      "passed": 36,
+      "total": 36
+    },
+    "localCacheObservation": "At 18:04 UTC, the PC resolver still returned the old Aruba address with TTL 1442 seconds; authoritative/public checks were all correct. Existing cached answers can persist until expiry.",
+    "redirect": "HTTPS apex returns 308 to https://www.mosaiko.org/",
+    "certificate": {
+      "id": "cert_8lQFWoxqwdlSq2YT1VgxqZA3",
+      "issuer": "Let's Encrypt YR2",
+      "domains": [
+        "mosaiko.org",
+        "www.mosaiko.org"
+      ],
+      "expiresAt": "2027-02-02T16:41:29Z",
+      "autoRenew": true,
+      "tlsVerifiedOnBothRecommendedIPs": true
+    },
+    "temporaryAcmeTxtRemoved": true,
+    "arubaExpiryShown": "2026-11-15"
+  },
+  "googleSearchConsole": {
+    "property": "sc-domain:mosaiko.org",
+    "verified": true,
+    "sitemap": "https://www.mosaiko.org/sitemap.xml",
+    "status": "Sitemap elaborata correttamente",
+    "lastRead": "2026-11-04",
+    "discoveredPages": 51,
+    "doesNotImplyAllPagesIndexed": true
+  },
+  "googleRichResults": {
+    "url": "https://www.mosaiko.org/2-8/",
+    "result": "https://search.google.com/test/rich-results/result?id=-OFBCdNjejg6qsb1RsXV6Q",
+    "crawledAt": "2026-11-04T18:58:43+01:00",
+    "crawlSuccess": true,
+    "validArticleItems": 1,
+    "validBreadcrumbItems": 1,
+    "warnings": 0
+  },
+  "githubCi": {
+    "commit": "7cd00d119862da9b153213b34c4470e07c74cfe9",
+    "conclusion": "success",
+    "url": "https://github.com/marbuttaro/mosaiko/actions/runs/41879208441"
+  }
 }

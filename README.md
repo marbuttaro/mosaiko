@@ -21,6 +21,8 @@ I test SQL applicano la migrazione a PostgreSQL tramite PGlite e verificano i pe
 
 ## Attivazione Supabase
 
+Il progetto è già attivo in produzione; i passaggi seguenti documentano la configurazione e non richiedono di creare nuovamente account o database. Dashboard: `https://www.mosaiko.org/admin/`.
+
 1. Creare un progetto **Free** nell’account Mosaiko, preferibilmente in una regione UE. Salvare password e chiavi in un file privato fuori dal repository.
 2. Eseguire i file SQL in `supabase/migrations/` in ordine di nome nel SQL editor del progetto. Creano `cms_content`, `cms_admins`, le policy RLS e il bucket pubblico `cms-images` (scrittura solo admin). La seconda migrazione limita l’esecuzione delle funzioni: la verifica admin usa i permessi dell’utente e la sua membership protetta da RLS, senza privilegi del proprietario.
 3. Impostare in `.env.local` solo `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Il sito e le API usano la chiave pubblicabile con RLS e il token dell’utente. Conservare `SUPABASE_SECRET_KEY` e le credenziali CMS in un file privato fuori dal repository (qui `../.env`): servono agli script locali, mai al deploy Vercel o a variabili `NEXT_PUBLIC_*`. I nomi precedenti `NEXT_PUBLIC_SUPABASE_ANON_KEY` e `SUPABASE_SERVICE_ROLE_KEY` restano supportati come compatibilità.
@@ -67,10 +69,10 @@ Sitemap e feed RSS leggono solo contenuti pubblicati. Canonical, Open Graph, New
 Per verificare un deploy:
 
 ```bash
-node scripts/audit-site.mjs https://mosaiko-ten.vercel.app
+node scripts/audit-site.mjs https://www.mosaiko.org
 node scripts/lighthouse-audit.mjs http://127.0.0.1:3000
 node scripts/verify-visual.mjs http://127.0.0.1:3101 http://127.0.0.1:3102
-SMOKE_BASE_URL=https://mosaiko-ten.vercel.app npm run test:smoke
+SMOKE_BASE_URL=https://www.mosaiko.org npm run test:smoke
 ```
 
 Con `SMOKE_BASE_URL` vengono eseguiti solo controlli pubblici in lettura sul sito indicato (desktop/mobile, metadati, redirect, RSS e robots); non partono server locali né test CRUD sul database remoto.
