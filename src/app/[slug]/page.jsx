@@ -4,6 +4,7 @@ import { getNews } from '../../lib/cms/public'
 import { notFound } from 'next/navigation'
 import { newsHref } from '../../lib/route'
 import { JsonLd, SITE_URL, organizationJsonLd } from '../../lib/site'
+import { articleDates } from '../../lib/article-dates'
 
 // Articoli in radice con lo slug di WordPress: solo quelli noti, ogni altro percorso dà 404
 export const dynamic = 'force-dynamic'
@@ -23,8 +24,8 @@ export async function generateMetadata({ params }) {
       url,
       title: item.title,
       description: newsDescription(item),
-      publishedTime: item.isoDate,
-      ...(item.modified ? { modifiedTime: item.modified } : {}),
+      ...(articleDates(item).datePublished ? { publishedTime: articleDates(item).datePublished } : {}),
+      ...(articleDates(item).dateModified ? { modifiedTime: articleDates(item).dateModified } : {}),
       ...(item.image ? { images: [item.image] } : {}),
     },
   }
@@ -44,8 +45,7 @@ export default async function Page({ params }) {
           '@type': 'NewsArticle',
           headline: item.title,
           description: newsDescription(item),
-          datePublished: item.isoDate,
-          dateModified: item.modified ?? item.isoDate,
+          ...articleDates(item),
           mainEntityOfPage: url,
           ...(item.image ? { image: [new URL(item.image, SITE_URL).href] } : {}),
           author: { '@type': 'Organization', name: organizationJsonLd.name, url: `${SITE_URL}/` },

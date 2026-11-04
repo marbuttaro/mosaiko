@@ -16,7 +16,14 @@ test('all seeded articles and sitemap entries have unique canonical, title, desc
     expect(html,url).toMatch(/<title>[^<]+<\/title>/)
     expect(html,url).toMatch(/name="description" content="[^"]+"/)
     expect(html,url).toContain('<h1')
-    for(const match of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g))expect(()=>JSON.parse(match[1])).not.toThrow()
+    for(const match of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)) {
+      const data=JSON.parse(match[1])
+      if(data['@type']==='NewsArticle') {
+        for(const field of ['datePublished','dateModified']) {
+          if(data[field])expect(data[field],`${url} ${field}`).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})$/)
+        }
+      }
+    }
   }
   for(const item of allNews)expect(urls).toContain(`https://www.mosaiko.org/${item.slug}/`)
 })
