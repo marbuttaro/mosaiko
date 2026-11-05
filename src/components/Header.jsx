@@ -12,12 +12,14 @@ const LIGHT_BGS = ['bg-mosaiko-sand', 'bg-mosaiko-mist']
 function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [onLight, setOnLight] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [open, setOpen] = useState(false)
   const { isHome, isPartnerPage } = routeFlags(usePathname())
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 12)
+      setIsMobile(!window.matchMedia('(min-width: 1024px)').matches)
       // Logo navy quando l'header passa sopra una sezione chiara
       const section = document
         .elementsFromPoint(40, 40)
@@ -26,71 +28,86 @@ function Header() {
     }
     onScroll()
     window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   // Nella pagina partner il form è in fondo alla pagina stessa
   const contactHref = isPartnerPage ? '#contatti' : homeHref(isHome, '#dove-siamo')
 
+  // Mobile: dal primo scroll la fascia logo + burger ha uno sfondo navy traslucido,
+  // quindi il logo resta bianco e leggibile su qualsiasi sezione
+  const mobileBar = isMobile && scrolled
+  const navyLogo = onLight && !mobileBar
+
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'py-3' : 'py-5'}`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
-        <a href={isHome ? '#top' : '/'} className="shrink-0">
-          <img
-            src={onLight ? '/logo/mosaiko-mark-navy.png' : '/logo/mosaiko-mark-white.png'}
-            alt="Mosaiko"
-            className="h-11 w-auto"
-          />
-        </a>
-
-        <nav
-          className={`hidden items-center gap-1 rounded-xl border px-2 py-2 backdrop-blur-md transition-colors duration-300 lg:flex ${
-            scrolled || onLight
-              ? 'border-white/10 bg-mosaiko-navy/90 shadow-lg shadow-black/20'
-              : 'border-white/15 bg-mosaiko-navy/40'
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div className={`relative transition-all duration-300 ${scrolled ? 'py-3' : 'py-5'}`}>
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute inset-0 border-b border-white/10 bg-mosaiko-navy/85 shadow-lg shadow-black/20 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
+            scrolled ? 'opacity-100' : 'opacity-0'
           }`}
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={homeHref(isHome, link.href)}
-              className="rounded-lg px-5 py-2 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        />
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
+          <a href={isHome ? '#top' : '/'} className="shrink-0">
+            <img
+              src={navyLogo ? '/logo/mosaiko-mark-navy.png' : '/logo/mosaiko-mark-white.png'}
+              alt="Mosaiko"
+              className="h-11 w-auto"
+            />
+          </a>
 
-        <Button href={contactHref} variant={onLight ? 'navy' : 'primary'} className="max-lg:hidden">
-          Contattaci
-        </Button>
+          <nav
+            className={`hidden items-center gap-1 rounded-xl border px-2 py-2 backdrop-blur-md transition-colors duration-300 lg:flex ${
+              scrolled || onLight
+                ? 'border-white/10 bg-mosaiko-navy/90 shadow-lg shadow-black/20'
+                : 'border-white/15 bg-mosaiko-navy/40'
+            }`}
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={homeHref(isHome, link.href)}
+                className="rounded-lg px-5 py-2 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-mosaiko-navy/60 text-white backdrop-blur-md lg:hidden"
-          aria-label="Apri il menu"
-        >
-          <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-            {open ? (
-              <path
-                d="M6 6l12 12M18 6L6 18"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            ) : (
-              <path
-                d="M4 7h16M4 12h16M4 17h16"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            )}
-          </svg>
-        </button>
+          <Button href={contactHref} variant={onLight ? 'navy' : 'primary'} className="max-lg:hidden">
+            Contattaci
+          </Button>
+
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-mosaiko-navy/60 text-white backdrop-blur-md lg:hidden"
+            aria-label="Apri il menu"
+          >
+            <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+              {open ? (
+                <path
+                  d="M6 6l12 12M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              ) : (
+                <path
+                  d="M4 7h16M4 12h16M4 17h16"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {open && (
