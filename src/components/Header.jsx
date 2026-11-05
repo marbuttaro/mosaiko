@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { navLinks } from '../data/content'
+import { location as contactInfo, navLinks } from '../data/content'
 import Button from './Button'
 import { homeHref, routeFlags } from '../lib/route'
 
@@ -14,7 +14,7 @@ function Header() {
   const [onLight, setOnLight] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [open, setOpen] = useState(false)
-  const { isHome, isPartnerPage } = routeFlags(usePathname())
+  const { isHome } = routeFlags(usePathname())
 
   useEffect(() => {
     const onScroll = () => {
@@ -35,8 +35,8 @@ function Header() {
     }
   }, [])
 
-  // Nella pagina partner il form è in fondo alla pagina stessa
-  const contactHref = isPartnerPage ? '#contatti' : homeHref(isHome, '#dove-siamo')
+  // "Contattaci" apre una nuova email nel programma di posta predefinito dell'utente
+  const contactHref = `mailto:${contactInfo.email}`
 
   // Mobile: dal primo scroll la fascia logo + burger ha uno sfondo navy traslucido,
   // quindi il logo resta bianco e leggibile su qualsiasi sezione
@@ -48,7 +48,7 @@ function Header() {
       <div className={`relative transition-all duration-300 ${scrolled ? 'py-3' : 'py-5'}`}>
         <div
           aria-hidden
-          className={`pointer-events-none absolute inset-0 border-b border-white/10 bg-mosaiko-navy/85 shadow-lg shadow-black/20 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
+          className={`pointer-events-none absolute inset-0 border-b border-white/10 bg-mosaiko-navy/70 shadow-lg shadow-black/20 backdrop-blur-md transition-opacity duration-300 lg:hidden ${
             scrolled ? 'opacity-100' : 'opacity-0'
           }`}
         />
